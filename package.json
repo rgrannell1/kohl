@@ -1,0 +1,50 @@
+{
+  "name": "@rgrannell/kohl",
+  "version": "0.8.0",
+  "description": "Highlight Logs",
+  "author": "Róisín Grannell <r.grannell2@gmail.com>",
+  "scripts": {
+    "tsc": "tsc",
+    "standard": "npx standard 'src/**'",
+    "standard:fix": "npx standard 'src/**' --fix",
+    "test": "npx test --coverage-report=lcov"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "kohl": "dist/cli/kohl.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgrannell1/kohl.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rgrannell1/kohl/issues"
+  },
+  "homepage": "https://github.com/rgrannell1/kohl#readme",
+  "devDependencies": {
+    "standard": "13.1.0"
+  },
+  "dependencies": {
+    "@types/docopt": "^0.6.31",
+    "@types/split": "^1.0.0",
+    "@types/through": "0.0.30",
+    "ansi-styles": "^2.2.1",
+    "chalk": "^4.1.0",
+    "docopt": "^0.6.2",
+    "general-category": "^1.6.0",
+    "ink": "^3.0.6",
+    "keypress": "^0.2.1",
+    "moment": "2.26.0",
+    "nanoid": "^3.1.9",
+    "neodoc": "2.0.2",
+    "parjs": "^0.12.7",
+    "react": "^16.13.1",
+    "split": "^1.0.1",
+    "strip-ansi-stream": "1.0.0",
+    "through": "^2.3.8",
+    "typescript": "^4.0.3",
+    "unicode": "^12.1.0"
+  }
+}
