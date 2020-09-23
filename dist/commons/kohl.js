@@ -40,7 +40,9 @@ export class Kohl extends React.Component {
             },
             mode: Mode.Default,
             command: '',
-            output: '',
+            output: {
+                status: 0
+            },
             ttyIn,
             lines,
             displayLines: [],

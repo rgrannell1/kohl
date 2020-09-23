@@ -52,7 +52,7 @@ export interface KohlState {
   patterns: Patterns,
   mode: Mode,
   command: string,
-  output: string,
+  output: CommandStatus,
   lines: Lines,
   displayLines: LineData[],
   lineId: number
@@ -64,4 +64,9 @@ export interface Key {
   shift: Boolean,
   sequence: string,
   name: string | undefined
+}
+
+export interface CommandStatus {
+  status: 0 | 1,
+  message?: string
 }

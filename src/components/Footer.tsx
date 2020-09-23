@@ -8,7 +8,10 @@ const {
   Newline,
 } = ink
 
-import { Mode } from '../commons/types.js'
+import {
+  CommandStatus,
+  Mode
+} from '../commons/types.js'
 
 interface EnterProps {
   command: string
@@ -26,15 +29,24 @@ export class EnterCommand extends React.PureComponent<EnterProps> {
 
 interface ShowProps {
   command: string
-  output: string
+  output: CommandStatus
 }
 
 export class ShowCommand extends React.PureComponent<ShowProps> {
   render () {
-    return <Box>
-      <Text inverse>&gt; things ran</Text>
-    </Box>
+    const { output } = this.props
 
+    if (output.status === 0) {
+      return <Box>
+        <Text inverse>✔️ </Text>
+      </Box>
+    } else if (output.status === 1) {
+      return <Box>
+        <Text inverse>✕ {output.message}</Text>
+      </Box>
+    } else {
+      throw 'invalid status code.'
+    }
   }
 }
 
@@ -49,7 +61,7 @@ export class DefaultFooter extends React.PureComponent<{}> {
 interface FooterProps {
   mode: Mode,
   command: string,
-  output: string
+  output: CommandStatus
 }
 
 export class Footer extends React.PureComponent<FooterProps> {

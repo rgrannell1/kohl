@@ -1,17 +1,22 @@
 
 import {
   Mode,
-  KohlProps
+  KohlProps,
+  CommandStatus
 } from '../commons/types.js'
 
 import P from 'parsimmon'
+
+enum LanguageParts {
+  Call,
+  Jump
+}
 
 interface Language {
   [key: string]: (p:P.Language) => P.Parser<any>
 }
 
 const language:Language = { }
-
 
 language._ = () => {
   return P.regexp(/\s*/)
@@ -30,7 +35,7 @@ language.Call = ref => {
     ref.__,
     P.sepBy(ref.Arg, P.whitespace),
     (proc, _, args) => {
-      return { type: 'call', proc, args }
+      return { type: LanguageParts.Call, proc, args }
     }
   )
 }
@@ -50,8 +55,9 @@ language.String = () => {
 language.Jump = ref => {
   return P.regexp(/\:[0-9]+/).map(match => {
     return {
-      type: 'jump', // -- todo enum
-      line: Number(match.slice(1))
+      proc: 'jump',
+      type: LanguageParts.Call, // -- todo enum
+      args: [ Number(match.slice(1)) ]
     }
   })
 }
@@ -59,7 +65,7 @@ language.Jump = ref => {
 language.Value = ref => {
   return P.seqMap(
     ref._,
-    P.alt(ref.Call),
+    P.alt(ref.Call, ref.Jump),
     ref._,
     (_0, core, _1) => core)
 }
@@ -74,15 +80,51 @@ const parseCommand = (command:string) => {
   return lang.Value.tryParse(command)
 }
 
-const executeCommand = (parsed:any, state:KohlProps) => {
-  // -- invoke against a lib
+const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => {
+  if (parsed.type === LanguageParts.Call) {
+    const { proc, args } = parsed
+
+    if (!libs[proc]) {
+      return {
+        message: `unknown procedure "${proc}".`,
+        status: 1
+      }
+    }
+
+    try {
+      libs[proc](state, ...args)
+      return {
+        status: 0
+      }
+    } catch (err) {
+      return {
+        status: 1
+      }
+    }
+  }
+
+  return {
+    status: 1
+  }
+}
+
+interface Library {
+  [key:string]:any
+}
+
+const libs:Library = { }
+
+libs.jump = (state:KohlProps, line:number) => {
+  // -- update
 }
 
 export const runCommand = (state:KohlProps, command:string) => {
-  const output = executeCommand(parseCommand(command), state)
+  const parsed = parseCommand(command)
+  const output = executeCommand(parsed, libs, state)
 
   return {
     mode: Mode.ShowCommand,
-    command
+    command,
+    output
   }
 }
