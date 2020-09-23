@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@types/docopt": "^0.6.31",
+    "@types/parsimmon": "^1.10.3",
     "@types/split": "^1.0.0",
     "@types/through": "0.0.30",
     "ansi-styles": "^2.2.1",
@@ -40,6 +41,7 @@
     "nanoid": "^3.1.9",
     "neodoc": "2.0.2",
     "parjs": "^0.12.7",
+    "parsimmon": "^1.16.0",
     "react": "^16.13.1",
     "split": "^1.0.1",
     "strip-ansi-stream": "1.0.0",
