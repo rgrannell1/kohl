@@ -4,7 +4,7 @@ import {
   KohlProps
 } from '../commons/types.js'
 
-import P from "parsimmon"
+import P from 'parsimmon'
 
 interface Language {
   [key: string]: (p:P.Language) => P.Parser<any>
@@ -13,11 +13,13 @@ interface Language {
 const language:Language = { }
 
 language.Arg = ref => {
-  return ref.String
+  return P.alt(ref.String, ref.Number)
 }
 
 language.Call = ref => {
-  return P.seq(ref.ProcName, ref.Arg.sepBy(P.optWhitespace))
+  return P.alt(
+    ref.ProcName,
+    P.seq(ref.ProcName, P.whitespace, P.sepBy(ref.Arg, P.whitespace)))
 }
 
 language.ProcName = () => {
@@ -29,18 +31,11 @@ language.Number = () => {
 }
 
 language.String = () => {
-  return P.regexp(/\"[^\"]\"/)
+  return P.regexp(/\"[^\"]*\"/)
 }
 
 language.Jump = ref => {
-  return P.regexp(/\:[0-9]+/)
-    .sepBy(P.optWhitespace)
-    .map(data => {
-      return {
-        proc: 'jumpLine',
-        args: Number(data[0].replace(':', ''))
-      }
-    })
+  return P.regexp(/\:[0-9]+/).sepBy(P.optWhitespace)
 }
 
 language.Value = ref => {
@@ -50,13 +45,6 @@ language.Value = ref => {
 const lang = P.createLanguage(language)
 
 /**
- *   <expr>   :=    <jump> | <call>
- *   <jump>   :=    <number> "k" | <number> "j"
- *   <call>   :=    <proc> <args> ...
- *   <proc>   :=    (<a-zA-Z>|"-") ...
- *   <arg>    :=    <number> | <string>
- *   <number> :=    <0-9> ...
- *   <string> :=    " <any> "
  *
  * @param command
  */
@@ -64,7 +52,13 @@ const parseCommand = (command:string) => {
   return lang.Value.tryParse(command)
 }
 
+const executeCommand = (parsed:any, state:KohlProps) => {
+  // -- invoke against a lib
+}
+
 export const runCommand = (state:KohlProps, command:string) => {
+  const output = executeCommand(parseCommand(command), state)
+
   return {
     mode: Mode.ShowCommand,
     command
