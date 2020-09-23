@@ -12,14 +12,27 @@ interface Language {
 
 const language:Language = { }
 
+
+language._ = () => {
+  return P.regexp(/\s*/)
+},
+language.__ = () => {
+  return P.regexp(/\s+/)
+},
+
 language.Arg = ref => {
   return P.alt(ref.String, ref.Number)
 }
 
 language.Call = ref => {
-  return P.alt(
+  return P.seqMap(
     ref.ProcName,
-    P.seq(ref.ProcName, P.whitespace, P.sepBy(ref.Arg, P.whitespace)))
+    ref.__,
+    P.sepBy(ref.Arg, P.whitespace),
+    (proc, _, args) => {
+      return { type: 'call', proc, args }
+    }
+  )
 }
 
 language.ProcName = () => {
@@ -35,11 +48,20 @@ language.String = () => {
 }
 
 language.Jump = ref => {
-  return P.regexp(/\:[0-9]+/).sepBy(P.optWhitespace)
+  return P.regexp(/\:[0-9]+/).map(match => {
+    return {
+      type: 'jump', // -- todo enum
+      line: Number(match.slice(1))
+    }
+  })
 }
 
 language.Value = ref => {
-  return ref.Jump
+  return P.seqMap(
+    ref._,
+    P.alt(ref.Call),
+    ref._,
+    (_0, core, _1) => core)
 }
 
 const lang = P.createLanguage(language)
