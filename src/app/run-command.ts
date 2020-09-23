@@ -92,9 +92,9 @@ const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => 
     }
 
     try {
-      libs[proc](state, ...args)
       return {
-        status: 0
+        status: 0,
+        result: libs[proc](state, ...args)
       }
     } catch (err) {
       return {
@@ -109,13 +109,18 @@ const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => 
 }
 
 interface Library {
-  [key:string]:any
+  [key:string]:(state:KohlProps, ...args:any[]) => Partial<KohlProps>
 }
 
 const libs:Library = { }
 
 libs.jump = (state:KohlProps, line:number) => {
-  // -- update
+  return {
+    cursor: {
+      ...state.cursor,
+      position: line
+    }
+  }
 }
 
 export const runCommand = (state:KohlProps, command:string) => {

@@ -54,14 +54,14 @@ const executeCommand = (parsed, libs, state) => {
         const { proc, args } = parsed;
         if (!libs[proc]) {
             return {
-                message: `unknown procedure ${proc}.`,
+                message: `unknown procedure "${proc}".`,
                 status: 1
             };
         }
         try {
-            libs[proc](state, ...args);
             return {
-                status: 0
+                status: 0,
+                result: libs[proc](state, ...args)
             };
         }
         catch (err) {
@@ -75,6 +75,30 @@ const executeCommand = (parsed, libs, state) => {
     };
 };
 const libs = {};
+libs.jump = (state, line) => {
+    // -- update
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    console.log(line);
+    return {
+        cursor: {
+            ...state.cursor,
+            position: line
+        }
+    };
+};
 export const runCommand = (state, command) => {
     const parsed = parseCommand(command);
     const output = executeCommand(parsed, libs, state);

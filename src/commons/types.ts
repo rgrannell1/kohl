@@ -68,5 +68,6 @@ export interface Key {
 
 export interface CommandStatus {
   status: 0 | 1,
-  message?: string
+  message?: string,
+  result?: Partial<KohlProps>
 }
