@@ -11,9 +11,13 @@ language._ = () => {
         return P.alt(ref.String, ref.Number);
     };
 language.Call = ref => {
-    return P.seqMap(ref.ProcName, ref.__, P.sepBy(ref.Arg, P.whitespace), (proc, _, args) => {
+    const withArgs = P.seqMap(ref.ProcName, ref.__, P.sepBy(ref.Arg, P.whitespace), (proc, _, args) => {
         return { type: LanguageParts.Call, proc, args };
     });
+    const withoutArgs = ref.ProcName.map(proc => {
+        return { type: LanguageParts.Call, proc, args: [] };
+    });
+    return P.alt(withoutArgs, withArgs);
 };
 language.ProcName = () => {
     return P.regexp(/[a-zA-Z0-9]+/);

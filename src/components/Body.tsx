@@ -27,14 +27,17 @@ export class Body extends React.PureComponent<BodyProps> {
 
     return line.slice(start, end).padEnd(1)
   }
-  selectDisplayLines (lines:Lines, cursor:Cursor, screen:Screen, patterns:Patterns) {
+  freeLines (screen:Screen) {
     const occupied = 5
-    const lower = cursor.position + (screen.rows - occupied)
+    return screen.rows - occupied
+  }
+  selectDisplayLines (lines:Lines, cursor:Cursor, screen:Screen, patterns:Patterns) {
+    const lower = cursor.position + this.freeLines(screen)
 
     return lines
       .values()
       .filter((lineData) => {
-        return lineData.text.includes(patterns.search || '')
+        return lineData.text.includes(patterns.search)
       })
       .slice(cursor.position, lower)
   }
@@ -47,13 +50,24 @@ export class Body extends React.PureComponent<BodyProps> {
     } = this.props
 
     const elems = []
-
     const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns)
-    for (const { text, id } of displayLines) {
-      const isSelected = cursor.position === id
-      const trimmed = this.trimLine(text, cursor, screen)
 
-      elems.push(<Text key={id} inverse={isSelected}>{trimmed}</Text>)
+    if (displayLines.length === 0) {
+      elems.push(<Text inverse>No Matches Found</Text>)
+
+      for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
+        elems.push(<Text> </Text>)
+      }
+    } else {
+      for (let ith = 0; ith < displayLines.length; ++ith) {
+        const { text, id } = displayLines[ith]
+
+        // -- highlight the first displayed entry
+        const isSelected = ith === 0
+        const trimmed = this.trimLine(text, cursor, screen)
+
+        elems.push(<Text key={id} inverse={isSelected}>{trimmed}</Text>)
+      }
     }
 
     return <>{elems}</>

@@ -49,7 +49,7 @@ Copyright:
   OTHER DEALINGS IN THE SOFTWARE.
 `;
 const main = () => {
-    const args = docopt.docopt(docs, {});
+    docopt.docopt(docs, {});
     const fd = fs.openSync('/dev/tty', 'r+');
     const ttyIn = new tty.ReadStream(fd, {});
     readline.emitKeypressEvents(ttyIn);

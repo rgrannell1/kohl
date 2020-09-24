@@ -20,7 +20,7 @@ language.Arg = ref => {
 }
 
 language.Call = ref => {
-  return P.seqMap(
+  const withArgs = P.seqMap(
     ref.ProcName,
     ref.__,
     P.sepBy(ref.Arg, P.whitespace),
@@ -28,6 +28,12 @@ language.Call = ref => {
       return { type: LanguageParts.Call, proc, args }
     }
   )
+
+  const withoutArgs =  ref.ProcName.map(proc => {
+    return { type: LanguageParts.Call, proc, args: [ ]}
+  })
+
+  return P.alt(withoutArgs, withArgs)
 }
 
 language.ProcName = () => {

@@ -1,5 +1,6 @@
 
 import {
+  Mode,
   KohlProps,
   Library
 } from '../commons/types.js'
@@ -33,4 +34,15 @@ library.search = (state:KohlProps, search:string) => {
 Object.assign(library.search, {
   parameters: 1,
   description: 'search for literal text'
+})
+
+library.q = () => {
+  return {
+    mode: Mode.Default
+  }
+}
+
+Object.assign(library.q, {
+  parameters: 1,
+  description: 'quit to the default view'
 })

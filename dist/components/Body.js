@@ -7,13 +7,16 @@ export class Body extends React.PureComponent {
         const end = start + screen.columns;
         return line.slice(start, end).padEnd(1);
     }
-    selectDisplayLines(lines, cursor, screen, patterns) {
+    freeLines(screen) {
         const occupied = 5;
-        const lower = cursor.position + (screen.rows - occupied);
+        return screen.rows - occupied;
+    }
+    selectDisplayLines(lines, cursor, screen, patterns) {
+        const lower = cursor.position + this.freeLines(screen);
         return lines
             .values()
             .filter((lineData) => {
-            return lineData.text.includes(patterns.search || '');
+            return lineData.text.includes(patterns.search);
         })
             .slice(cursor.position, lower);
     }
@@ -21,10 +24,20 @@ export class Body extends React.PureComponent {
         const { cursor, lines, screen, patterns } = this.props;
         const elems = [];
         const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns);
-        for (const { text, id } of displayLines) {
-            const isSelected = cursor.position === id;
-            const trimmed = this.trimLine(text, cursor, screen);
-            elems.push(React.createElement(Text, { key: id, inverse: isSelected }, trimmed));
+        if (displayLines.length === 0) {
+            elems.push(React.createElement(Text, { inverse: true }, "No Matches Found"));
+            for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
+                elems.push(React.createElement(Text, null, " "));
+            }
+        }
+        else {
+            for (let ith = 0; ith < displayLines.length; ++ith) {
+                const { text, id } = displayLines[ith];
+                // -- highlight the first displayed entry
+                const isSelected = ith === 0;
+                const trimmed = this.trimLine(text, cursor, screen);
+                elems.push(React.createElement(Text, { key: id, inverse: isSelected }, trimmed));
+            }
         }
         return React.createElement(React.Fragment, null, elems);
     }
