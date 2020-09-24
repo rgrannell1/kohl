@@ -4,7 +4,6 @@ import {
   Library
 } from '../commons/types.js'
 
-
 export const library:Library = { }
 
 library.jump = (state:KohlProps, line:number) => {

@@ -21,3 +21,4 @@ const appMappings = new Map([
     ...mappings
 ]);
 export default appMappings;
+//# sourceMappingURL=index.js.map

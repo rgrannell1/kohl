@@ -1,4 +1,5 @@
 
+import P from 'parsimmon'
 import CircularBuffer from "./circular-buffer";
 
 export interface LineData {
@@ -80,4 +81,13 @@ interface LibraryResult {
 
 export interface Library {
   [key:string]:(state:KohlProps, ...args:any[]) => LibraryResult
+}
+
+export enum LanguageParts {
+  Call,
+  Jump
+}
+
+export interface Language {
+  [key: string]: (p:P.Language) => P.Parser<any>
 }

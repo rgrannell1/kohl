@@ -56,3 +56,4 @@ const main = () => {
     render(React.createElement(Kohl, null));
 };
 main();
+//# sourceMappingURL=kohl.js.map

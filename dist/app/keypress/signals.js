@@ -7,3 +7,4 @@ mappings.set(keypress('ctrl + z'), (elem) => {
     process.kill(process.pid, 'SIGSTP');
 });
 export default mappings;
+//# sourceMappingURL=signals.js.map

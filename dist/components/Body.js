@@ -24,3 +24,4 @@ export class Body extends React.PureComponent {
         return React.createElement(React.Fragment, null, elems);
     }
 }
+//# sourceMappingURL=Body.js.map

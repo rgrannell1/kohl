@@ -105,3 +105,4 @@ export class Kohl extends React.Component {
             React.createElement(Footer, { mode: mode, output: output, command: command }));
     }
 }
+//# sourceMappingURL=kohl.js.map

@@ -33,3 +33,4 @@ export default class CircularBuffer {
         return this.values().slice(start, end);
     }
 }
+//# sourceMappingURL=circular-buffer.js.map

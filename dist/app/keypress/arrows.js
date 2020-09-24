@@ -61,3 +61,4 @@ mappings.set(hasName('pageup'), (elem) => {
     });
 });
 export default mappings;
+//# sourceMappingURL=arrows.js.map

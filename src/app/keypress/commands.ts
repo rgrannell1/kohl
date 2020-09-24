@@ -16,7 +16,7 @@ const mappings = new Map()
 mappings.set(hasName('return'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     if (state.mode === Mode.EnterCommand) {
-      return runCommand(state, state.command)
+      return runCommand(state, state.command).output.state
     }
   })
 })

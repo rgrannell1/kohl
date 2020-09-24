@@ -26,3 +26,4 @@ mappings.set(hasSequence('g'), (elem) => {
     });
 });
 export default mappings;
+//# sourceMappingURL=vim.js.map

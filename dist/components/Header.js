@@ -43,3 +43,4 @@ export class Header extends React.Component {
             React.createElement(SelectionSummary, { selected: this.props.selection.count, total: this.props.selection.total }));
     }
 }
+//# sourceMappingURL=Header.js.map

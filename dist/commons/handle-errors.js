@@ -16,3 +16,4 @@ const handleErrors = err => {
     process.exit(1);
 };
 module.exports = handleErrors;
+//# sourceMappingURL=handle-errors.js.map

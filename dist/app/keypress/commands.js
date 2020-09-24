@@ -5,7 +5,7 @@ const mappings = new Map();
 mappings.set(hasName('return'), (elem) => {
     elem.setState((state) => {
         if (state.mode === Mode.EnterCommand) {
-            return runCommand(state, state.command);
+            return runCommand(state, state.command).output.state;
         }
     });
 });
@@ -58,3 +58,4 @@ mappings.set(hasSequence('/'), (elem) => {
     });
 });
 export default mappings;
+//# sourceMappingURL=commands.js.map

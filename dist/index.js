@@ -12,3 +12,4 @@ const main = () => {
     render(React.createElement(Kohl, null));
 };
 main();
+//# sourceMappingURL=index.js.map

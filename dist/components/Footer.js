@@ -49,3 +49,4 @@ export class Footer extends React.PureComponent {
         }
     }
 }
+//# sourceMappingURL=Footer.js.map
