@@ -4,12 +4,12 @@ import ink from 'ink'
 
 const {
   Box,
-  Text,
-  Newline,
+  Text
 } = ink
 
 import {
   CommandStatus,
+  ExecuteResult,
   Mode
 } from '../commons/types.js'
 
@@ -29,7 +29,7 @@ export class EnterCommand extends React.PureComponent<EnterProps> {
 
 interface ShowProps {
   command: string
-  output: CommandStatus
+  output: ExecuteResult
 }
 
 export class ShowCommand extends React.PureComponent<ShowProps> {
@@ -61,7 +61,7 @@ export class DefaultFooter extends React.PureComponent<{}> {
 interface FooterProps {
   mode: Mode,
   command: string,
-  output: CommandStatus
+  output: ExecuteResult
 }
 
 export class Footer extends React.PureComponent<FooterProps> {

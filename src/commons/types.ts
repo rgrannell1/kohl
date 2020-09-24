@@ -53,7 +53,7 @@ export interface KohlState {
   patterns: Patterns,
   mode: Mode,
   command: string,
-  output: CommandStatus,
+  output: ExecuteResult,
   lines: Lines,
   displayLines: LineData[],
   lineId: number
@@ -67,20 +67,16 @@ export interface Key {
   readonly name: string | undefined
 }
 
-export interface CommandStatus {
-  readonly status: 0 | 1,
-  readonly message?: string,
-  readonly state?: Partial<KohlProps>
-}
+export type CommandStatus = Partial<KohlProps>
 
-interface LibraryResult {
+export interface ExecuteResult {
   readonly status: 0 | 1,
   readonly message?: string,
   readonly state: Partial<KohlProps>
 }
 
 export interface Library {
-  [key:string]:(state:KohlProps, ...args:any[]) => LibraryResult
+  [key:string]:(state:KohlProps, ...args:any[]) => CommandStatus
 }
 
 export enum LanguageParts {

@@ -16,7 +16,14 @@ const mappings = new Map()
 mappings.set(hasName('return'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     if (state.mode === Mode.EnterCommand) {
-      return runCommand(state, state.command).output.state
+      const result = runCommand(state, state.command)
+
+      return {
+        ...result.output.state,
+        command: result.output.status === 0
+          ? ''
+          : state.command
+      }
     }
   })
 })

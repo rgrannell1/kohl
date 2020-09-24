@@ -1,6 +1,6 @@
 import React from 'react';
 import ink from 'ink';
-const { Box, Text, Newline, } = ink;
+const { Box, Text } = ink;
 import { Mode } from '../commons/types.js';
 export class EnterCommand extends React.PureComponent {
     render() {

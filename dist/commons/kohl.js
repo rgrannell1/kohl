@@ -41,6 +41,7 @@ export class Kohl extends React.Component {
             mode: Mode.Default,
             command: '',
             output: {
+                state: {},
                 status: 0
             },
             ttyIn,
@@ -97,10 +98,10 @@ export class Kohl extends React.Component {
         throw new Error(key);
     }
     render() {
-        const { command, cursor, lines, mode, output, screen, selection } = this.state;
+        const { command, cursor, lines, mode, output, screen, selection, patterns } = this.state;
         return React.createElement(React.Fragment, null,
             React.createElement(Header, { cursor: cursor, selection: selection }),
-            React.createElement(Body, { cursor: cursor, lines: lines, screen: screen }),
+            React.createElement(Body, { cursor: cursor, lines: lines, screen: screen, patterns: patterns }),
             React.createElement(Newline, null),
             React.createElement(Footer, { mode: mode, output: output, command: command }));
     }

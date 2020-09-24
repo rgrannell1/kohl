@@ -16,21 +16,27 @@ const executeCommand = (parsed, libs, state) => {
         if (!libs[proc]) {
             return {
                 message: `unknown procedure "${proc}".`,
-                status: 1
+                status: 1,
+                state: {}
             };
         }
-        const result = libs[proc](state, ...args);
         try {
-            return result;
+            return {
+                status: 0,
+                state: libs[proc](state, ...args)
+            };
         }
         catch (err) {
             return {
-                status: 1
+                message: err.message,
+                status: 1,
+                state: {}
             };
         }
     }
     return {
-        status: 1
+        status: 1,
+        state: {}
     };
 };
 export const runCommand = (state, command) => {

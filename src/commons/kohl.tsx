@@ -56,6 +56,7 @@ export class Kohl extends React.Component<{}, KohlState> {
       mode: Mode.Default,
       command: '',
       output: {
+        state: {},
         status: 0
       },
       ttyIn,
@@ -122,12 +123,13 @@ export class Kohl extends React.Component<{}, KohlState> {
       mode,
       output,
       screen,
-      selection
+      selection,
+      patterns
     } = this.state
 
     return <>
       <Header cursor={cursor} selection={selection}/>
-      <Body cursor={cursor} lines={lines} screen={screen}/>
+      <Body cursor={cursor} lines={lines} screen={screen} patterns={patterns}/>
       <Newline/>
       <Footer mode={mode} output={output} command={command}/>
     </>

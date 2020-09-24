@@ -7,15 +7,20 @@ export class Body extends React.PureComponent {
         const end = start + screen.columns;
         return line.slice(start, end).padEnd(1);
     }
-    selectDisplayLines(lines, cursor, screen) {
+    selectDisplayLines(lines, cursor, screen, patterns) {
         const occupied = 5;
         const lower = cursor.position + (screen.rows - occupied);
-        return lines.slice(cursor.position, lower);
+        return lines
+            .values()
+            .filter((lineData) => {
+            return lineData.text.includes(patterns.search || '');
+        })
+            .slice(cursor.position, lower);
     }
     render() {
-        const { cursor, lines, screen } = this.props;
+        const { cursor, lines, screen, patterns } = this.props;
         const elems = [];
-        const displayLines = this.selectDisplayLines(lines, cursor, screen);
+        const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns);
         for (const { text, id } of displayLines) {
             const isSelected = cursor.position === id;
             const trimmed = this.trimLine(text, cursor, screen);

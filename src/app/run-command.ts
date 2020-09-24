@@ -3,7 +3,7 @@ import {
   Mode,
   Library,
   KohlProps,
-  CommandStatus,
+  ExecuteResult,
   LanguageParts
 } from '../commons/types.js'
 
@@ -21,29 +21,35 @@ const parseCommand = (command:string) => {
   return lang.Value.tryParse(command)
 }
 
-const executeCommand = (parsed:any, libs:Library, state:KohlProps):CommandStatus => {
+const executeCommand = (parsed:any, libs:Library, state:KohlProps):ExecuteResult => {
   if (parsed.type === LanguageParts.Call) {
     const { proc, args } = parsed
 
     if (!libs[proc]) {
       return {
         message: `unknown procedure "${proc}".`,
-        status: 1
+        status: 1,
+        state: {}
       }
     }
 
-    const result = libs[proc](state, ...args)
     try {
-      return result
+      return {
+        status: 0,
+        state: libs[proc](state, ...args)
+      }
     } catch (err) {
       return {
-        status: 1
+        message: err.message,
+        status: 1,
+        state: {}
       }
     }
   }
 
   return {
-    status: 1
+    status: 1,
+    state: {}
   }
 }
 
