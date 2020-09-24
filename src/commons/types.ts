@@ -2,8 +2,8 @@
 import CircularBuffer from "./circular-buffer";
 
 export interface LineData {
-  text: string,
-  id: number
+  readonly text: string,
+  readonly id: number
 }
 
 export enum Mode {
@@ -13,23 +13,23 @@ export enum Mode {
 }
 
 export interface Screen {
-  rows: number,
-  columns: number
+  readonly rows: number,
+  readonly columns: number
 }
 
 export interface Cursor {
-  position: number,
-  column: number
+  readonly position: number,
+  readonly column: number
 }
 
 export interface Selection {
-  count: number,
-  total: number
+  readonly count: number,
+  readonly total: number
 }
 
 export interface Patterns {
-  search: string,
-  highlight: string
+  readonly search: string,
+  readonly highlight: string
 }
 
 export type Lines = CircularBuffer<LineData>
@@ -59,15 +59,25 @@ export interface KohlState {
 }
 
 export interface Key {
-  ctrl: Boolean,
-  meta: Boolean,
-  shift: Boolean,
-  sequence: string,
-  name: string | undefined
+  readonly ctrl: Boolean,
+  readonly meta: Boolean,
+  readonly shift: Boolean,
+  readonly sequence: string,
+  readonly name: string | undefined
 }
 
 export interface CommandStatus {
-  status: 0 | 1,
-  message?: string,
-  result?: Partial<KohlProps>
+  readonly status: 0 | 1,
+  readonly message?: string,
+  readonly state?: Partial<KohlProps>
+}
+
+interface LibraryResult {
+  readonly status: 0 | 1,
+  readonly message?: string,
+  readonly state: Partial<KohlProps>
+}
+
+export interface Library {
+  [key:string]:(state:KohlProps, ...args:any[]) => LibraryResult
 }

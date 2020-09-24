@@ -1,5 +1,6 @@
 import { Mode } from '../commons/types.js';
 import P from 'parsimmon';
+import { library } from './library.js';
 var LanguageParts;
 (function (LanguageParts) {
     LanguageParts[LanguageParts["Call"] = 0] = "Call";
@@ -58,11 +59,9 @@ const executeCommand = (parsed, libs, state) => {
                 status: 1
             };
         }
+        const result = libs[proc](state, ...args);
         try {
-            return {
-                status: 0,
-                result: libs[proc](state, ...args)
-            };
+            return result;
         }
         catch (err) {
             return {
@@ -74,37 +73,25 @@ const executeCommand = (parsed, libs, state) => {
         status: 1
     };
 };
-const libs = {};
-libs.jump = (state, line) => {
-    // -- update
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    console.log(line);
-    return {
-        cursor: {
-            ...state.cursor,
-            position: line
-        }
-    };
-};
 export const runCommand = (state, command) => {
-    const parsed = parseCommand(command);
-    const output = executeCommand(parsed, libs, state);
-    return {
-        mode: Mode.ShowCommand,
-        command,
-        output
-    };
+    try {
+        const parsed = parseCommand(command);
+        const output = executeCommand(parsed, library, state);
+        return {
+            mode: Mode.ShowCommand,
+            command,
+            output
+        };
+    }
+    catch (err) {
+        return {
+            mode: Mode.ShowCommand,
+            command,
+            output: {
+                status: 1,
+                message: err.message.slice(0, 10),
+                state: null
+            }
+        };
+    }
 };

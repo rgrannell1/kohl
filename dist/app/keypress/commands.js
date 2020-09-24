@@ -45,7 +45,7 @@ mappings.set(hasSequence('?'), (elem) => {
 });
 mappings.set(hasSequence('/'), (elem) => {
     elem.setState((state) => {
-        if (state.mode === Mode.Default) {
+        if (state.mode === Mode.Default || state.mode === Mode.ShowCommand) {
             return {
                 mode: Mode.EnterCommand
             };

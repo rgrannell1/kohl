@@ -1,11 +1,13 @@
 
 import {
   Mode,
+  Library,
   KohlProps,
   CommandStatus
 } from '../commons/types.js'
 
 import P from 'parsimmon'
+import { library } from './library.js'
 
 enum LanguageParts {
   Call,
@@ -80,7 +82,7 @@ const parseCommand = (command:string) => {
   return lang.Value.tryParse(command)
 }
 
-const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => {
+const executeCommand = (parsed:any, libs:Library, state:KohlProps):CommandStatus => {
   if (parsed.type === LanguageParts.Call) {
     const { proc, args } = parsed
 
@@ -91,11 +93,9 @@ const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => 
       }
     }
 
+    const result = libs[proc](state, ...args)
     try {
-      return {
-        status: 0,
-        result: libs[proc](state, ...args)
-      }
+      return result
     } catch (err) {
       return {
         status: 1
@@ -108,28 +108,24 @@ const executeCommand = (parsed:any, libs:any, state:KohlProps):CommandStatus => 
   }
 }
 
-interface Library {
-  [key:string]:(state:KohlProps, ...args:any[]) => Partial<KohlProps>
-}
-
-const libs:Library = { }
-
-libs.jump = (state:KohlProps, line:number) => {
-  return {
-    cursor: {
-      ...state.cursor,
-      position: line
-    }
-  }
-}
-
 export const runCommand = (state:KohlProps, command:string) => {
-  const parsed = parseCommand(command)
-  const output = executeCommand(parsed, libs, state)
-
-  return {
-    mode: Mode.ShowCommand,
-    command,
-    output
+  try {
+    const parsed = parseCommand(command)
+    const output = executeCommand(parsed, library, state)
+    return {
+      mode: Mode.ShowCommand,
+      command,
+      output
+    }
+  } catch (err) {
+    return {
+      mode: Mode.ShowCommand,
+      command,
+      output: {
+        status: 1,
+        message: err.message.slice(0, 10),
+        state: null
+      }
+    }
   }
 }
