@@ -1,12 +1,10 @@
 
 import P from 'parsimmon'
 
-
 import {
   Language,
   LanguageParts
 } from '../commons/types.js'
-
 
 export const language:Language = { }
 
