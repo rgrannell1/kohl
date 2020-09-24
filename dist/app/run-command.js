@@ -41,22 +41,40 @@ const executeCommand = (parsed, libs, state) => {
 };
 export const runCommand = (state, command) => {
     try {
-        const parsed = parseCommand(command);
-        const output = executeCommand(parsed, library, state);
+        var parsed = parseCommand(command);
+    }
+    catch (err) {
+        return {
+            // -- failed to parse
+            mode: Mode.ShowCommand,
+            command,
+            output: {
+                status: 1,
+                message: 'parse failure; hit q'
+            }
+        };
+    }
+    try {
+        // -- execute and return new state
+        const { message, status, state: newState } = executeCommand(parsed, library, state);
         return {
             mode: Mode.ShowCommand,
             command,
-            output
+            ...newState,
+            output: {
+                message,
+                status
+            }
         };
     }
     catch (err) {
+        // -- failed to execute.
         return {
             mode: Mode.ShowCommand,
             command,
             output: {
                 status: 1,
-                message: err.message.slice(0, 10),
-                state: null
+                message: err.message.slice(0, 10)
             }
         };
     }

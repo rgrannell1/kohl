@@ -1,6 +1,7 @@
 
 import React from 'react'
 import ink from 'ink'
+import {nanoid} from 'nanoid'
 
 const {
   Text
@@ -53,10 +54,10 @@ export class Body extends React.PureComponent<BodyProps> {
     const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns)
 
     if (displayLines.length === 0) {
-      elems.push(<Text inverse>No Matches Found</Text>)
+      elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)
 
       for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
-        elems.push(<Text> </Text>)
+        elems.push(<Text key={nanoid()}> </Text>)
       }
     } else {
       for (let ith = 0; ith < displayLines.length; ++ith) {

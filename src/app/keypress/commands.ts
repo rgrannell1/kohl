@@ -18,11 +18,13 @@ mappings.set(hasName('return'), (elem:React.Component) => {
     if (state.mode === Mode.EnterCommand) {
       const result = runCommand(state, state.command)
 
-      return {
-        ...result.output.state,
-        command: result.output.status === 0
-          ? ''
-          : state.command
+      if (result.output.status === 0) {
+        return {
+          ...result,
+          command: ''
+        }
+      } else {
+        return result
       }
     }
   })

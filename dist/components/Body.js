@@ -1,5 +1,6 @@
 import React from 'react';
 import ink from 'ink';
+import { nanoid } from 'nanoid';
 const { Text } = ink;
 export class Body extends React.PureComponent {
     trimLine(line, cursor, screen) {
@@ -25,9 +26,9 @@ export class Body extends React.PureComponent {
         const elems = [];
         const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns);
         if (displayLines.length === 0) {
-            elems.push(React.createElement(Text, { inverse: true }, "No Matches Found"));
+            elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
             for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
-                elems.push(React.createElement(Text, null, " "));
+                elems.push(React.createElement(Text, { key: nanoid() }, " "));
             }
         }
         else {
