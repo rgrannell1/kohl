@@ -1,7 +1,8 @@
 
 import {
   Mode,
-  KohlProps
+  KohlProps,
+  KeyMapping
 } from '../../commons/types.js'
 
 import {
@@ -11,7 +12,7 @@ import {
 
 import { runCommand } from '../run-command.js'
 
-const mappings = new Map()
+const mappings:KeyMapping = new Map()
 
 mappings.set(hasName('return'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {

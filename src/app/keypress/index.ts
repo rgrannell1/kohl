@@ -1,7 +1,8 @@
 
 import {
   Mode,
-  KohlProps
+  KohlProps,
+  KeyMapping
 } from '../../commons/types.js'
 
 import arrowMappings from './arrows.js'
@@ -13,7 +14,7 @@ import {
   Key
 } from '../../commons/types'
 
-const mappings = new Map()
+const mappings:KeyMapping = new Map()
 
 mappings.set(() => true, (elem:React.Component, key:Key) => {
   elem.setState((state:KohlProps) => {

@@ -17,7 +17,7 @@ language.Call = ref => {
     const withoutArgs = ref.ProcName.map(proc => {
         return { type: LanguageParts.Call, proc, args: [] };
     });
-    return P.alt(withoutArgs, withArgs);
+    return P.alt(withArgs, withoutArgs);
 };
 language.ProcName = () => {
     return P.regexp(/[a-zA-Z0-9]+/);

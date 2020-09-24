@@ -87,3 +87,8 @@ export enum LanguageParts {
 export interface Language {
   [key: string]: (p:P.Language) => P.Parser<any>
 }
+
+type isKey = (key:Key) => Boolean
+type onElem = (ref:React.Component, key:Key) => any
+
+export type KeyMapping = Map<isKey, onElem>

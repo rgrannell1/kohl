@@ -1,9 +1,13 @@
 
 import {
+  KeyMapping
+} from '../../commons/types.js'
+
+import {
   keypress
 } from './utils.js'
 
-const mappings = new Map()
+const mappings:KeyMapping = new Map()
 
 mappings.set(keypress('ctrl + c'), (elem:React.Component) => {
   process.kill(process.pid, 'SIGINT')

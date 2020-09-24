@@ -33,7 +33,7 @@ language.Call = ref => {
     return { type: LanguageParts.Call, proc, args: [ ]}
   })
 
-  return P.alt(withoutArgs, withArgs)
+  return P.alt(withArgs, withoutArgs)
 }
 
 language.ProcName = () => {
