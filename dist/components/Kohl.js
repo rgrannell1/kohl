@@ -4,12 +4,12 @@ import * as tty from 'tty';
 import * as fs from 'fs';
 import split from 'split';
 import through from 'through';
-import { Header } from '../components/Header.js';
-import { Footer } from '../components/Footer.js';
-import { Body } from '../components/Body.js';
-import CircularBuffer from './circular-buffer.js';
+import { Header } from './Header.js';
+import { Footer } from './Footer.js';
+import { Body } from './Body.js';
+import CircularBuffer from '../commons/circular-buffer.js';
 import mappings from '../app/keypress/index.js';
-import { Mode } from './types.js';
+import { Mode } from '../commons/types.js';
 import ink from 'ink';
 const { Newline } = ink;
 const lineMatchesPattern = (pattern, line) => {
@@ -106,4 +106,4 @@ export class Kohl extends React.Component {
             React.createElement(Footer, { mode: mode, output: output, command: command }));
     }
 }
-//# sourceMappingURL=kohl.js.map
+//# sourceMappingURL=Kohl.js.map

@@ -8,7 +8,7 @@ import readline from 'readline'
 import * as tty from 'tty'
 import * as fs from 'fs'
 
-import { Kohl } from '../commons/kohl.js'
+import { Kohl } from '../components/Kohl.js'
 const {
   render
 } = ink
