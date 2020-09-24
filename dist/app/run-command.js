@@ -21,6 +21,14 @@ const executeCommand = (parsed, libs, state) => {
             };
         }
         try {
+            const procDef = libs[proc];
+            if (args.length !== procDef.parameters) {
+                return {
+                    message: `expected #${procDef.parameters} args, got #${args.length}`,
+                    status: 1,
+                    state: {}
+                };
+            }
             return {
                 status: 0,
                 state: libs[proc](state, ...args)
