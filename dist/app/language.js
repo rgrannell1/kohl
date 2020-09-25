@@ -26,7 +26,9 @@ language.Number = () => {
     return P.regexp(/[0-9]+/).map(Number);
 };
 language.String = () => {
-    return P.regexp(/\"[^\"]*\"/);
+    return P.regexp(/\"[^\"]*\"/).map((part) => {
+        return part.slice(1, -1);
+    });
 };
 language.Jump = ref => {
     return P.regexp(/\:[0-9]+/).map(match => {

@@ -13,11 +13,11 @@ library.jump = Object.assign(jump, {
     parameters: 1,
     description: 'jump to line-number'
 });
-const search = (state, search) => {
+const search = (state, query) => {
     return {
         patterns: {
             ...state.patterns,
-            search
+            search: query
         }
     };
 };

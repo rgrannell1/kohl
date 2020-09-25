@@ -17,17 +17,4 @@ export default class FilterLines {
         return this.matchingLines().length;
     }
 }
-/**
-  const lower = cursor.position + this.freeLines(screen)
-
-  return lines
-    .values()
-    .filter((lineData) => {
-      return lineData.text.includes(patterns.search)
-    })
-    .slice(cursor.position, lower)
-
- */
-//  const lower = cursor.position + this.freeLines(screen)
-//  .slice(cursor.position, lower)
 //# sourceMappingURL=filter-lines.js.map

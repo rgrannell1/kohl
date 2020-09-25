@@ -45,7 +45,9 @@ language.Number = () => {
 }
 
 language.String = () => {
-  return P.regexp(/\"[^\"]*\"/)
+  return P.regexp(/\"[^\"]*\"/).map((part:string) => {
+    return part.slice(1,-1)
+  })
 }
 
 language.Jump = ref => {

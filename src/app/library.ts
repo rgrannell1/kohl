@@ -22,11 +22,11 @@ library.jump = Object.assign(jump, {
   description: 'jump to line-number'
 })
 
-const search = (state:KohlProps, search:string) => {
+const search = (state:KohlProps, query:string) => {
   return {
     patterns: {
       ...state.patterns,
-      search
+      search: query
     }
   }
 }
