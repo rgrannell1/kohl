@@ -1,5 +1,6 @@
 import React from 'react';
 import ink from 'ink';
+import FilterLines from '../app/filter-lines.js';
 const { Box, Text, Newline, } = ink;
 class CursorLinePosition extends React.PureComponent {
     render() {
@@ -15,14 +16,13 @@ class SelectionSummary extends React.PureComponent {
             ? 100
             : Math.round((selected / total) * 100);
     }
-    computeSelection() {
-        return {
-            selected: 10,
-            total: 10
-        };
-    }
     render() {
-        const { selected, total } = this.computeSelection();
+        const filter = new FilterLines({
+            lines: this.props.lines,
+            patterns: this.props.patterns
+        });
+        const total = filter.total();
+        const selected = filter.selected();
         const ratio = this.ratio(selected, total);
         const strings = {
             ratio: ratio.toLocaleString(),
@@ -40,13 +40,14 @@ class SelectionSummary extends React.PureComponent {
 }
 export class Header extends React.Component {
     render() {
+        const { cursor, lines, patterns } = this.props;
         return React.createElement(Box, null,
             React.createElement(Box, { minWidth: 8 },
                 React.createElement(Text, null,
                     "kohl",
                     React.createElement(Newline, null))),
             React.createElement(CursorLinePosition, { position: this.props.cursor.position }),
-            React.createElement(SelectionSummary, null));
+            React.createElement(SelectionSummary, { lines: lines, patterns: patterns }));
     }
 }
 //# sourceMappingURL=Header.js.map

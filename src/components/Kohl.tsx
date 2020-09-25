@@ -48,11 +48,6 @@ export class Kohl extends React.Component<{}, KohlState> {
       column: 0
     }
 
-    // -- the total line count, and the selected line-count
-    const selection = {
-      count: 0,
-      total: 0
-    }
     const patterns = {
       search: '',
       highlight: ''
@@ -65,7 +60,6 @@ export class Kohl extends React.Component<{}, KohlState> {
     this.state = {
       screen,
       cursor,
-      selection,
       patterns,
       mode: Mode.Default,
       command: '',
@@ -81,13 +75,8 @@ export class Kohl extends React.Component<{}, KohlState> {
     this.state.ttyIn.on('keypress', this.handleKeyPress.bind(this))
     this.state.ttyIn.setRawMode(true)
   }
+  // -- TODO refactor extremely slow.
   ingestLine (line:string, state:KohlState) {
-    const isMatch = lineMatchesPattern(state.patterns.search, line)
-    const selection = {
-      count: state.selection.count + (isMatch ? 1 : 0),
-      total: state.selection.total + 1
-    }
-
     state.lines.add({
       text: line,
       id: state.lineId
@@ -98,7 +87,6 @@ export class Kohl extends React.Component<{}, KohlState> {
         rows: process.stdout.rows,
         columns: process.stdout.columns
       },
-      selection,
       lines: state.lines,
       lineId: state.lineId + 1
     }
@@ -138,7 +126,7 @@ export class Kohl extends React.Component<{}, KohlState> {
     } = this.state
 
     return <>
-      <Header cursor={cursor}/>
+      <Header cursor={cursor} lines={lines} patterns={patterns}/>
       <Body cursor={cursor} lines={lines} screen={screen} patterns={patterns}/>
       <Newline/>
       <Footer mode={mode} output={output} command={command}/>

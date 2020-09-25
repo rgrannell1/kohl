@@ -1,7 +1,7 @@
 
 import React from 'react'
 import ink from 'ink'
-import FilterLines from '../app/filter-lines'
+import FilterLines from '../app/filter-lines.js'
 
 const {
   Box,
@@ -32,12 +32,6 @@ class SelectionSummary extends React.PureComponent<any> {
     return Number.isNaN(selected / total)
       ? 100
       : Math.round((selected / total) * 100)
-  }
-  computeSelection () {
-    return {
-      selected: 10,
-      total: 10
-    }
   }
   render () {
     const filter = new FilterLines({

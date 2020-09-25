@@ -24,11 +24,6 @@ export interface Cursor {
   readonly column: number
 }
 
-export interface Selection {
-  readonly count: number,
-  readonly total: number
-}
-
 export interface Patterns {
   readonly search: string,
   readonly highlight: string
@@ -39,7 +34,6 @@ export type Lines = CircularBuffer<LineData>
 export interface KohlProps {
   screen: Screen,
   cursor: Cursor,
-  selection: Selection,
   patterns: Patterns,
   mode: Mode,
   command: string,
@@ -50,7 +44,6 @@ export interface KohlState {
   ttyIn: tty.ReadStream,
   screen: Screen,
   cursor: Cursor,
-  selection: Selection,
   patterns: Patterns,
   mode: Mode,
   command: string,

@@ -13,6 +13,7 @@ import {
   Patterns,
   Screen,
 } from '../commons/types'
+import FilterLines from '../app/filter-lines.js'
 
 interface BodyProps {
   cursor: Cursor,
@@ -32,16 +33,6 @@ export class Body extends React.PureComponent<BodyProps> {
     const occupied = 5
     return screen.rows - occupied
   }
-  selectDisplayLines (lines:Lines, cursor:Cursor, screen:Screen, patterns:Patterns) {
-    const lower = cursor.position + this.freeLines(screen)
-
-    return lines
-      .values()
-      .filter((lineData) => {
-        return lineData.text.includes(patterns.search)
-      })
-      .slice(cursor.position, lower)
-  }
   render () {
     const {
       cursor,
@@ -50,8 +41,16 @@ export class Body extends React.PureComponent<BodyProps> {
       patterns
     } = this.props
 
+    const filter = new FilterLines({
+      lines,
+      patterns
+    })
+
+    const lower = cursor.position + this.freeLines(screen)
+
     const elems = []
-    const displayLines = this.selectDisplayLines(lines, cursor, screen, patterns)
+    const displayLines = filter.matchingLines(cursor)
+      .slice(cursor.position, lower)
 
     if (displayLines.length === 0) {
       elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)
@@ -63,7 +62,6 @@ export class Body extends React.PureComponent<BodyProps> {
       for (let ith = 0; ith < displayLines.length; ++ith) {
         const { text, id } = displayLines[ith]
 
-        // -- highlight the first displayed entry
         const isSelected = ith === 0
         const trimmed = this.trimLine(text, cursor, screen)
 

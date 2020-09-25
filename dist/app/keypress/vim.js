@@ -1,14 +1,17 @@
 import { Mode } from '../../commons/types.js';
 import { hasSequence } from './utils.js';
+import FilterLines from '../filter-lines.js';
 const mappings = new Map();
-// TODO selection
 mappings.set(hasSequence('G'), (elem) => {
     elem.setState((state) => {
+        const filter = new FilterLines({
+            lines: state.lines
+        });
         if (state.mode === Mode.Default) {
             return {
                 cursor: {
                     ...state.cursor,
-                    position: state.selection.total - state.screen.rows + 5
+                    position: filter.total() - state.screen.rows + 5
                 }
             };
         }
