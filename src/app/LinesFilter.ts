@@ -1,13 +1,12 @@
 
 import {
-  Screen,
   Cursor,
   Lines,
   LineData,
   Patterns
 } from '../commons/types'
 
-export default class FilterLines {
+export default class LinesFilter {
   lines:Lines
   patterns:Patterns
   constructor ({ lines, patterns }:any) {
@@ -17,7 +16,7 @@ export default class FilterLines {
   isMatch (lineData:LineData) {
     return lineData.text.includes(this.patterns.search)
   }
-  matchingLines (cursor?:Cursor) {
+  matchingLines () {
     return this.lines.values()
       .filter(this.isMatch.bind(this))
   }

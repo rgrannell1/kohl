@@ -36,7 +36,7 @@ mappings.set(hasName('escape'), (elem) => {
 mappings.set(hasName('q'), (elem) => {
     elem.setState((state) => {
         if (state.mode === Mode.Default) {
-            process.kill(process.pid, 'SIGINT');
+            process.exit(0);
         }
         else if (state.mode === Mode.ShowCommand) {
             return {

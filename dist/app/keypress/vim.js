@@ -1,10 +1,10 @@
 import { Mode } from '../../commons/types.js';
 import { hasSequence } from './utils.js';
-import FilterLines from '../filter-lines.js';
+import LinesFilter from '../LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasSequence('G'), (elem) => {
     elem.setState((state) => {
-        const filter = new FilterLines({
+        const filter = new LinesFilter({
             lines: state.lines
         });
         if (state.mode === Mode.Default) {

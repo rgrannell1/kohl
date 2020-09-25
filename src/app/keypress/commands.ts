@@ -51,7 +51,7 @@ mappings.set(hasName('escape'), (elem:React.Component) => {
 mappings.set(hasName('q'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     if (state.mode === Mode.Default) {
-      process.kill(process.pid, 'SIGINT')
+      process.exit(0)
     } else if (state.mode === Mode.ShowCommand) {
       return {
         mode: Mode.Default

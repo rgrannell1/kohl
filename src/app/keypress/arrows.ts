@@ -5,7 +5,7 @@ import {
 } from '../../commons/types.js'
 
 import { hasName } from './utils.js'
-import FilterLines from '../../app/filter-lines.js'
+import LinesFilter from '../LinesFilter.js'
 
 const mappings:KeyMapping = new Map()
 
@@ -22,8 +22,8 @@ mappings.set(hasName('up'), (elem:React.Component) => {
 
 mappings.set(hasName('down'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
-    const filter = new FilterLines(state)
-    const bottom = filter.total() - state.screen.rows
+    const filter = new LinesFilter(state)
+    const bottom = filter.selected() - state.screen.rows
 
     return {
       cursor: {
@@ -58,8 +58,8 @@ mappings.set(hasName('left'), (elem:React.Component) => {
 
 mappings.set(hasName('pagedown'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
-    const filter = new FilterLines(state)
-    const bottom = filter.total() - state.screen.rows
+    const filter = new LinesFilter(state)
+    const bottom = filter.selected() - state.screen.rows
 
     return {
       cursor: {

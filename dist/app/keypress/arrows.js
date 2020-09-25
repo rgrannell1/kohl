@@ -1,5 +1,5 @@
 import { hasName } from './utils.js';
-import FilterLines from '../../app/filter-lines.js';
+import LinesFilter from '../LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasName('up'), (elem) => {
     elem.setState((state) => {
@@ -13,8 +13,8 @@ mappings.set(hasName('up'), (elem) => {
 });
 mappings.set(hasName('down'), (elem) => {
     elem.setState((state) => {
-        const filter = new FilterLines(state);
-        const bottom = filter.total() - state.screen.rows;
+        const filter = new LinesFilter(state);
+        const bottom = filter.selected() - state.screen.rows;
         return {
             cursor: {
                 position: Math.min(state.cursor.position + 1, bottom),
@@ -45,8 +45,8 @@ mappings.set(hasName('left'), (elem) => {
 });
 mappings.set(hasName('pagedown'), (elem) => {
     elem.setState((state) => {
-        const filter = new FilterLines(state);
-        const bottom = filter.total() - state.screen.rows;
+        const filter = new LinesFilter(state);
+        const bottom = filter.selected() - state.screen.rows;
         return {
             cursor: {
                 ...state.cursor,

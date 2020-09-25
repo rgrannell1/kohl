@@ -2,7 +2,7 @@ import React from 'react';
 import ink from 'ink';
 import { nanoid } from 'nanoid';
 const { Text } = ink;
-import FilterLines from '../app/filter-lines.js';
+import LinesFilter from '../app/LinesFilter.js';
 export class Body extends React.PureComponent {
     trimLine(line, cursor, screen) {
         const start = cursor.column;
@@ -15,7 +15,7 @@ export class Body extends React.PureComponent {
     }
     render() {
         const { cursor, lines, screen, patterns } = this.props;
-        const filter = new FilterLines({
+        const filter = new LinesFilter({
             lines,
             patterns
         });

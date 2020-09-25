@@ -6,13 +6,13 @@ import {
 } from '../../commons/types.js'
 
 import { hasSequence } from './utils.js'
-import FilterLines from '../filter-lines.js'
+import LinesFilter from '../LinesFilter.js'
 
 const mappings:KeyMapping = new Map()
 
 mappings.set(hasSequence('G'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
-    const filter = new FilterLines({
+    const filter = new LinesFilter({
       lines: state.lines
     })
 

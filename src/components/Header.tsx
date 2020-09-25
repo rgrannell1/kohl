@@ -1,7 +1,7 @@
 
 import React from 'react'
 import ink from 'ink'
-import FilterLines from '../app/filter-lines.js'
+import LinesFilter from '../app/LinesFilter.js'
 
 const {
   Box,
@@ -34,7 +34,7 @@ class SelectionSummary extends React.PureComponent<any> {
       : Math.round((selected / total) * 100)
   }
   render () {
-    const filter = new FilterLines({
+    const filter = new LinesFilter({
       lines: this.props.lines,
       patterns: this.props.patterns
     })

@@ -13,7 +13,7 @@ import {
   Patterns,
   Screen,
 } from '../commons/types'
-import FilterLines from '../app/filter-lines.js'
+import LinesFilter from '../app/LinesFilter.js'
 
 interface BodyProps {
   cursor: Cursor,
@@ -41,7 +41,7 @@ export class Body extends React.PureComponent<BodyProps> {
       patterns
     } = this.props
 
-    const filter = new FilterLines({
+    const filter = new LinesFilter({
       lines,
       patterns
     })
