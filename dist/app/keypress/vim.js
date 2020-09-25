@@ -5,7 +5,8 @@ const mappings = new Map();
 mappings.set(hasSequence('G'), (elem) => {
     elem.setState((state) => {
         const filter = new LinesFilter({
-            lines: state.lines
+            lines: state.lines,
+            patterns: state.patterns
         });
         if (state.mode === Mode.Default) {
             return {

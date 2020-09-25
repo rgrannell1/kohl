@@ -1,16 +1,13 @@
+import { isString, isRegexp } from '../commons/checks.js';
+import { highlightPatterns, formatString } from './highlight-patterns.js';
 let idx = 0;
-function isString(pattern) {
-    return typeof pattern === 'string';
-}
-function isRegexp(pattern) {
-    return pattern instanceof RegExp;
-}
+const matchPatterns = (line, pattern) => {
+    return [];
+};
 export default class Line {
     constructor(text) {
         this.text = text;
         this.id = idx++;
-    }
-    highlight(pattern) {
     }
     isMatch(pattern) {
         if (isString(pattern)) {
@@ -20,10 +17,10 @@ export default class Line {
             return pattern.test(this.text);
         }
     }
-    toString() {
-        // -- convert to ansi string.
-    }
-    slice(start, end) {
+    highlight(patterns, start, end) {
+        const parts = highlightPatterns(this.text, patterns)
+            .slice(start, end);
+        return formatString(parts);
     }
 }
 //# sourceMappingURL=Line.js.map

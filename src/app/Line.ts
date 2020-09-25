@@ -4,7 +4,10 @@ import {
   isRegexp
 } from '../commons/checks.js'
 
-import { highlightPatterns } from './highlight-patterns.js'
+import {
+  highlightPatterns,
+  formatString
+} from './highlight-patterns.js'
 
 let idx = 0
 
@@ -19,9 +22,6 @@ export default class Line {
     this.text = text
     this.id = idx++
   }
-  highlight (patterns:string[]) {
-    return highlightPatterns(this.text, patterns)
-  }
   isMatch (pattern:string | RegExp) {
     if (isString(pattern)) {
       return this.text.includes(pattern)
@@ -29,10 +29,10 @@ export default class Line {
       return pattern.test(this.text)
     }
   }
-  toString () {
-    // -- convert to ansi string.
-  }
-  slice (start:number, end:number) {
-    // -- slice and join highlight
+  highlight (patterns:string[], start:number, end:number) {
+    const parts = highlightPatterns(this.text, patterns)
+      .slice(start, end)
+
+    return formatString(parts)
   }
 }

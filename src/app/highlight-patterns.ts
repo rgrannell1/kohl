@@ -9,6 +9,12 @@ import {
   SequenceData
 } from '../commons/types'
 
+import {
+  sequenceBy
+} from '../commons/utils.js'
+
+import ansi from 'ansi-styles'
+
 const matchStringPattern = (line:string, pattern:string) => {
   // -- return matches for string literals. Not implemented by default
   let id = 0
@@ -82,4 +88,54 @@ export const highlightPatterns = (line:string, patterns:string[]) => {
   }
 
   return sequence
+}
+
+interface Elem {
+  id: number
+}
+
+const displayColours = [
+  'green',
+  'red',
+  'yellow',
+  'blue',
+  'magenta',
+  'cyan',
+  'black',
+  'white',
+  'gray',
+  'grey'
+]
+
+const displayText = displayColours.map((colour:string) => {
+  return (text:string) => {
+    return `${ansi[colour].open}${text}${ansi[colour].close}`
+  }
+})
+
+const formatText = (chars:string, id?:number) => {
+  if (typeof id !== 'undefined' && Number.isInteger(id)) {
+    const colourId = id % displayText.length
+    return displayText[colourId](chars)
+  } else {
+    return chars
+  }
+}
+
+const hasSameId = (elem0:Elem, elem1:Elem) => {
+  return elem0.id === elem1.id
+}
+
+export const formatString = (parts:SequenceData[]) => {
+  let message = ''
+
+  const grouped = sequenceBy(hasSameId, parts)
+  for (const stretch of grouped) {
+    const chars = stretch.map(group => group.char)
+    const { id } = stretch[0]
+
+    message += formatText(chars.join(''), id)
+  }
+
+  return message
 }

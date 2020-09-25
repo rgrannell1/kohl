@@ -13,7 +13,8 @@ const mappings:KeyMapping = new Map()
 mappings.set(hasSequence('G'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     const filter = new LinesFilter({
-      lines: state.lines
+      lines: state.lines,
+      patterns: state.patterns
     })
 
     if (state.mode === Mode.Default) {
