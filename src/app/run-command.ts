@@ -11,6 +11,12 @@ import P from 'parsimmon'
 import { library } from './library.js'
 import { language } from './language.js'
 
+interface Call {
+  type: LanguageParts.Call,
+  proc: string,
+  args: string[]
+}
+
 const lang = P.createLanguage(language)
 
 /**
@@ -21,7 +27,7 @@ const parseCommand = (command:string) => {
   return lang.Value.tryParse(command)
 }
 
-const executeCommand = (parsed:any, libs:Library, state:KohlProps):ExecuteResult => {
+const executeCommand = (parsed:Call, libs:Library, state:KohlProps):ExecuteResult => {
   if (parsed.type === LanguageParts.Call) {
     const { proc, args } = parsed
 
@@ -34,7 +40,7 @@ const executeCommand = (parsed:any, libs:Library, state:KohlProps):ExecuteResult
     }
 
     try {
-      const procDef:any = libs[proc]
+      const procDef = libs[proc]
 
       if (args.length !== procDef.parameters) {
         return {

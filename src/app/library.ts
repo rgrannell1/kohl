@@ -19,7 +19,7 @@ library.jump = (state:KohlProps, line:number) => {
 
 Object.assign(library.jump, {
   parameters: 1,
-  description: 'jump to line.'
+  description: 'jump to line-number'
 })
 
 library.search = (state:KohlProps, search:string) => {

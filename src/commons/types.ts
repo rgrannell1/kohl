@@ -1,4 +1,5 @@
 
+import tty from 'tty'
 import P from 'parsimmon'
 import CircularBuffer from "./circular-buffer";
 
@@ -46,7 +47,7 @@ export interface KohlProps {
 }
 
 export interface KohlState {
-  ttyIn: any,
+  ttyIn: tty.ReadStream,
   screen: Screen,
   cursor: Cursor,
   selection: Selection,
@@ -75,8 +76,14 @@ export interface ExecuteResult {
   readonly state: Partial<KohlProps>
 }
 
+export type LibraryFunction = (state:KohlProps, ...args:any[]) => CommandStatus
+export interface LibraryFunctionMetadata {
+  description: string,
+  parameters: number
+}
+
 export interface Library {
-  [key:string]:(state:KohlProps, ...args:any[]) => CommandStatus
+  [key:string]: LibraryFunction & LibraryFunctionMetadata
 }
 
 export enum LanguageParts {

@@ -15,6 +15,7 @@ import CircularBuffer from '../commons/circular-buffer.js'
 
 import mappings from '../app/keypress/index.js'
 import {
+  Key,
   KohlProps,
   Mode,
   LineData,
@@ -106,14 +107,14 @@ export class Kohl extends React.Component<{}, KohlState> {
   componentWillUnmount () {
     this.state.ttyIn.removeListener('keypress', this.handleKeyPress)
   }
-  handleKeyPress (ch:any, key:any) {
+  handleKeyPress (ch:any, key:Key) {
     for (const [pred, handler] of mappings.entries()) {
       if (pred(key)) {
         return handler(this, key)
       }
     }
 
-    throw new Error(key)
+    throw new Error(`unhandled key ${key.sequence}`)
   }
   render () {
     const {
