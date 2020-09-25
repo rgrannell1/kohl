@@ -64,7 +64,6 @@ export const highlightPatterns = (line, patterns) => {
     }
     return sequence;
 };
-// TODO displayText
 const displayColours = [
     'green',
     'red',
@@ -95,15 +94,13 @@ const hasSameId = (elem0, elem1) => {
     return elem0.id === elem1.id;
 };
 export const formatString = (parts) => {
-    let output = '';
+    let message = '';
     const grouped = sequenceBy(hasSameId, parts);
     for (const stretch of grouped) {
         const chars = stretch.map(group => group.char);
         const { id } = stretch[0];
-        output += chars;
-        //output += formatText(chars.join(''), id)
+        message += formatText(chars.join(''), id);
     }
-    return 'accccccccccccccccccc';
-    return output;
+    return message;
 };
 //# sourceMappingURL=highlight-patterns.js.map

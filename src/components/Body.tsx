@@ -48,13 +48,7 @@ export class Body extends React.PureComponent<BodyProps> {
 
     const elems = []
     const displayLines = filter.matchingLines()
-      .map(line => {
-        console.error(
-          line.highlight([patterns.highlight], 0, 100)
-        )
-        process.exit(0)
-      })
-      // .slice(cursor.position, cursor.position + this.freeLines(screen))
+      .slice(cursor.position, cursor.position + this.freeLines(screen))
 
     if (displayLines.length === 0) {
       elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)

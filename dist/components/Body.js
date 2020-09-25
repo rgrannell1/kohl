@@ -21,11 +21,7 @@ export class Body extends React.PureComponent {
         });
         const elems = [];
         const displayLines = filter.matchingLines()
-            .map(line => {
-            console.error(line.highlight([patterns.highlight], 0, 100));
-            process.exit(0);
-        });
-        // .slice(cursor.position, cursor.position + this.freeLines(screen))
+            .slice(cursor.position, cursor.position + this.freeLines(screen));
         if (displayLines.length === 0) {
             elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
             for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
