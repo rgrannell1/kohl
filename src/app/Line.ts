@@ -1,6 +1,14 @@
 
 let idx = 0
 
+function isString (pattern: any): pattern is string {
+  return typeof pattern === 'string'
+}
+
+function isRegexp (pattern: any): pattern is RegExp {
+  return pattern instanceof RegExp
+}
+
 export default class Line {
   id: number
   text: string
@@ -11,11 +19,11 @@ export default class Line {
   highlight (pattern:string) {
 
   }
-  isMatch (pattern:string) {
-    if (false) {
-      // -- return regexp
-    } else {
+  isMatch (pattern:string | RegExp) {
+    if (isString(pattern)) {
       return this.text.includes(pattern)
+    } else if (isRegexp(pattern)) {
+      return pattern.test(this.text)
     }
   }
   toString () {
