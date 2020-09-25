@@ -18,16 +18,12 @@ import {
   Key,
   KohlProps,
   Mode,
-  LineData,
   KohlState
 } from '../commons/types.js'
 
 import ink from 'ink'
+import Line from '../app/Line.js'
 const { Newline } = ink
-
-const lineMatchesPattern = (pattern:string, line:string):Boolean => {
-  return line.includes(pattern)
-}
 
 export class Kohl extends React.Component<{}, KohlState> {
   constructor (props:KohlProps) {
@@ -35,7 +31,7 @@ export class Kohl extends React.Component<{}, KohlState> {
 
     const fd = fs.openSync('/dev/tty', 'r+')
     const ttyIn = new tty.ReadStream(fd, { })
-    const lines:CircularBuffer<LineData> = new CircularBuffer(20_000)
+    const lines:CircularBuffer<Line> = new CircularBuffer(20_000)
 
     const screen = {
       rows: process.stdout.rows,
@@ -77,10 +73,7 @@ export class Kohl extends React.Component<{}, KohlState> {
   }
   // -- TODO refactor extremely slow.
   ingestLine (line:string, state:KohlState) {
-    state.lines.add({
-      text: line,
-      id: state.lineId
-    })
+    state.lines.add(new Line(line))
 
     return {
       console: {

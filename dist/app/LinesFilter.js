@@ -3,10 +3,10 @@ export default class LinesFilter {
         this.lines = lines;
         this.patterns = patterns;
     }
-    isMatch(lineData) {
-        return lineData.text.includes(this.patterns.search);
+    isMatch(line) {
+        return line.text.includes(this.patterns.search);
     }
-    matchingLines(cursor) {
+    matchingLines() {
         return this.lines.values()
             .filter(this.isMatch.bind(this));
     }

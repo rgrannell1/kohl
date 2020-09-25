@@ -1,8 +1,8 @@
 
+import Line from '../app/Line.js'
+
 import {
-  Cursor,
   Lines,
-  LineData,
   Patterns
 } from '../commons/types'
 
@@ -13,8 +13,8 @@ export default class LinesFilter {
     this.lines = lines
     this.patterns = patterns
   }
-  isMatch (lineData:LineData) {
-    return lineData.text.includes(this.patterns.search)
+  isMatch (line:Line) {
+    return line.text.includes(this.patterns.search)
   }
   matchingLines () {
     return this.lines.values()

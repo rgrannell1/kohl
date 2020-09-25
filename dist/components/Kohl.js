@@ -11,10 +11,8 @@ import CircularBuffer from '../commons/circular-buffer.js';
 import mappings from '../app/keypress/index.js';
 import { Mode } from '../commons/types.js';
 import ink from 'ink';
+import Line from '../app/Line.js';
 const { Newline } = ink;
-const lineMatchesPattern = (pattern, line) => {
-    return line.includes(pattern);
-};
 export class Kohl extends React.Component {
     constructor(props) {
         super(props);
@@ -58,10 +56,7 @@ export class Kohl extends React.Component {
     }
     // -- TODO refactor extremely slow.
     ingestLine(line, state) {
-        state.lines.add({
-            text: line,
-            id: state.lineId
-        });
+        state.lines.add(new Line(line));
         return {
             console: {
                 rows: process.stdout.rows,

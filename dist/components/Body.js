@@ -19,10 +19,9 @@ export class Body extends React.PureComponent {
             lines,
             patterns
         });
-        const lower = cursor.position + this.freeLines(screen);
         const elems = [];
-        const displayLines = filter.matchingLines(cursor)
-            .slice(cursor.position, lower);
+        const displayLines = filter.matchingLines()
+            .slice(cursor.position, cursor.position + this.freeLines(screen));
         if (displayLines.length === 0) {
             elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
             for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {

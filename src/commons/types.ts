@@ -2,11 +2,7 @@
 import tty from 'tty'
 import P from 'parsimmon'
 import CircularBuffer from "./circular-buffer";
-
-export interface LineData {
-  readonly text: string,
-  readonly id: number
-}
+import Line from '../app/Line'
 
 export enum Mode {
   Default,
@@ -29,7 +25,7 @@ export interface Patterns {
   readonly highlight: string
 }
 
-export type Lines = CircularBuffer<LineData>
+export type Lines = CircularBuffer<Line>
 
 export interface KohlProps {
   screen: Screen,
@@ -49,7 +45,7 @@ export interface KohlState {
   command: string,
   output: ExecuteResult,
   lines: Lines,
-  displayLines: LineData[],
+  displayLines: Lines[],
   lineId: number
 }
 
