@@ -95,7 +95,7 @@ export class Kohl extends React.Component {
                 return handler(this, key);
             }
         }
-        throw new Error(key);
+        throw new Error(`unhandled key ${key.sequence}`);
     }
     render() {
         const { command, cursor, lines, mode, output, screen, selection, patterns } = this.state;
