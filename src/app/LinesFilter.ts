@@ -6,15 +6,21 @@ import {
   Patterns
 } from '../commons/types'
 
+interface LinesFilterArgs {
+  lines: Lines,
+  patterns: Patterns
+}
+
+// -- merge into a lines class?
 export default class LinesFilter {
   lines:Lines
   patterns:Patterns
-  constructor ({ lines, patterns }:any) {
+  constructor ({ lines, patterns }:LinesFilterArgs) {
     this.lines = lines
     this.patterns = patterns
   }
   isMatch (line:Line) {
-    return line.text.includes(this.patterns.search)
+    return line.isMatch(this.patterns.search)
   }
   matchingLines () {
     return this.lines.values()

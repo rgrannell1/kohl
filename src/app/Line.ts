@@ -1,12 +1,15 @@
 
+import {
+  isString,
+  isRegexp
+} from '../commons/checks.js'
+
+import { highlightPatterns } from './highlight-patterns.js'
+
 let idx = 0
 
-function isString (pattern: any): pattern is string {
-  return typeof pattern === 'string'
-}
-
-function isRegexp (pattern: any): pattern is RegExp {
-  return pattern instanceof RegExp
+const matchPatterns = (line:string, pattern:string) => {
+  return []
 }
 
 export default class Line {
@@ -16,8 +19,8 @@ export default class Line {
     this.text = text
     this.id = idx++
   }
-  highlight (pattern:string) {
-
+  highlight (patterns:string[]) {
+    return highlightPatterns(this.text, patterns)
   }
   isMatch (pattern:string | RegExp) {
     if (isString(pattern)) {
@@ -30,6 +33,6 @@ export default class Line {
     // -- convert to ansi string.
   }
   slice (start:number, end:number) {
-
+    // -- slice and join highlight
   }
 }

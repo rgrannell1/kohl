@@ -36,6 +36,21 @@ library.search = Object.assign(search, {
   description: 'search for literal text'
 })
 
+const highlight = (state:KohlProps, query:string) => {
+  return {
+    patterns: {
+      ...state.patterns,
+      highlight: query
+    }
+  }
+}
+
+library.highlight = Object.assign(highlight, {
+  parameters: 1,
+  description: 'highlight literal text'
+})
+
+
 const q = () => {
   return {
     mode: Mode.Default

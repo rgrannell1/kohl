@@ -10,6 +10,18 @@ export enum Mode {
   EnterCommand
 }
 
+export interface MatchData {
+  start: number,
+  end: number,
+  id: number
+}
+
+export interface SequenceData {
+  char: string,
+  index: number,
+  id?: number
+}
+
 export interface Screen {
   readonly rows: number,
   readonly columns: number
