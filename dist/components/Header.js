@@ -15,8 +15,14 @@ class SelectionSummary extends React.PureComponent {
             ? 100
             : Math.round((selected / total) * 100);
     }
+    computeSelection() {
+        return {
+            selected: 10,
+            total: 10
+        };
+    }
     render() {
-        const { selected, total } = this.props;
+        const { selected, total } = this.computeSelection();
         const ratio = this.ratio(selected, total);
         const strings = {
             ratio: ratio.toLocaleString(),
@@ -40,7 +46,7 @@ export class Header extends React.Component {
                     "kohl",
                     React.createElement(Newline, null))),
             React.createElement(CursorLinePosition, { position: this.props.cursor.position }),
-            React.createElement(SelectionSummary, { selected: this.props.selection.count, total: this.props.selection.total }));
+            React.createElement(SelectionSummary, null));
     }
 }
 //# sourceMappingURL=Header.js.map

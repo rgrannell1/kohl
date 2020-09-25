@@ -57,11 +57,6 @@ Copyright:
 
 const main = () => {
   docopt.docopt(docs, {})
-  const fd = fs.openSync('/dev/tty', 'r+')
-  const ttyIn = new tty.ReadStream(fd, { })
-
-  readline.emitKeypressEvents(ttyIn)
-
   render(<Kohl/>)
 }
 

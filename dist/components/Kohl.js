@@ -21,29 +21,36 @@ export class Kohl extends React.Component {
         const fd = fs.openSync('/dev/tty', 'r+');
         const ttyIn = new tty.ReadStream(fd, {});
         const lines = new CircularBuffer(20000);
+        const screen = {
+            rows: process.stdout.rows,
+            columns: process.stdout.columns
+        };
+        // -- the current row and line position of the available text.
+        const cursor = {
+            position: 0,
+            column: 0
+        };
+        // -- the total line count, and the selected line-count
+        const selection = {
+            count: 0,
+            total: 0
+        };
+        const patterns = {
+            search: '',
+            highlight: ''
+        };
+        const output = {
+            state: {},
+            status: 0
+        };
         this.state = {
-            screen: {
-                rows: process.stdout.rows,
-                columns: process.stdout.columns
-            },
-            cursor: {
-                position: 0,
-                column: 0
-            },
-            selection: {
-                count: 0,
-                total: 0
-            },
-            patterns: {
-                search: '',
-                highlight: ''
-            },
+            screen,
+            cursor,
+            selection,
+            patterns,
             mode: Mode.Default,
             command: '',
-            output: {
-                state: {},
-                status: 0
-            },
+            output,
             ttyIn,
             lines,
             displayLines: [],
@@ -98,9 +105,9 @@ export class Kohl extends React.Component {
         throw new Error(`unhandled key ${key.sequence}`);
     }
     render() {
-        const { command, cursor, lines, mode, output, screen, selection, patterns } = this.state;
+        const { command, cursor, lines, mode, output, screen, patterns } = this.state;
         return React.createElement(React.Fragment, null,
-            React.createElement(Header, { cursor: cursor, selection: selection }),
+            React.createElement(Header, { cursor: cursor }),
             React.createElement(Body, { cursor: cursor, lines: lines, screen: screen, patterns: patterns }),
             React.createElement(Newline, null),
             React.createElement(Footer, { mode: mode, output: output, command: command }));

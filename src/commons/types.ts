@@ -71,7 +71,7 @@ export interface Key {
 export type CommandStatus = Partial<KohlProps>
 
 export interface ExecuteResult {
-  readonly status: 0 | 1,
+  readonly status: number,
   readonly message?: string,
   readonly state: Partial<KohlProps>
 }

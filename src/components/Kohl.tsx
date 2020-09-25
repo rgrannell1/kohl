@@ -37,29 +37,39 @@ export class Kohl extends React.Component<{}, KohlState> {
     const ttyIn = new tty.ReadStream(fd, { })
     const lines:CircularBuffer<LineData> = new CircularBuffer(20_000)
 
+    const screen = {
+      rows: process.stdout.rows,
+      columns: process.stdout.columns
+    }
+
+    // -- the current row and line position of the available text.
+    const cursor = {
+      position: 0,
+      column: 0
+    }
+
+    // -- the total line count, and the selected line-count
+    const selection = {
+      count: 0,
+      total: 0
+    }
+    const patterns = {
+      search: '',
+      highlight: ''
+    }
+    const output = {
+      state: {},
+      status: 0
+    }
+
     this.state = {
-      screen: {
-        rows: process.stdout.rows,
-        columns: process.stdout.columns
-      },
-      cursor: {
-        position: 0,
-        column: 0
-      },
-      selection: {
-        count: 0,
-        total: 0
-      },
-      patterns: {
-        search: '',
-        highlight: ''
-      },
+      screen,
+      cursor,
+      selection,
+      patterns,
       mode: Mode.Default,
       command: '',
-      output: {
-        state: {},
-        status: 0
-      },
+      output,
       ttyIn,
       lines,
       displayLines: [],
@@ -124,12 +134,11 @@ export class Kohl extends React.Component<{}, KohlState> {
       mode,
       output,
       screen,
-      selection,
       patterns
     } = this.state
 
     return <>
-      <Header cursor={cursor} selection={selection}/>
+      <Header cursor={cursor}/>
       <Body cursor={cursor} lines={lines} screen={screen} patterns={patterns}/>
       <Newline/>
       <Footer mode={mode} output={output} command={command}/>

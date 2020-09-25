@@ -1,6 +1,7 @@
 import { Mode } from '../../commons/types.js';
 import { hasSequence } from './utils.js';
 const mappings = new Map();
+// TODO selection
 mappings.set(hasSequence('G'), (elem) => {
     elem.setState((state) => {
         if (state.mode === Mode.Default) {

@@ -5,6 +5,7 @@
   "author": "Róisín Grannell <r.grannell2@gmail.com>",
   "scripts": {
     "tsc": "tsc",
+    "start": "npm run tsc && cat data/apache_logs.txt | node dist/cli/kohl.js",
     "standard": "npx standard 'src/**'",
     "standard:fix": "npx standard 'src/**' --fix",
     "test": "npx test --coverage-report=lcov"

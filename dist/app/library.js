@@ -31,7 +31,7 @@ const q = () => {
     };
 };
 library.q = Object.assign(q, {
-    parameters: 1,
+    parameters: 0,
     description: 'quit to the default view'
 });
 //# sourceMappingURL=library.js.map

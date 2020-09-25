@@ -1,12 +1,17 @@
 
 import React from 'react'
 import ink from 'ink'
+import FilterLines from '../app/filter-lines'
 
 const {
   Box,
   Text ,
   Newline,
 } = ink
+
+import {
+  Patterns
+} from '../commons/types'
 
 interface CursorLineProps {
   position: number
@@ -22,19 +27,27 @@ class CursorLinePosition extends React.PureComponent<CursorLineProps> {
   }
 }
 
-interface SelectionSummaryProps {
-  selected: number,
-  total: number
-}
-
-class SelectionSummary extends React.PureComponent<SelectionSummaryProps> {
+class SelectionSummary extends React.PureComponent<any> {
   ratio (selected:number, total:number) {
     return Number.isNaN(selected / total)
       ? 100
       : Math.round((selected / total) * 100)
   }
+  computeSelection () {
+    return {
+      selected: 10,
+      total: 10
+    }
+  }
   render () {
-    const {selected, total} = this.props
+    const filter = new FilterLines({
+      lines: this.props.lines,
+      patterns: this.props.patterns
+    })
+
+    const total = filter.total()
+    const selected = filter.selected()
+
     const ratio = this.ratio(selected, total)
 
     const strings = {
@@ -53,20 +66,24 @@ interface HeaderProps {
   cursor: {
     position: number
   },
-  selection: {
-    count: number,
-    total: number
-  }
+  lines: any,
+  patterns: Patterns
 }
 
 export class Header extends React.Component<HeaderProps> {
   render () {
+    const {
+      cursor,
+      lines,
+      patterns
+    } = this.props
+
     return <Box>
       <Box minWidth={8}>
         <Text>kohl<Newline/></Text>
       </Box>
       <CursorLinePosition position={this.props.cursor.position}/>
-      <SelectionSummary selected={this.props.selection.count} total={this.props.selection.total}/>
+      <SelectionSummary lines={lines} patterns={patterns}/>
     </Box>
   }
 }
