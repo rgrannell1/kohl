@@ -12,7 +12,6 @@ interface LinesFilterArgs {
   patterns: Patterns
 }
 
-// -- merge into a lines class?
 export default class LinesFilter {
   lines:Lines
   patterns:Patterns

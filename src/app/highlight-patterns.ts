@@ -63,12 +63,14 @@ const matchPattern = (line:string, pattern:string | RegExp) => {
   }
 }
 
-export const highlightPatterns = (line:string, patterns:string[]) => {
+type Pattern = string | RegExp
+
+export const highlightPatterns = (line:string, patterns:Pattern[]) => {
   const allMatches:MatchData[] = []
 
   let id = 0
   // -- match each pattern as many times as possible using `matchAll`
-  for (const pattern of patterns.filter(pattern => pattern.length > 0)) {
+  for (const pattern of patterns) {
     // -- note: does not work with strings;
     allMatches.push(...matchPattern(line, pattern))
   }
@@ -127,21 +129,7 @@ const hasSameId = (elem0:Elem, elem1:Elem) => {
   return elem0.id === elem1.id
 }
 
-const store = new WeakMap()
-
-const memoise = (fn:any) => {
-  return (parts:SequenceData[]) => {
-    if (store.has(parts)) {
-      return store.get(parts)
-    } else {
-      const result = fn(parts)
-      store.set(parts, result)
-      return result
-    }
-  }
-}
-
-const _formatString = (parts:SequenceData[]) => {
+export const formatString = (parts:SequenceData[]) => {
   let message = ''
 
   const grouped = sequenceBy(hasSameId, parts)
@@ -154,5 +142,3 @@ const _formatString = (parts:SequenceData[]) => {
 
   return message
 }
-
-export const formatString = memoise(_formatString)

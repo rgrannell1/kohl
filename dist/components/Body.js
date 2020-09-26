@@ -13,20 +13,22 @@ export class Body extends React.PureComponent {
         const occupied = 5;
         return screen.rows - occupied;
     }
+    getBounds(cursor, screen) {
+        return {
+            left: cursor.column,
+            right: cursor.column + screen.columns,
+            top: cursor.position,
+            bottom: cursor.position + this.freeLines(screen)
+        };
+    }
     render() {
         const { cursor, lines, screen, patterns } = this.props;
         const filter = new LinesFilter({
             lines,
             patterns
         });
-        const foo = {
-            left: cursor.column,
-            right: cursor.column + screen.columns,
-            top: cursor.position,
-            bottom: cursor.position + this.freeLines(screen)
-        };
         const elems = [];
-        const displayLines = filter.displayLines(foo);
+        const displayLines = filter.displayLines(this.getBounds(cursor, screen));
         if (displayLines.length === 0) {
             elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
             for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {

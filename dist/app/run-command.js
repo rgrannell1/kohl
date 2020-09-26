@@ -1,6 +1,6 @@
 import { Mode, LanguageParts } from '../commons/types.js';
 import P from 'parsimmon';
-import { library } from './library.js';
+import { library } from './library/index.js';
 import { language } from './language.js';
 const lang = P.createLanguage(language);
 /**

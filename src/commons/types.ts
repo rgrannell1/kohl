@@ -34,7 +34,7 @@ export interface Cursor {
 
 export interface Patterns {
   readonly search: string,
-  readonly highlight: string
+  readonly highlight: string | RegExp
 }
 
 export type Lines = CircularBuffer<Line>

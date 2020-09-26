@@ -45,7 +45,7 @@ export const highlightPatterns = (line, patterns) => {
     const allMatches = [];
     let id = 0;
     // -- match each pattern as many times as possible using `matchAll`
-    for (const pattern of patterns.filter(pattern => pattern.length > 0)) {
+    for (const pattern of patterns) {
         // -- note: does not work with strings;
         allMatches.push(...matchPattern(line, pattern));
     }
@@ -93,20 +93,7 @@ const formatText = (chars, id) => {
 const hasSameId = (elem0, elem1) => {
     return elem0.id === elem1.id;
 };
-const store = new WeakMap();
-const memoise = (fn) => {
-    return (parts) => {
-        if (store.has(parts)) {
-            return store.get(parts);
-        }
-        else {
-            const result = fn(parts);
-            store.set(parts, result);
-            return result;
-        }
-    };
-};
-const _formatString = (parts) => {
+export const formatString = (parts) => {
     let message = '';
     const grouped = sequenceBy(hasSameId, parts);
     for (const stretch of grouped) {
@@ -116,5 +103,4 @@ const _formatString = (parts) => {
     }
     return message;
 };
-export const formatString = memoise(_formatString);
 //# sourceMappingURL=highlight-patterns.js.map

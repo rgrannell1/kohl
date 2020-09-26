@@ -1,4 +1,3 @@
-// -- merge into a lines class?
 export default class LinesFilter {
     constructor({ lines, patterns }) {
         this.lines = lines;
@@ -10,7 +9,6 @@ export default class LinesFilter {
     matchingLines() {
         return this.lines.values().filter(this.isMatch.bind(this));
     }
-    // -- TODO code bottleneck
     displayLines(bounds) {
         return this.matchingLines()
             .slice(bounds.top, bounds.bottom)

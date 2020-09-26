@@ -30,6 +30,16 @@ On Linux distributions that support Snap packages, run:
 sudo snap install kohl
 ```
 
+### Build
+
+#### Performance
+
+```
+npm run perf:clean
+npm run perf:measure
+npm run perf:show
+```
+
 ### Changelog
 
 ### License

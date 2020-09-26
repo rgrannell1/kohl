@@ -5,7 +5,7 @@ const jump = (state, line) => {
     return {
         cursor: {
             ...state.cursor,
-            position: line
+            position: Math.max(line, 0)
         }
     };
 };
@@ -25,7 +25,7 @@ library.search = Object.assign(search, {
     parameters: 1,
     description: 'search for literal text'
 });
-const highlight = (state, query) => {
+const show = (state, query) => {
     return {
         patterns: {
             ...state.patterns,
@@ -33,7 +33,25 @@ const highlight = (state, query) => {
         }
     };
 };
-library.highlight = Object.assign(highlight, {
+library.show = Object.assign(show, {
+    parameters: 1,
+    description: 'highlight literal text'
+});
+const showRegexp = (state, query) => {
+    try {
+        var regexp = new RegExp(query, 'g');
+    }
+    catch (err) {
+        throw new Error('failed to parse regexp');
+    }
+    return {
+        patterns: {
+            ...state.patterns,
+            highlight: regexp
+        }
+    };
+};
+library.showRegexp = Object.assign(showRegexp, {
     parameters: 1,
     description: 'highlight literal text'
 });

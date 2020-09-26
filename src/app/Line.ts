@@ -11,6 +11,8 @@ import {
 
 let idx = 0
 
+type Pattern = string | RegExp
+
 export default class Line {
   id: number
   text: string
@@ -25,7 +27,7 @@ export default class Line {
       return pattern.test(this.text)
     }
   }
-  highlight (patterns:string[], start:number, end:number) {
+  highlight (patterns:Pattern[], start:number, end:number) {
     const parts = highlightPatterns(this.text, patterns)
       .slice(start, end)
 
