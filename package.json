@@ -8,7 +8,10 @@
     "start": "npm run tsc && cat data/apache_logs.txt | node dist/cli/kohl.js",
     "standard": "npx standard 'src/**'",
     "standard:fix": "npx standard 'src/**' --fix",
-    "test": "npx test --coverage-report=lcov"
+    "test": "npx test --coverage-report=lcov",
+    "perf:measure": "cat data/apache_logs.txt | node --prof dist/cli/kohl.js",
+    "perf:clean": "rm isolate* || echo ''",
+    "perf:show": "node --prof-process --preprocess -j isolate*.log | node_modules/.bin/flamebearer"
   },
   "preferGlobal": true,
   "bin": {
@@ -25,6 +28,7 @@
   },
   "homepage": "https://github.com/rgrannell1/kohl#readme",
   "devDependencies": {
+    "flamebearer": "^1.1.3",
     "standard": "13.1.0"
   },
   "dependencies": {

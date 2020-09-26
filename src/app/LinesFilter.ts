@@ -3,7 +3,8 @@ import Line from '../app/Line.js'
 
 import {
   Lines,
-  Patterns
+  Patterns,
+  Bounds
 } from '../commons/types'
 
 interface LinesFilterArgs {
@@ -23,8 +24,18 @@ export default class LinesFilter {
     return line.isMatch(this.patterns.search)
   }
   matchingLines () {
-    return this.lines.values()
-      .filter(this.isMatch.bind(this))
+    return this.lines.values().filter(this.isMatch.bind(this))
+  }
+  displayLines (bounds:Bounds) {
+    return this.matchingLines()
+      .slice(bounds.top, bounds.bottom)
+      .map(data => {
+        const { id } = data
+        const { highlight } = this.patterns
+        const text = data.highlight([highlight], bounds.left, bounds.right)
+
+        return { text, id }
+      })
   }
   total () {
     return this.lines.size()

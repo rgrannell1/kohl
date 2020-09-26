@@ -103,12 +103,14 @@ export const runCommand = (state:KohlProps, command:string) => {
     }
   } catch (err) {
     // -- failed to execute.
+
+    const message = err.message.slice(0, 10)
     return {
       mode: Mode.ShowCommand,
       command,
       output: {
         status: 1,
-        message: err.message.slice(0, 10)
+        message
       }
     }
   }

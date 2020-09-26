@@ -4,7 +4,103 @@ No Matches Found
 
 
 Press / to run command, q to exit, '?' for help
-[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line NaN    0 / 0 (100%)
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+>
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> h
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> hi
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> hig
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> high
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highl
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highli
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlig
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highligh
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight "
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight "G
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight "GE
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight "GET
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      0 / 0 (100%)
+
+No Matches Found
+
+
+> highlight "GET"
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      10,001 / 10,001 (100%)
+
+No Matches Found
+
+
+✔️
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[Gkohl    line 0      10,001 / 10,001 (100%)
 
 No Matches Found
 

@@ -11,10 +11,6 @@ import {
 
 let idx = 0
 
-const matchPatterns = (line:string, pattern:string) => {
-  return []
-}
-
 export default class Line {
   id: number
   text: string

@@ -1,6 +1,6 @@
+import ansi from 'ansi-styles';
 import { isString, isRegexp } from '../commons/checks.js';
 import { sequenceBy } from '../commons/utils.js';
-import ansi from 'ansi-styles';
 const matchStringPattern = (line, pattern) => {
     // -- return matches for string literals. Not implemented by default
     let id = 0;
@@ -93,14 +93,28 @@ const formatText = (chars, id) => {
 const hasSameId = (elem0, elem1) => {
     return elem0.id === elem1.id;
 };
-export const formatString = (parts) => {
+const store = new WeakMap();
+const memoise = (fn) => {
+    return (parts) => {
+        if (store.has(parts)) {
+            return store.get(parts);
+        }
+        else {
+            const result = fn(parts);
+            store.set(parts, result);
+            return result;
+        }
+    };
+};
+const _formatString = (parts) => {
     let message = '';
     const grouped = sequenceBy(hasSameId, parts);
     for (const stretch of grouped) {
         const chars = stretch.map(group => group.char);
-        const { id } = stretch[0];
+        const [{ id }] = stretch;
         message += formatText(chars.join(''), id);
     }
     return message;
 };
+export const formatString = memoise(_formatString);
 //# sourceMappingURL=highlight-patterns.js.map

@@ -1,4 +1,7 @@
 
+import ansi from 'ansi-styles'
+import { memo } from 'react'
+
 import {
   isString,
   isRegexp
@@ -12,8 +15,6 @@ import {
 import {
   sequenceBy
 } from '../commons/utils.js'
-
-import ansi from 'ansi-styles'
 
 const matchStringPattern = (line:string, pattern:string) => {
   // -- return matches for string literals. Not implemented by default
@@ -126,16 +127,32 @@ const hasSameId = (elem0:Elem, elem1:Elem) => {
   return elem0.id === elem1.id
 }
 
-export const formatString = (parts:SequenceData[]) => {
+const store = new WeakMap()
+
+const memoise = (fn:any) => {
+  return (parts:SequenceData[]) => {
+    if (store.has(parts)) {
+      return store.get(parts)
+    } else {
+      const result = fn(parts)
+      store.set(parts, result)
+      return result
+    }
+  }
+}
+
+const _formatString = (parts:SequenceData[]) => {
   let message = ''
 
   const grouped = sequenceBy(hasSameId, parts)
   for (const stretch of grouped) {
     const chars = stretch.map(group => group.char)
-    const { id } = stretch[0]
+    const [{ id } ]= stretch
 
     message += formatText(chars.join(''), id)
   }
 
   return message
 }
+
+export const formatString = memoise(_formatString)

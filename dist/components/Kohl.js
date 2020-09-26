@@ -54,7 +54,6 @@ export class Kohl extends React.Component {
         this.state.ttyIn.on('keypress', this.handleKeyPress.bind(this));
         this.state.ttyIn.setRawMode(true);
     }
-    // -- TODO refactor extremely slow.
     ingestLine(line, state) {
         state.lines.add(new Line(line));
         return {

@@ -33,6 +33,14 @@ export class Body extends React.PureComponent<BodyProps> {
     const occupied = 5
     return screen.rows - occupied
   }
+  getBounds (cursor:Cursor, screen:Screen) {
+    return {
+      left: cursor.column,
+      right: cursor.column + screen.columns,
+      top: cursor.position,
+      bottom: cursor.position + this.freeLines(screen)
+    }
+  }
   render () {
     const {
       cursor,
@@ -47,8 +55,7 @@ export class Body extends React.PureComponent<BodyProps> {
     })
 
     const elems = []
-    const displayLines = filter.matchingLines()
-      .slice(cursor.position, cursor.position + this.freeLines(screen))
+    const displayLines = filter.displayLines(this.getBounds(cursor, screen))
 
     if (displayLines.length === 0) {
       elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)

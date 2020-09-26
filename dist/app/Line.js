@@ -1,9 +1,6 @@
 import { isString, isRegexp } from '../commons/checks.js';
 import { highlightPatterns, formatString } from './highlight-patterns.js';
 let idx = 0;
-const matchPatterns = (line, pattern) => {
-    return [];
-};
 export default class Line {
     constructor(text) {
         this.text = text;

@@ -100,3 +100,10 @@ type isKey = (key:Key) => Boolean
 type onElem = (ref:React.Component, key:Key) => any
 
 export type KeyMapping = Map<isKey, onElem>
+
+export interface Bounds {
+  left: number,
+  right: number,
+  top: number,
+  bottom: number
+}
