@@ -67,7 +67,6 @@ interface HeaderProps {
 export class Header extends React.Component<HeaderProps> {
   render () {
     const {
-      cursor,
       lines,
       patterns
     } = this.props

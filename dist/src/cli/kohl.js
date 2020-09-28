@@ -1,15 +1,9 @@
 #!/usr/bin/env node
-
-import docopt from 'docopt'
-import React from 'react'
-import ink from 'ink'
-import readline from 'readline'
-
-import { Kohl } from '../components/Kohl.js'
-const {
-  render
-} = ink
-
+import docopt from 'docopt';
+import React from 'react';
+import ink from 'ink';
+import { Kohl } from '../components/Kohl.js';
+const { render } = ink;
 const docs = `
 Name:
   kohl — highlight logs.
@@ -50,11 +44,11 @@ Copyright:
   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
   OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
   OTHER DEALINGS IN THE SOFTWARE.
-`
-
+`;
 const main = () => {
-  docopt.docopt(docs, {})
-  render(<React.StrictMode><Kohl/></React.StrictMode>)
-}
-
-main()
+    docopt.docopt(docs, {});
+    render(React.createElement(React.StrictMode, null,
+        React.createElement(Kohl, null)));
+};
+main();
+//# sourceMappingURL=kohl.js.map

@@ -87,8 +87,13 @@ export class Kohl extends React.Component<{}, KohlState> {
     process.stdin
       .pipe(split())
       .pipe(through(line => {
-        this.setState(this.ingestLine.bind(this, line))
+        this.state.lines.add(new Line(line))
       }))
+      .on('finish', () => {
+        this.setState({
+          lineId: this.state.lineId + 1
+        })
+      })
   }
   componentDidMount () {
     this.readKeyStrokes()
@@ -97,7 +102,7 @@ export class Kohl extends React.Component<{}, KohlState> {
   componentWillUnmount () {
     this.state.ttyIn.removeListener('keypress', this.handleKeyPress)
   }
-  handleKeyPress (ch:any, key:Key) {
+  handleKeyPress (_:any, key:Key) {
     for (const [pred, handler] of mappings.entries()) {
       if (pred(key)) {
         return handler(this, key)

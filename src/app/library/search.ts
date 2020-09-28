@@ -5,6 +5,7 @@ import {
 
 const search = (state:KohlProps, query:string) => {
   return {
+    lines: state.lines,
     patterns: {
       ...state.patterns,
       search: query

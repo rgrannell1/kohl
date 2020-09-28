@@ -37,7 +37,7 @@ language.Call = ref => {
 }
 
 language.ProcName = () => {
-  return P.regexp(/[a-zA-Z0-9]+/)
+  return P.regexp(/[a-zA-Z0-9]+\?{0, 1}/)
 }
 
 language.Number = () => {

@@ -34,7 +34,7 @@ sudo snap install kohl
 
 #### Performance
 
-```
+```zsh
 npm run perf:clean
 npm run perf:measure
 npm run perf:show

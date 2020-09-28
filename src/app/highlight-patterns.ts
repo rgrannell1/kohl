@@ -1,6 +1,5 @@
 
 import ansi from 'ansi-styles'
-import { memo } from 'react'
 
 import {
   isString,
