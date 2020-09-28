@@ -89,7 +89,7 @@ export class Kohl extends React.Component<{}, KohlState> {
       .pipe(through(line => {
         this.state.lines.add(new Line(line))
       }))
-      .on('finish', () => {
+      .on('end', () => {
         this.setState({
           lineId: this.state.lineId + 1
         })

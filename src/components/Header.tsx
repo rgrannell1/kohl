@@ -3,6 +3,10 @@ import React from 'react'
 import ink from 'ink'
 import LinesFilter from '../app/LinesFilter.js'
 
+import {
+  Lines
+} from '../commons/types'
+
 const {
   Box,
   Text ,
@@ -60,22 +64,23 @@ interface HeaderProps {
   cursor: {
     position: number
   },
-  lines: any,
+  lines: Lines,
   patterns: Patterns
 }
 
-export class Header extends React.Component<HeaderProps> {
+export class Header extends React.PureComponent<HeaderProps> {
   render () {
     const {
       lines,
-      patterns
+      patterns,
+      cursor
     } = this.props
 
     return <Box>
       <Box minWidth={8}>
         <Text>kohl<Newline/></Text>
       </Box>
-      <CursorLinePosition position={this.props.cursor.position}/>
+      <CursorLinePosition position={cursor.position}/>
       <SelectionSummary lines={lines} patterns={patterns}/>
     </Box>
   }
