@@ -20,7 +20,7 @@ language.Call = ref => {
     return P.alt(withArgs, withoutArgs);
 };
 language.ProcName = () => {
-    return P.regexp(/[a-zA-Z0-9]+/);
+    return P.regexp(/[a-zA-Z0-9]+\??/);
 };
 language.Number = () => {
     return P.regexp(/[0-9]+/).map(Number);

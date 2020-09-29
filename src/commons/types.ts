@@ -40,12 +40,12 @@ export interface Patterns {
 export type Lines = CircularBuffer<Line>
 
 export interface KohlProps {
-  screen: Screen,
-  cursor: Cursor,
-  patterns: Patterns,
-  mode: Mode,
-  command: string,
-  lines: Lines
+  readonly screen: Screen,
+  readonly cursor: Cursor,
+  readonly patterns: Patterns,
+  readonly mode: Mode,
+  readonly command: string,
+  readonly lines: Lines
 }
 
 export interface KohlState {
@@ -79,8 +79,8 @@ export interface ExecuteResult {
 
 export type LibraryFunction = (state:KohlProps, ...args:any[]) => CommandStatus
 export interface LibraryFunctionMetadata {
-  description: string,
-  parameters: number
+  readonly description: string,
+  readonly parameters: number
 }
 
 export interface Library {
@@ -102,8 +102,8 @@ type onElem = (ref:React.Component, key:Key) => any
 export type KeyMapping = Map<isKey, onElem>
 
 export interface Bounds {
-  left: number,
-  right: number,
-  top: number,
-  bottom: number
+  readonly left: number,
+  readonly right: number,
+  readonly top: number,
+  readonly bottom: number
 }

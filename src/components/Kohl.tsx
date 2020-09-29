@@ -10,6 +10,7 @@ import through from 'through'
 import { Header } from './Header.js'
 import { Footer } from './Footer.js'
 import { Body } from './Body.js'
+import { Help } from './Help.js'
 
 import CircularBuffer from '../commons/circular-buffer.js'
 

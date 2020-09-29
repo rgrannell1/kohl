@@ -38,15 +38,15 @@ class SelectionSummary extends React.PureComponent {
             "%)");
     }
 }
-export class Header extends React.Component {
+export class Header extends React.PureComponent {
     render() {
-        const { cursor, lines, patterns } = this.props;
+        const { lines, patterns, cursor } = this.props;
         return React.createElement(Box, null,
             React.createElement(Box, { minWidth: 8 },
                 React.createElement(Text, null,
                     "kohl",
                     React.createElement(Newline, null))),
-            React.createElement(CursorLinePosition, { position: this.props.cursor.position }),
+            React.createElement(CursorLinePosition, { position: cursor.position }),
             React.createElement(SelectionSummary, { lines: lines, patterns: patterns }));
     }
 }

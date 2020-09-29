@@ -1,5 +1,6 @@
 const search = (state, query) => {
     return {
+        lines: state.lines,
         patterns: {
             ...state.patterns,
             search: query

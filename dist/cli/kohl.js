@@ -47,7 +47,8 @@ Copyright:
 `;
 const main = () => {
     docopt.docopt(docs, {});
-    render(React.createElement(Kohl, null));
+    render(React.createElement(React.StrictMode, null,
+        React.createElement(Kohl, null)));
 };
 main();
 //# sourceMappingURL=kohl.js.map
