@@ -64,10 +64,6 @@ mappings.set(hasName('q'), (elem:React.Component) => {
   })
 })
 
-mappings.set(hasSequence('?'), (elem:React.Component) => {
-
-})
-
 mappings.set(hasSequence('/'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     if (state.mode === Mode.Default || state.mode === Mode.ShowCommand) {

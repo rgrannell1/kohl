@@ -16,7 +16,7 @@ export class ShowCommand extends React.PureComponent {
         const { output } = this.props;
         if (output.status === 0) {
             return React.createElement(Box, null,
-                React.createElement(Text, { inverse: true }, "\u2714\uFE0F "));
+                React.createElement(Text, { inverse: true }, output.message || '✔️ '));
         }
         else if (output.status === 1) {
             return React.createElement(Box, null,

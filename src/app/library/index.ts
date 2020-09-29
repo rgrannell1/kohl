@@ -8,7 +8,8 @@ import q from './q.js'
 import search from './search.js'
 import searchRegexp from './searchRegexp.js'
 import show from './show.js'
-import showq from './show?.js'
+import showq from './showq.js'
+import searchq from './searchq.js'
 import showRegexp from './showRegexp.js'
 
 export const library:Library = { }
@@ -20,3 +21,4 @@ library.searchRegexp = searchRegexp
 library.show = show
 library.showRegexp = showRegexp
 library['show?'] = showq
+library['search?'] = searchq

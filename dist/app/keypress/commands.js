@@ -50,8 +50,6 @@ mappings.set(hasName('q'), (elem) => {
         }
     });
 });
-mappings.set(hasSequence('?'), (elem) => {
-});
 mappings.set(hasSequence('/'), (elem) => {
     elem.setState((state) => {
         if (state.mode === Mode.Default || state.mode === Mode.ShowCommand) {

@@ -69,12 +69,12 @@ export interface Key {
   readonly name: string | undefined
 }
 
-export type CommandStatus = Partial<KohlProps>
+export type CommandStatus = Partial<KohlState>
 
 export interface ExecuteResult {
   readonly status: number,
   readonly message?: string,
-  readonly state: Partial<KohlProps>
+  readonly state: Partial<KohlState>
 }
 
 export type LibraryFunction = (state:KohlProps, ...args:any[]) => CommandStatus

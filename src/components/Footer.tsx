@@ -38,7 +38,7 @@ export class ShowCommand extends React.PureComponent<ShowProps> {
 
     if (output.status === 0) {
       return <Box>
-        <Text inverse>✔️ </Text>
+        <Text inverse>{output.message || '✔️ '}</Text>
       </Box>
     } else if (output.status === 1) {
       return <Box>

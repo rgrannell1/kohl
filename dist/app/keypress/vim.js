@@ -12,7 +12,7 @@ mappings.set(hasSequence('G'), (elem) => {
             return {
                 cursor: {
                     ...state.cursor,
-                    position: filter.total() - state.screen.rows + 5
+                    position: Math.max(filter.total() - state.screen.rows + 5, 0)
                 }
             };
         }

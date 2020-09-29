@@ -50,6 +50,7 @@ const executeCommand = (parsed:Call, libs:Library, state:KohlProps):ExecuteResul
         }
       }
 
+      // -- invoke the command & set new desired state.
       return {
         status: 0,
         state: libs[proc](state, ...args)
@@ -95,11 +96,12 @@ export const runCommand = (state:KohlProps, command:string) => {
     return {
       mode: Mode.ShowCommand,
       command,
-      ...newState,
       output: {
         message,
         status
-      }
+      },
+      // -- note: newState can set the above properties.
+      ...newState
     }
   } catch (err) {
     // -- failed to execute.

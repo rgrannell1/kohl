@@ -29,6 +29,7 @@ const executeCommand = (parsed, libs, state) => {
                     state: {}
                 };
             }
+            // -- invoke the command & set new desired state.
             return {
                 status: 0,
                 state: libs[proc](state, ...args)
@@ -68,11 +69,12 @@ export const runCommand = (state, command) => {
         return {
             mode: Mode.ShowCommand,
             command,
-            ...newState,
             output: {
                 message,
                 status
-            }
+            },
+            // -- note: newState can set the above properties.
+            ...newState
         };
     }
     catch (err) {
