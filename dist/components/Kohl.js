@@ -77,9 +77,24 @@ export class Kohl extends React.Component {
             });
         });
     }
+    clearOnResizing() {
+        // -- TODO find an unmount, find a more efficient method.
+        const pid = setInterval(() => {
+            const rows = process.stdout.rows;
+            const columns = process.stdout.columns;
+            if (rows !== this.state.screen.rows || columns !== this.state.screen.columns) {
+                console.clear();
+                this.forceUpdate();
+            }
+            this.setState({
+                screen: { rows, columns }
+            });
+        }, 250);
+    }
     componentDidMount() {
         this.readKeyStrokes();
         this.readStdin();
+        this.clearOnResizing();
     }
     componentWillUnmount() {
         this.state.ttyIn.removeListener('keypress', this.handleKeyPress);
@@ -93,12 +108,12 @@ export class Kohl extends React.Component {
         throw new Error(`unhandled key ${key.sequence}`);
     }
     render() {
-        const { command, cursor, lines, mode, output, screen, patterns } = this.state;
+        const state = this.state;
         return React.createElement(React.Fragment, null,
-            React.createElement(Header, { cursor: cursor, lines: lines, patterns: patterns }),
-            React.createElement(Body, { cursor: cursor, lines: lines, screen: screen, patterns: patterns }),
+            React.createElement(Header, { cursor: state.cursor, lines: state.lines, patterns: state.patterns }),
+            React.createElement(Body, { cursor: state.cursor, lines: state.lines, screen: state.screen, patterns: state.patterns }),
             React.createElement(Newline, null),
-            React.createElement(Footer, { mode: mode, output: output, command: command }));
+            React.createElement(Footer, { mode: state.mode, output: state.output, command: state.command }));
     }
 }
 //# sourceMappingURL=Kohl.js.map

@@ -10,7 +10,6 @@ import through from 'through'
 import { Header } from './Header.js'
 import { Footer } from './Footer.js'
 import { Body } from './Body.js'
-import { Help } from './Help.js'
 
 import CircularBuffer from '../commons/circular-buffer.js'
 
@@ -96,9 +95,26 @@ export class Kohl extends React.Component<{}, KohlState> {
         })
       })
   }
+  clearOnResizing () {
+    // -- TODO find an unmount, find a more efficient method.
+    const pid = setInterval(() => {
+      const rows = process.stdout.rows
+      const columns = process.stdout.columns
+
+      if (rows !== this.state.screen.rows || columns !== this.state.screen.columns) {
+        console.clear()
+        this.forceUpdate()
+      }
+
+      this.setState({
+        screen: { rows, columns }
+      })
+    }, 250)
+  }
   componentDidMount () {
     this.readKeyStrokes()
     this.readStdin()
+    this.clearOnResizing()
   }
   componentWillUnmount () {
     this.state.ttyIn.removeListener('keypress', this.handleKeyPress)
@@ -113,21 +129,13 @@ export class Kohl extends React.Component<{}, KohlState> {
     throw new Error(`unhandled key ${key.sequence}`)
   }
   render () {
-    const {
-      command,
-      cursor,
-      lines,
-      mode,
-      output,
-      screen,
-      patterns
-    } = this.state
+    const state = this.state
 
     return <>
-      <Header cursor={cursor} lines={lines} patterns={patterns}/>
-      <Body cursor={cursor} lines={lines} screen={screen} patterns={patterns}/>
+      <Header cursor={state.cursor} lines={state.lines} patterns={state.patterns}/>
+      <Body cursor={state.cursor} lines={state.lines} screen={state.screen} patterns={state.patterns}/>
       <Newline/>
-      <Footer mode={mode} output={output} command={command}/>
+      <Footer mode={state.mode} output={state.output} command={state.command}/>
     </>
   }
 }
