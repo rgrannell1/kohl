@@ -39,7 +39,9 @@ export class Body extends React.PureComponent {
             for (let ith = 0; ith < displayLines.length; ++ith) {
                 const { text, id } = displayLines[ith];
                 const isSelected = ith === 0;
-                const trimmed = this.trimLine(text, cursor, screen);
+                const trimmed = text.length === 0
+                    ? ' '
+                    : text;
                 elems.push(React.createElement(Text, { key: id, inverse: isSelected }, trimmed));
             }
         }

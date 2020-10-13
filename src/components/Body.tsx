@@ -68,7 +68,9 @@ export class Body extends React.PureComponent<BodyProps> {
         const { text, id } = displayLines[ith]
 
         const isSelected = ith === 0
-        const trimmed = this.trimLine(text, cursor, screen)
+        const trimmed = text.length === 0
+          ? ' '
+          : text
 
         elems.push(<Text key={id} inverse={isSelected}>{trimmed}</Text>)
       }

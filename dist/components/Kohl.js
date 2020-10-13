@@ -86,6 +86,12 @@ export class Kohl extends React.Component {
                 console.clear();
                 this.forceUpdate();
             }
+            if (typeof rows === 'undefined') {
+                throw new TypeError('stdout-rows count not defined; are you piping stdout to a file or program?');
+            }
+            if (typeof columns === 'undefined') {
+                throw new TypeError('stdout-columns count not defined; are you piping stdout to a file or program?');
+            }
             this.setState({
                 screen: { rows, columns }
             });
