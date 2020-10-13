@@ -18,7 +18,7 @@ export class Kohl extends React.Component {
         super(props);
         const fd = fs.openSync('/dev/tty', 'r+');
         const ttyIn = new tty.ReadStream(fd, {});
-        const lines = new CircularBuffer(20000);
+        const lines = new CircularBuffer(Kohl.MAX_LINES);
         const screen = {
             rows: process.stdout.rows,
             columns: process.stdout.columns
@@ -36,6 +36,7 @@ export class Kohl extends React.Component {
             state: {},
             status: 0
         };
+        // -- add page
         this.state = {
             screen,
             cursor,
@@ -122,4 +123,5 @@ export class Kohl extends React.Component {
             React.createElement(Footer, { mode: state.mode, output: state.output, command: state.command }));
     }
 }
+Kohl.MAX_LINES = 20000;
 //# sourceMappingURL=Kohl.js.map

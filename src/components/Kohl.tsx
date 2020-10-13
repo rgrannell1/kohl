@@ -26,12 +26,13 @@ import Line from '../app/Line.js'
 const { Newline } = ink
 
 export class Kohl extends React.Component<{}, KohlState> {
+  static MAX_LINES = 20_000
   constructor (props:KohlProps) {
     super(props)
 
     const fd = fs.openSync('/dev/tty', 'r+')
     const ttyIn = new tty.ReadStream(fd, { })
-    const lines:CircularBuffer<Line> = new CircularBuffer(20_000)
+    const lines:CircularBuffer<Line> = new CircularBuffer(Kohl.MAX_LINES)
 
     const screen = {
       rows: process.stdout.rows,
@@ -53,6 +54,7 @@ export class Kohl extends React.Component<{}, KohlState> {
       status: 0
     }
 
+    // -- add page
     this.state = {
       screen,
       cursor,

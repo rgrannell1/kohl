@@ -10,8 +10,7 @@ export class Body extends React.PureComponent {
         return line.slice(start, end).padEnd(1);
     }
     freeLines(screen) {
-        const occupied = 5;
-        return screen.rows - occupied;
+        return screen.rows - Body.OCCUPIED_VERTICAL_LINES;
     }
     getBounds(cursor, screen) {
         return {
@@ -48,4 +47,5 @@ export class Body extends React.PureComponent {
         return React.createElement(React.Fragment, null, elems);
     }
 }
+Body.OCCUPIED_VERTICAL_LINES = 5;
 //# sourceMappingURL=Body.js.map

@@ -23,6 +23,7 @@ interface BodyProps {
 }
 
 export class Body extends React.PureComponent<BodyProps> {
+  static OCCUPIED_VERTICAL_LINES = 5
   trimLine(line:string, cursor:Cursor, screen:Screen) {
     const start = cursor.column
     const end = start + screen.columns
@@ -30,8 +31,7 @@ export class Body extends React.PureComponent<BodyProps> {
     return line.slice(start, end).padEnd(1)
   }
   freeLines (screen:Screen) {
-    const occupied = 5
-    return screen.rows - occupied
+    return screen.rows - Body.OCCUPIED_VERTICAL_LINES
   }
   getBounds (cursor:Cursor, screen:Screen) {
     return {

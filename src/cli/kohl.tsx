@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
+import * as fs from 'fs'
 import docopt from 'docopt'
 import React from 'react'
 import ink from 'ink'
-import readline from 'readline'
+import * as tty from 'tty'
 
 import { Kohl } from '../components/Kohl.js'
 const {
@@ -54,7 +55,12 @@ Copyright:
 
 const main = () => {
   docopt.docopt(docs, {})
-  render(<React.StrictMode><Kohl/></React.StrictMode>)
+  const fd = fs.openSync('/dev/tty', 'r+')
+
+  render(<React.StrictMode><Kohl/></React.StrictMode>, {
+    stdin: new tty.ReadStream(fd, { }),
+    stdout: new tty.WriteStream(fd)
+  })
 }
 
 main()

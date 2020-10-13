@@ -1,7 +1,9 @@
 #!/usr/bin/env node
+import * as fs from 'fs';
 import docopt from 'docopt';
 import React from 'react';
 import ink from 'ink';
+import * as tty from 'tty';
 import { Kohl } from '../components/Kohl.js';
 const { render } = ink;
 const docs = `
@@ -47,8 +49,12 @@ Copyright:
 `;
 const main = () => {
     docopt.docopt(docs, {});
+    const fd = fs.openSync('/dev/tty', 'r+');
     render(React.createElement(React.StrictMode, null,
-        React.createElement(Kohl, null)));
+        React.createElement(Kohl, null)), {
+        stdin: new tty.ReadStream(fd, {}),
+        stdout: new tty.WriteStream(fd)
+    });
 };
 main();
 //# sourceMappingURL=kohl.js.map
