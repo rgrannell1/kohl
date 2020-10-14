@@ -6,19 +6,19 @@
   "scripts": {
     "docs": "npx typedoc --out docs src",
     "tsc": "tsc",
-    "build": "rm -rf dist && npm run tsc && chmod +x dist/cli/kohl.js",
-    "start": "npm run tsc && cat data/apache_logs.txt | node dist/cli/kohl.js",
+    "build": "rm -rf dist && npm run tsc && chmod +x dist/src/cli/kohl.js",
+    "start": "npm run tsc && cat data/apache_logs.txt | node dist/src/cli/kohl.js",
     "standard": "npx standard 'src/**'",
     "standard:fix": "npx standard 'src/**' --fix",
-    "test": "npx test --coverage-report=lcov",
-    "perf:measure": "cat data/apache_logs.txt | node --prof dist/cli/kohl.js",
+    "perf:measure": "cat data/apache_logs.txt | node --prof dist/src/cli/kohl.js",
     "perf:clean": "rm isolate* || echo ''",
     "perf:show": "node --prof-process --preprocess -j isolate*.log | node_modules/.bin/flamebearer",
-    "perf": "npm run perf:clean; npm run perf:measure; npm run perf:show"
+    "perf": "npm run perf:clean; npm run perf:measure; npm run perf:show",
+    "test": "npm run tsc && npx mocha dist/tests"
   },
   "preferGlobal": true,
   "bin": {
-    "kohl": "dist/cli/kohl.js"
+    "kohl": "dist/src/cli/kohl.js"
   },
   "type": "module",
   "repository": {
@@ -47,6 +47,7 @@
     "docopt": "^0.6.2",
     "general-category": "^1.6.0",
     "ink": "^3.0.7",
+    "ink-testing-library": "^2.1.0",
     "keypress": "^0.2.1",
     "moment": "2.26.0",
     "nanoid": "^3.1.9",

@@ -31,7 +31,7 @@ class CursorLinePosition extends React.PureComponent<CursorLineProps> {
   }
 }
 
-class SelectionSummary extends React.PureComponent<any> {
+export class SelectionSummary extends React.PureComponent<any> {
   ratio (selected:number, total:number) {
     return Number.isNaN(selected / total)
       ? 100

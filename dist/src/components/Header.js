@@ -10,7 +10,7 @@ class CursorLinePosition extends React.PureComponent {
                 this.props.position));
     }
 }
-class SelectionSummary extends React.PureComponent {
+export class SelectionSummary extends React.PureComponent {
     ratio(selected, total) {
         return Number.isNaN(selected / total)
             ? 100
