@@ -1,0 +1,25 @@
+name: kohl
+grade: stable
+version: v0.1.0
+base: core18
+
+license: MIT
+
+summary: Highlight Logs
+
+description: >
+  A pager that highlights logs.
+
+confinement: strict
+
+apps:
+  kohl:
+    command: bin/kohl
+
+parts:
+  kohl:
+    source: .
+    plugin: nodejs
+    nodejs-version: 14.3.0
+    nodejs-package-manager: yarn
+    build-packages: ['libcurl4-openssl-dev', 'git']

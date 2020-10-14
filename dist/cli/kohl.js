@@ -53,7 +53,8 @@ const main = () => {
     render(React.createElement(React.StrictMode, null,
         React.createElement(Kohl, null)), {
         stdin: new tty.ReadStream(fd, {}),
-        stdout: new tty.WriteStream(fd)
+        stdout: new tty.WriteStream(fd),
+        patchConsole: false
     });
 };
 main();

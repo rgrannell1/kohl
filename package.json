@@ -6,7 +6,7 @@
   "scripts": {
     "docs": "npx typedoc --out docs src",
     "tsc": "tsc",
-    "compile": "rm -rf dist && npm run tsc",
+    "build": "rm -rf dist && npm run tsc && chmod +x dist/cli/kohl.js",
     "start": "npm run tsc && cat data/apache_logs.txt | node dist/cli/kohl.js",
     "standard": "npx standard 'src/**'",
     "standard:fix": "npx standard 'src/**' --fix",

@@ -59,7 +59,8 @@ const main = () => {
 
   render(<React.StrictMode><Kohl/></React.StrictMode>, {
     stdin: new tty.ReadStream(fd, { }),
-    stdout: new tty.WriteStream(fd)
+    stdout: new tty.WriteStream(fd),
+    patchConsole: false
   })
 }
 
