@@ -36,6 +36,15 @@ sudo snap install kohl
 
 ### Build
 
+#### Snapcraft
+
+```zsh
+snapcraft
+sudo snap remove kohl
+sudo snap install kohl_v0.1.0_amd64.snap --dangerous --devmode
+cat data/apache_logs.txt | kohl
+```
+
 #### Performance
 
 ```zsh

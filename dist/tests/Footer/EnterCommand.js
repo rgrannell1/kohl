@@ -6,7 +6,7 @@ const cases = ['testcommand'];
 const runEnterCommand = () => {
     for (const command of cases) {
         const { lastFrame } = render(React.createElement(EnterCommand, { command: command }));
-        tap.equals(lastFrame(), `> ${command}\n`);
+        tap.includes(lastFrame(), `> ${command}`);
     }
 };
 runEnterCommand();
