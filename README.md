@@ -1,6 +1,8 @@
 
 # kohl
 
+![CI](https://github.com/rgrannell1/kohl/workflows/CI/badge.svg)
+
 ![Kohl Example](./example.png)
 
 kohl as in kohlrabi. The successor project to https://github.com/rgrannell1/kale.
