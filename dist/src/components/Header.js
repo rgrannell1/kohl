@@ -10,7 +10,13 @@ export class CursorLinePosition extends React.PureComponent {
                 this.props.position));
     }
 }
-export class SelectionSummary extends React.PureComponent {
+export class SelectionSummary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lineLength: 0
+        };
+    }
     ratio(selected, total) {
         return total === 0
             ? 100
@@ -19,7 +25,14 @@ export class SelectionSummary extends React.PureComponent {
     shouldComponentUpdate() {
         // -- pure components perform shallow reference checks, meaning lines can change in length
         // -- without triggering a re-render. This insures a re-render takes place.
-        return true;
+        const hasSameLength = this.state.lineLength !== this.props.lines.size();
+        if (!hasSameLength) {
+            this.setState({
+                lineLength: this.props.lines.size()
+            });
+            return true;
+        }
+        return false;
     }
     render() {
         const { lines, patterns } = this.props;

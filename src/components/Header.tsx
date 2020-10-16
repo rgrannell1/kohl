@@ -36,7 +36,18 @@ interface SelectionSummaryProps {
   patterns: Patterns
 }
 
-export class SelectionSummary extends React.PureComponent<SelectionSummaryProps> {
+interface SelectionSummaryState {
+  lineLength: number
+}
+
+export class SelectionSummary extends React.Component<SelectionSummaryProps, SelectionSummaryState> {
+  constructor (props:SelectionSummaryProps) {
+    super(props)
+
+    this.state = {
+      lineLength: 0
+    }
+  }
   ratio (selected:number, total:number) {
     return total === 0
       ? 100
@@ -45,7 +56,18 @@ export class SelectionSummary extends React.PureComponent<SelectionSummaryProps>
   shouldComponentUpdate () {
     // -- pure components perform shallow reference checks, meaning lines can change in length
     // -- without triggering a re-render. This insures a re-render takes place.
-    return true
+
+    const hasSameLength = this.state.lineLength !== this.props.lines.size()
+
+    if (!hasSameLength) {
+      this.setState({
+        lineLength: this.props.lines.size()
+      })
+
+      return true
+    }
+
+    return false
   }
   render () {
     const {
