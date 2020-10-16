@@ -6,3 +6,4 @@ isolate*
 *.map
 *.snap
 .nyc*
+.nyc_output

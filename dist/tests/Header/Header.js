@@ -19,10 +19,6 @@ const runHeaderTests = () => {
     for (const { lines, patterns, cursor, output } of cases) {
         const buff = createLines(lines);
         const { lastFrame } = render(React.createElement(Header, { lines: buff, patterns: patterns, cursor: cursor }));
-        console.log('++++++++++=');
-        console.log(lastFrame());
-        console.log(output);
-        console.log('++++++++++=');
         tap.equal(lastFrame(), output);
     }
 };
