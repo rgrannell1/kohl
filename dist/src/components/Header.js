@@ -22,17 +22,15 @@ export class SelectionSummary extends React.Component {
             ? 100
             : Math.round((selected / total) * 100);
     }
+    componentWillReceiveProps() {
+        this.setState({
+            lineLength: this.props.lines.size()
+        });
+    }
     shouldComponentUpdate() {
         // -- pure components perform shallow reference checks, meaning lines can change in length
         // -- without triggering a re-render. This insures a re-render takes place.
-        const hasSameLength = this.state.lineLength !== this.props.lines.size();
-        if (!hasSameLength) {
-            this.setState({
-                lineLength: this.props.lines.size()
-            });
-            return true;
-        }
-        return false;
+        return this.state.lineLength !== this.props.lines.size();
     }
     render() {
         const { lines, patterns } = this.props;

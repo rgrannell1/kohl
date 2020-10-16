@@ -39,6 +39,13 @@ export interface Patterns {
 
 export type Lines = CircularBuffer<Line>
 
+export interface FileState {
+  screen: Screen,
+  cursor: Cursor,
+  patterns: Patterns,
+  lines: Lines
+}
+
 export interface KohlProps {
   readonly screen: Screen,
   readonly cursor: Cursor,
@@ -49,6 +56,7 @@ export interface KohlProps {
 }
 
 export interface KohlState {
+  //file: FileState,
   ttyIn: tty.ReadStream,
   screen: Screen,
   cursor: Cursor,
