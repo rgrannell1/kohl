@@ -31,16 +31,31 @@ export class CursorLinePosition extends React.PureComponent<CursorLineProps> {
   }
 }
 
-export class SelectionSummary extends React.PureComponent<any> {
+interface SelectionSummaryProps {
+  lines: Lines,
+  patterns: Patterns
+}
+
+export class SelectionSummary extends React.PureComponent<SelectionSummaryProps> {
   ratio (selected:number, total:number) {
     return total === 0
       ? 100
       : Math.round((selected / total) * 100)
   }
+  shouldComponentUpdate () {
+    // -- pure components perform shallow reference checks, meaning lines can change in length
+    // -- without triggering a re-render. This insures a re-render takes place.
+    return true
+  }
   render () {
+    const {
+      lines,
+      patterns
+    } = this.props
+
     const filter = new LinesFilter({
-      lines: this.props.lines,
-      patterns: this.props.patterns
+      lines: lines,
+      patterns: patterns
     })
 
     const total = filter.total()
