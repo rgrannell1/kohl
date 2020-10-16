@@ -1,4 +1,6 @@
 import { Mode } from '../../commons/types.js';
+import CircularBuffer from '../../commons/circular-buffer.js';
+import Line from '../../app/Line.js';
 import { hasName, hasSequence } from './utils.js';
 import { runCommand } from '../run-command.js';
 const mappings = new Map();
@@ -62,6 +64,61 @@ mappings.set(hasSequence('/'), (elem) => {
                 command: state.command + '/'
             };
         }
+    });
+});
+const loadFile = (content) => {
+    const lines = content.split('\n');
+    const buff = new CircularBuffer(lines.length);
+    for (const line of lines) {
+        buff.add(new Line(line));
+    }
+    return {
+        cursor: {
+            position: 0,
+            cursor: 0
+        },
+        patterns: {
+            search: '',
+            highlight: ''
+        },
+        mode: Mode.Default,
+        command: '',
+        output: {
+            state: {},
+            status: 0
+        },
+        lines: buff,
+        displayLines: [],
+        lineId: 0
+    };
+};
+const help = `
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+This is dumb
+`;
+mappings.set(hasSequence('?'), (elem) => {
+    // -- this does not seem correct, but replaceState is deprecated.
+    const oldState = elem.state;
+    const fileStore = oldState.fileStore;
+    fileStore.set('stdin', oldState);
+    const helpFile = loadFile(help);
+    elem.setState(state => {
+        console.clear();
+        return {
+            ...helpFile,
+            screen: oldState.screen,
+            ttyIn: oldState.ttyIn,
+            fileStore: oldState.fileStore
+        };
     });
 });
 export default mappings;

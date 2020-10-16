@@ -36,7 +36,12 @@ export class Kohl extends React.Component {
             state: {},
             status: 0
         };
-        // -- add page
+        /**
+         * React "helpfully" doesn't like nested state objects, so this state is a mess. Rather than using a File
+         * object to capture file information, we snapshot states into fileStore before switching to another file
+         * stored in fileStore.
+         *
+         */
         this.state = {
             screen,
             cursor,
@@ -47,7 +52,8 @@ export class Kohl extends React.Component {
             ttyIn,
             lines,
             displayLines: [],
-            lineId: 0
+            lineId: 0,
+            fileStore: new Map()
         };
     }
     readKeyStrokes() {

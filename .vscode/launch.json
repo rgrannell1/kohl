@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "preLaunchTask": "npm: compile",
+      "preLaunchTask": "npm: build",
       "name": "Launch Kohl",
       "skipFiles": [
         "<node_internals>/**"
@@ -13,7 +13,7 @@
         "<",
         "data/apache_logs.txt"
      ],
-      "program": "${workspaceFolder}/dist/cli/kohl.js",
+      "program": "${workspaceFolder}/dist/src/cli/kohl.js",
       "console": "integratedTerminal"
     }
   ]
