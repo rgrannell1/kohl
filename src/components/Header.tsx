@@ -21,7 +21,7 @@ interface CursorLineProps {
   position: number
 }
 
-class CursorLinePosition extends React.PureComponent<CursorLineProps> {
+export class CursorLinePosition extends React.PureComponent<CursorLineProps> {
   render ( ) {
     return <Box minWidth={12}>
       <Text>
@@ -33,7 +33,7 @@ class CursorLinePosition extends React.PureComponent<CursorLineProps> {
 
 export class SelectionSummary extends React.PureComponent<any> {
   ratio (selected:number, total:number) {
-    return Number.isNaN(selected / total)
+    return total === 0
       ? 100
       : Math.round((selected / total) * 100)
   }

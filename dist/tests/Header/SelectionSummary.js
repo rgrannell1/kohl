@@ -1,9 +1,8 @@
 import tap from 'tap';
 import React from 'react';
 import { render } from 'ink-testing-library';
-import { SelectionSummary } from '../src/components/Header.js';
-import CircularBuffer from '../src/commons/circular-buffer.js';
-import Line from '../src/app/Line.js';
+import { SelectionSummary } from '../../src/components/Header.js';
+import { createLines } from '../utils.js';
 const cases = [];
 // -- empty case
 cases.push({
@@ -38,23 +37,11 @@ cases.push({
     },
     output: '3 / 3 (100%)'
 });
-/**
- * Construct a lines buffer from text lines.
- *
- * @param lines
- */
-const createLines = (lines) => {
-    const buff = new CircularBuffer(100);
-    for (const line of lines) {
-        buff.add(new Line(line));
-    }
-    return buff;
-};
-const runTests = () => {
-    // -- static tests.
+const runSelectionSummaryTests = () => {
     for (const { lines, patterns, output } of cases) {
         const { lastFrame } = render(React.createElement(SelectionSummary, { lines: createLines(lines), patterns: patterns }));
         tap.equal(lastFrame(), output);
     }
 };
-//# sourceMappingURL=Header.test.js.map
+runSelectionSummaryTests();
+//# sourceMappingURL=SelectionSummary.js.map
