@@ -13,7 +13,10 @@ import {
 
 interface Case {
   lines: string[],
-  patterns: {},
+  patterns: {
+    search: string,
+    highlight: string
+  },
   output: string
 }
 
@@ -22,7 +25,10 @@ const cases:Case[] = []
 // -- empty case
 cases.push({
   lines: [],
-  patterns: {},
+  patterns: {
+    search: '',
+    highlight: ''
+  },
   output: '0 / 0 (100%)'
 })
 

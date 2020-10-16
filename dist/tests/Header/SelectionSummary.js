@@ -7,7 +7,10 @@ const cases = [];
 // -- empty case
 cases.push({
     lines: [],
-    patterns: {},
+    patterns: {
+        search: '',
+        highlight: ''
+    },
     output: '0 / 0 (100%)'
 });
 // -- lines but no matching patterns
