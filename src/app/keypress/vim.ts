@@ -12,17 +12,14 @@ const mappings:KeyMapping = new Map()
 
 mappings.set(hasSequence('G'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
-    const filter = new LinesFilter({
-      lines: state.lines,
-      patterns: state.patterns
-    })
+    const filter = new LinesFilter(state.file)
 
     if (state.mode === Mode.Default) {
+      const newFile = { ...state.file }
+      newFile.cursor.position = Math.max(filter.total() - state.screen.rows + 5, 0)
+
       return {
-        cursor: {
-          ...state.cursor,
-          position: Math.max(filter.total() - state.screen.rows + 5, 0)
-        }
+        file: newFile
       }
     } else if (state.mode === Mode.EnterCommand) {
       return {
@@ -35,11 +32,11 @@ mappings.set(hasSequence('G'), (elem:React.Component) => {
 mappings.set(hasSequence('g'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     if (state.mode === Mode.Default) {
+      const newFile = { ...state.file }
+      newFile.cursor.position = 0
+
       return {
-        cursor: {
-          ...state.cursor,
-          position: 0
-        }
+        file: newFile
       }
     } else if (state.mode === Mode.EnterCommand) {
       return {

@@ -4,16 +4,12 @@ import LinesFilter from '../LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasSequence('G'), (elem) => {
     elem.setState((state) => {
-        const filter = new LinesFilter({
-            lines: state.lines,
-            patterns: state.patterns
-        });
+        const filter = new LinesFilter(state.file);
         if (state.mode === Mode.Default) {
+            const newFile = { ...state.file };
+            newFile.cursor.position = Math.max(filter.total() - state.screen.rows + 5, 0);
             return {
-                cursor: {
-                    ...state.cursor,
-                    position: Math.max(filter.total() - state.screen.rows + 5, 0)
-                }
+                file: newFile
             };
         }
         else if (state.mode === Mode.EnterCommand) {
@@ -26,11 +22,10 @@ mappings.set(hasSequence('G'), (elem) => {
 mappings.set(hasSequence('g'), (elem) => {
     elem.setState((state) => {
         if (state.mode === Mode.Default) {
+            const newFile = { ...state.file };
+            newFile.cursor.position = 0;
             return {
-                cursor: {
-                    ...state.cursor,
-                    position: 0
-                }
+                file: newFile
             };
         }
         else if (state.mode === Mode.EnterCommand) {
