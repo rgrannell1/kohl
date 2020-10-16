@@ -23,7 +23,7 @@ mappings.set(hasName('up'), (elem:React.Component) => {
 mappings.set(hasName('down'), (elem:React.Component) => {
   elem.setState((state:KohlProps) => {
     const filter = new LinesFilter(state)
-    const bottom = filter.selected() - state.screen.rows
+    const bottom = Math.max(filter.selected() - state.screen.rows, 0)
 
     return {
       cursor: {

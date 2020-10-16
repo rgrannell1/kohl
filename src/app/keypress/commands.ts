@@ -82,19 +82,19 @@ mappings.set(hasSequence('/'), (elem:React.Component) => {
 mappings.set(hasSequence('?'), (elem:React.Component) => {
   // -- this does not seem correct, but replaceState is deprecated.
 
-  const oldState = elem.state as any
-  const fileStore = oldState.fileStore
+  elem.setState((state:any) => {
+    const fileStore = state.fileStore as any
 
-  fileStore.set('stdin', oldState)
+    fileStore.set('stdin', state)
 
-  elem.setState(state => {
     console.clear()
 
     return {
       ...files.loadFile(files.help()),
-      screen: oldState.screen,
-      ttyIn: oldState.ttyIn,
-      fileStore: oldState.fileStore
+      screen: state.screen,
+      ttyIn: state.ttyIn,
+      fileStore: state.fileStore,
+      lineId: state.lineId + 1
     }
   })
 })

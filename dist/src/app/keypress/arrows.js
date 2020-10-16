@@ -14,7 +14,7 @@ mappings.set(hasName('up'), (elem) => {
 mappings.set(hasName('down'), (elem) => {
     elem.setState((state) => {
         const filter = new LinesFilter(state);
-        const bottom = filter.selected() - state.screen.rows;
+        const bottom = Math.max(filter.selected() - state.screen.rows, 0);
         return {
             cursor: {
                 position: Math.min(state.cursor.position + 1, bottom),

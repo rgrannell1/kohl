@@ -67,16 +67,16 @@ mappings.set(hasSequence('/'), (elem) => {
 });
 mappings.set(hasSequence('?'), (elem) => {
     // -- this does not seem correct, but replaceState is deprecated.
-    const oldState = elem.state;
-    const fileStore = oldState.fileStore;
-    fileStore.set('stdin', oldState);
-    elem.setState(state => {
+    elem.setState((state) => {
+        const fileStore = state.fileStore;
+        fileStore.set('stdin', state);
         console.clear();
         return {
             ...files.loadFile(files.help()),
-            screen: oldState.screen,
-            ttyIn: oldState.ttyIn,
-            fileStore: oldState.fileStore
+            screen: state.screen,
+            ttyIn: state.ttyIn,
+            fileStore: state.fileStore,
+            lineId: state.lineId + 1
         };
     });
 });
