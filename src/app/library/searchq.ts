@@ -1,13 +1,14 @@
 
 import {
   KohlProps,
-  KohlState
+  KohlState,
+  CommandStatus
 } from '../../commons/types.js'
 
-const search = (state:KohlProps):Partial<KohlState> => {
+const search = (state:KohlProps):CommandStatus => {
   return {
     output: {
-      message: state?.patterns?.highlight?.toString() || '',
+      message: state.file?.patterns?.highlight?.toString() || '',
       status: 0,
       state: {}
     }

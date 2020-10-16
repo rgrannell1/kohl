@@ -1,9 +1,8 @@
 const searchRegexp = (state, query) => {
+    const newFile = { ...state.file };
+    newFile.patterns.search = query;
     return {
-        patterns: {
-            ...state.patterns,
-            search: query
-        }
+        file: newFile
     };
 };
 export default Object.assign(searchRegexp, {

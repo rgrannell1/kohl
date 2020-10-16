@@ -1,15 +1,15 @@
 
 import {
-  KohlProps
+  KohlProps,
+  CommandStatus
 } from '../../commons/types.js'
 
-const search = (state:KohlProps, query:string) => {
+const search = (state:KohlProps, query:string):CommandStatus => {
+  const newFile = { ...state.file }
+  newFile.patterns.search = query
+
   return {
-    lines: state.lines,
-    patterns: {
-      ...state.patterns,
-      search: query
-    }
+    file: newFile
   }
 }
 

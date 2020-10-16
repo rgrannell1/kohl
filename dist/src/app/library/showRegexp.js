@@ -5,11 +5,10 @@ const showRegexp = (state, query) => {
     catch (err) {
         throw new Error('failed to parse regexp');
     }
+    const newFile = { ...state.file };
+    newFile.patterns.highlight = regexp;
     return {
-        patterns: {
-            ...state.patterns,
-            highlight: regexp
-        }
+        file: newFile
     };
 };
 export default Object.assign(showRegexp, {

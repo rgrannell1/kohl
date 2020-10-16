@@ -1,15 +1,16 @@
 
 
 import {
-  KohlProps
+  KohlProps,
+  CommandStatus
 } from '../../commons/types.js'
 
-const show = (state:KohlProps, query:string) => {
+const show = (state:KohlProps, query:string):CommandStatus => {
+  const newFile = { ...state.file }
+  newFile.patterns.highlight = query
+
   return {
-    patterns: {
-      ...state.patterns,
-      highlight: query
-    }
+    file: newFile
   }
 }
 

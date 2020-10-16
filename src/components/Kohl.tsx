@@ -56,14 +56,16 @@ export class Kohl extends React.Component<{}, KohlState> {
 
     // -- add page
     this.state = {
+      file: {
+        cursor,
+        patterns,
+        lines,
+      },
       screen,
-      cursor,
-      patterns,
       mode: Mode.Default,
       command: '',
       output,
       ttyIn,
-      lines,
       displayLines: [],
       lineId: 0
     }
@@ -74,14 +76,14 @@ export class Kohl extends React.Component<{}, KohlState> {
     this.state.ttyIn.setRawMode(true)
   }
   ingestLine (line:string, state:KohlState) {
-    state.lines.add(new Line(line))
+    state.file.lines.add(new Line(line))
 
     return {
       console: {
         rows: process.stdout.rows,
         columns: process.stdout.columns
       },
-      lines: state.lines,
+      lines: state.file.lines,
       lineId: state.lineId + 1
     }
   }
@@ -89,7 +91,7 @@ export class Kohl extends React.Component<{}, KohlState> {
     process.stdin
       .pipe(split())
       .pipe(through(line => {
-        this.state.lines.add(new Line(line))
+        this.state.file.lines.add(new Line(line))
       }))
       .on('end', () => {
         this.setState({
@@ -141,8 +143,8 @@ export class Kohl extends React.Component<{}, KohlState> {
     const state = this.state
 
     return <>
-      <Header cursor={state.cursor} lines={state.lines} patterns={state.patterns}/>
-      <Body cursor={state.cursor} lines={state.lines} screen={state.screen} patterns={state.patterns}/>
+      <Header cursor={state.file.cursor} lines={state.file.lines} patterns={state.file.patterns}/>
+      <Body cursor={state.file.cursor} lines={state.file.lines} screen={state.screen} patterns={state.file.patterns}/>
       <Newline/>
       <Footer mode={state.mode} output={state.output} command={state.command}/>
     </>

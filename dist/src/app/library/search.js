@@ -1,10 +1,8 @@
 const search = (state, query) => {
+    const newFile = { ...state.file };
+    newFile.patterns.search = query;
     return {
-        lines: state.lines,
-        patterns: {
-            ...state.patterns,
-            search: query
-        }
+        file: newFile
     };
 };
 export default Object.assign(search, {

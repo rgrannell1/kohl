@@ -38,14 +38,16 @@ export class Kohl extends React.Component {
         };
         // -- add page
         this.state = {
+            file: {
+                cursor,
+                patterns,
+                lines,
+            },
             screen,
-            cursor,
-            patterns,
             mode: Mode.Default,
             command: '',
             output,
             ttyIn,
-            lines,
             displayLines: [],
             lineId: 0
         };
@@ -56,13 +58,13 @@ export class Kohl extends React.Component {
         this.state.ttyIn.setRawMode(true);
     }
     ingestLine(line, state) {
-        state.lines.add(new Line(line));
+        state.file.lines.add(new Line(line));
         return {
             console: {
                 rows: process.stdout.rows,
                 columns: process.stdout.columns
             },
-            lines: state.lines,
+            lines: state.file.lines,
             lineId: state.lineId + 1
         };
     }
@@ -70,7 +72,7 @@ export class Kohl extends React.Component {
         process.stdin
             .pipe(split())
             .pipe(through(line => {
-            this.state.lines.add(new Line(line));
+            this.state.file.lines.add(new Line(line));
         }))
             .on('end', () => {
             this.setState({
@@ -117,8 +119,8 @@ export class Kohl extends React.Component {
     render() {
         const state = this.state;
         return React.createElement(React.Fragment, null,
-            React.createElement(Header, { cursor: state.cursor, lines: state.lines, patterns: state.patterns }),
-            React.createElement(Body, { cursor: state.cursor, lines: state.lines, screen: state.screen, patterns: state.patterns }),
+            React.createElement(Header, { cursor: state.file.cursor, lines: state.file.lines, patterns: state.file.patterns }),
+            React.createElement(Body, { cursor: state.file.cursor, lines: state.file.lines, screen: state.screen, patterns: state.file.patterns }),
             React.createElement(Newline, null),
             React.createElement(Footer, { mode: state.mode, output: state.output, command: state.command }));
     }

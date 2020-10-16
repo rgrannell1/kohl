@@ -1,9 +1,8 @@
 const jump = (state, line) => {
+    const newFile = { ...state.file };
+    newFile.cursor.position = Math.max(line, 0);
     return {
-        cursor: {
-            ...state.cursor,
-            position: Math.max(line, 0)
-        }
+        file: newFile
     };
 };
 export default Object.assign(jump, {

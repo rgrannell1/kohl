@@ -1,7 +1,7 @@
 const search = (state) => {
     return {
         output: {
-            message: state?.patterns?.highlight?.toString() || '',
+            message: state.file?.patterns?.highlight?.toString() || '',
             status: 0,
             state: {}
         }

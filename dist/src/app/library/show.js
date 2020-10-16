@@ -1,9 +1,8 @@
 const show = (state, query) => {
+    const newFile = { ...state.file };
+    newFile.patterns.highlight = query;
     return {
-        patterns: {
-            ...state.patterns,
-            highlight: query
-        }
+        file: newFile
     };
 };
 export default Object.assign(show, {

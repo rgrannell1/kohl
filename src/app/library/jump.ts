@@ -1,14 +1,15 @@
 
 import {
-  KohlProps
+  KohlProps,
+  CommandStatus
 } from '../../commons/types.js'
 
-const jump = (state:KohlProps, line:number) => {
+const jump = (state:KohlProps, line:number):CommandStatus => {
+  const newFile = { ...state.file }
+  newFile.cursor.position = Math.max(line, 0)
+
   return {
-    cursor: {
-      ...state.cursor,
-      position: Math.max(line, 0)
-    }
+    file: newFile
   }
 }
 

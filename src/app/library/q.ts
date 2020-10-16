@@ -1,9 +1,10 @@
 
 import {
-  Mode
+  Mode,
+  CommandStatus
 } from '../../commons/types.js'
 
-const q = () => {
+const q = ():CommandStatus => {
   return {
     mode: Mode.Default
   }

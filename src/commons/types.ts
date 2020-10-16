@@ -28,19 +28,18 @@ export interface Screen {
 }
 
 export interface Cursor {
-  readonly position: number,
-  readonly column: number
+  position: number,
+  column: number
 }
 
 export interface Patterns {
-  readonly search: string,
-  readonly highlight: string | RegExp
+  search: string,
+  highlight: string | RegExp
 }
 
 export type Lines = CircularBuffer<Line>
 
 export interface FileState {
-  screen: Screen,
   cursor: Cursor,
   patterns: Patterns,
   lines: Lines
@@ -48,23 +47,18 @@ export interface FileState {
 
 export interface KohlProps {
   readonly screen: Screen,
-  readonly cursor: Cursor,
-  readonly patterns: Patterns,
+  readonly file: FileState,
   readonly mode: Mode,
   readonly command: string,
-  readonly lines: Lines
 }
 
 export interface KohlState {
-  //file: FileState,
-  ttyIn: tty.ReadStream,
   screen: Screen,
-  cursor: Cursor,
-  patterns: Patterns,
+  file: FileState,
+  ttyIn: tty.ReadStream,
   mode: Mode,
   command: string,
   output: ExecuteResult,
-  lines: Lines,
   displayLines: Lines[],
   lineId: number
 }
