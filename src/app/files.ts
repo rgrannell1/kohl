@@ -46,7 +46,6 @@ export const loadFile = (content:string) => {
       status: 0
     },
     lines: buff,
-    displayLines: [],
     lineId: 0
   }
 }

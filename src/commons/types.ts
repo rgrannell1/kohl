@@ -59,7 +59,6 @@ export interface KohlState {
   command: string,
   output: ExecuteResult,
   lines: Lines,
-  displayLines: Lines[],
   lineId: number,
   fileStore: FileStore
 }

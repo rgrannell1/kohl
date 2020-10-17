@@ -51,7 +51,6 @@ export class Kohl extends React.Component {
             output,
             ttyIn,
             lines,
-            displayLines: [],
             lineId: 0,
             fileStore: new Map()
         };
