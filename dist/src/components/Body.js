@@ -13,6 +13,10 @@ export class Body extends React.PureComponent {
         return screen.rows - Body.OCCUPIED_VERTICAL_LINES;
     }
     getBounds(cursor, screen) {
+        // -- note neesd to be patched
+        if (typeof cursor.column === 'undefined') {
+            cursor;
+        }
         return {
             left: cursor.column,
             right: cursor.column + screen.columns,
@@ -30,7 +34,8 @@ export class Body extends React.PureComponent {
         const displayLines = filter.displayLines(this.getBounds(cursor, screen));
         if (displayLines.length === 0) {
             elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
-            for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
+            const fillCount = this.freeLines(screen) - 1;
+            for (let ith = 0; ith < fillCount; ++ith) {
                 elems.push(React.createElement(Text, { key: nanoid() }, " "));
             }
         }

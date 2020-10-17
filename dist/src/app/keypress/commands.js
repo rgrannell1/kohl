@@ -71,13 +71,14 @@ mappings.set(hasSequence('?'), (elem) => {
         const fileStore = state.fileStore;
         fileStore.set('stdin', state);
         console.clear();
-        return {
+        let data = {
             ...files.loadFile(files.help()),
             screen: state.screen,
             ttyIn: state.ttyIn,
             fileStore: state.fileStore,
-            lineId: state.lineId + 1
+            lineId: 0
         };
+        return data;
     });
 });
 export default mappings;

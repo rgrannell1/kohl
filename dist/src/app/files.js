@@ -25,7 +25,7 @@ export const loadFile = (content) => {
     return {
         cursor: {
             position: 0,
-            cursor: 0
+            column: 0
         },
         patterns: {
             search: '',

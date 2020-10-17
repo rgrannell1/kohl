@@ -33,7 +33,7 @@ export const loadFile = (content:string) => {
   return {
     cursor: {
       position: 0,
-      cursor: 0
+      column: 0
     },
     patterns: {
       search: '',

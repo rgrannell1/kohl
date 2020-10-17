@@ -34,6 +34,12 @@ export class Body extends React.PureComponent<BodyProps> {
     return screen.rows - Body.OCCUPIED_VERTICAL_LINES
   }
   getBounds (cursor:Cursor, screen:Screen) {
+    // -- note neesd to be patched
+
+    if (typeof cursor.column === 'undefined') {
+      cursor
+    }
+
     return {
       left: cursor.column,
       right: cursor.column + screen.columns,
@@ -60,7 +66,8 @@ export class Body extends React.PureComponent<BodyProps> {
     if (displayLines.length === 0) {
       elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)
 
-      for (let ith = 0; ith < this.freeLines(screen) - 1; ++ith) {
+      const fillCount = this.freeLines(screen) - 1
+      for (let ith = 0; ith < fillCount; ++ith) {
         elems.push(<Text key={nanoid()}> </Text>)
       }
     } else {
