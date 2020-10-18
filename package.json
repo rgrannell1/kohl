@@ -38,6 +38,7 @@
   "dependencies": {
     "@types/ansi-styles": "^3.2.1",
     "@types/docopt": "^0.6.31",
+    "@types/mustache": "^4.0.1",
     "@types/parsimmon": "^1.10.3",
     "@types/react": "^16.9.52",
     "@types/split": "^1.0.0",
@@ -51,6 +52,7 @@
     "ink-testing-library": "^2.1.0",
     "keypress": "^0.2.1",
     "moment": "2.26.0",
+    "mustache": "^4.0.1",
     "nanoid": "^3.1.9",
     "neodoc": "2.0.2",
     "parjs": "^0.12.7",

@@ -71,14 +71,13 @@ mappings.set(hasSequence('?'), (elem) => {
         const fileStore = state.fileStore;
         fileStore.set(state.fileId, state);
         if (state.fileId === 'help') {
-            //console.clear()
             // -- load the previously loaded file.
             return {
                 ...fileStore.get('-')
             };
         }
         else {
-            //console.clear()
+            // -- store a reference to the current state
             fileStore.set('-', state);
             return {
                 ...files.loadFile(files.help()),

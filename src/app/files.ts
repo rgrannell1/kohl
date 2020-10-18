@@ -2,6 +2,9 @@
 import {
   Mode
 } from '../commons/types.js'
+import {library} from './library/index.js'
+
+import mustache from 'mustache'
 
 import * as fs from 'fs'
 import * as path from 'path'
@@ -12,8 +15,24 @@ import { fileURLToPath } from 'url'
 const __dirname = fileURLToPath(import.meta.url)
 
 export const help = () => {
+  const libraryEntries = Object.entries(library).sort((datum0, datum1) => {
+    return datum0[0] > datum1[0] ? -1 : +1
+  })
+
+  const view = {
+    procedures: libraryEntries.map((pair:any) => {
+      const [name, data] = pair
+      return {
+        name,
+        parameters: data.parameters,
+        description: data.description
+      }
+    })
+  }
+
   const content = fs.readFileSync(path.join(__dirname, '../../files/help.mustache'))
-  return content.toString()
+
+  return mustache.render(content.toString(), view)
 }
 
 export const loadFile = (content:string) => {
