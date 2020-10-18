@@ -6,6 +6,7 @@ import {library} from './library/index.js'
 
 import mustache from 'mustache'
 
+import chalk from 'chalk'
 import * as fs from 'fs'
 import * as path from 'path'
 import CircularBuffer from '../commons/circular-buffer.js'
@@ -23,7 +24,7 @@ export const help = () => {
     procedures: libraryEntries.map((pair:any) => {
       const [name, data] = pair
       return {
-        name,
+        name: chalk.underline(name),
         parameters: data.parameters,
         description: data.description
       }
