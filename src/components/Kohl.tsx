@@ -62,6 +62,7 @@ export class Kohl extends React.Component<{}, KohlState> {
      *
      */
     this.state = {
+      fileId: 'stdin',
       screen,
       cursor,
       patterns,

@@ -3,7 +3,8 @@ import * as files from '../files.js'
 import {
   Mode,
   KohlProps,
-  KeyMapping
+  KeyMapping,
+  KohlState
 } from '../../commons/types.js'
 
 import {
@@ -82,22 +83,27 @@ mappings.set(hasSequence('/'), (elem:React.Component) => {
 mappings.set(hasSequence('?'), (elem:React.Component) => {
   // -- this does not seem correct, but replaceState is deprecated.
 
-  elem.setState((state:any) => {
-    const fileStore = state.fileStore as any
+  elem.setState((state:KohlState) => {
+    const fileStore = state.fileStore
 
-    fileStore.set('stdin', state)
+    fileStore.set(state.fileId, state)
 
-    console.clear()
-
-    let data = {
-      ...files.loadFile(files.help()),
-      screen: state.screen,
-      ttyIn: state.ttyIn,
-      fileStore: state.fileStore,
-      lineId: 0
+    if (state.fileId === 'help') {
+      // -- load the previously loaded file.
+      return {
+        ...fileStore.get('-')
+      }
+    } else {
+      // -- store a reference to the current state
+      fileStore.set('-', state)
+      return {
+        ...files.loadFile(files.help()),
+        screen: state.screen,
+        ttyIn: state.ttyIn,
+        fileStore: state.fileStore,
+        lineId: 0
+      }
     }
-
-    return data
   })
 })
 

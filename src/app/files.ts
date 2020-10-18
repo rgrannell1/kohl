@@ -3,23 +3,17 @@ import {
   Mode
 } from '../commons/types.js'
 
+import * as fs from 'fs'
+import * as path from 'path'
 import CircularBuffer from '../commons/circular-buffer.js'
 import Line from '../app/Line.js'
 
+import { fileURLToPath } from 'url'
+const __dirname = fileURLToPath(import.meta.url)
+
 export const help = () => {
-  return [
-    'Kohl',
-    '',
-    'Library:',
-    '  jump:',
-    '  q:',
-    '  search:',
-    '  searchq:',
-    '  searchRegexp:',
-    '  show:',
-    '  showq:',
-    '  showRegexp:',
-  ].join('\n')
+  const content = fs.readFileSync(path.join(__dirname, '../../files/help.mustache'))
+  return content.toString()
 }
 
 export const loadFile = (content:string) => {
@@ -31,6 +25,7 @@ export const loadFile = (content:string) => {
   }
 
   return {
+    fileId: 'help',
     cursor: {
       position: 0,
       column: 0

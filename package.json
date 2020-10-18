@@ -6,15 +6,15 @@
   "scripts": {
     "docs": "npx typedoc --out docs src",
     "tsc": "tsc",
-    "build": "rm -rf dist && npm run tsc && chmod +x dist/src/cli/kohl.js",
-    "start": "npm run tsc && cat data/apache_logs.txt | node dist/src/cli/kohl.js",
+    "build": "rm -rf dist && npm run tsc && chmod +x dist/src/cli/kohl.js && cp -r src/files dist/src/files",
+    "start": "npm run build && cat data/apache_logs.txt | node dist/src/cli/kohl.js",
     "standard": "npx standard 'src/**'",
     "standard:fix": "npx standard 'src/**' --fix",
     "perf:measure": "cat data/apache_logs.txt | node --prof dist/src/cli/kohl.js",
     "perf:clean": "rm isolate* || echo ''",
     "perf:show": "node --prof-process --preprocess -j isolate*.log | node_modules/.bin/flamebearer",
     "perf": "npm run perf:clean; npm run perf:measure; npm run perf:show",
-    "test": "npm run tsc && npx tap dist/tests --no-esm"
+    "test": "npm run build && npx tap dist/tests --no-esm"
   },
   "preferGlobal": true,
   "bin": {

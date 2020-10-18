@@ -69,16 +69,25 @@ mappings.set(hasSequence('?'), (elem) => {
     // -- this does not seem correct, but replaceState is deprecated.
     elem.setState((state) => {
         const fileStore = state.fileStore;
-        fileStore.set('stdin', state);
-        console.clear();
-        let data = {
-            ...files.loadFile(files.help()),
-            screen: state.screen,
-            ttyIn: state.ttyIn,
-            fileStore: state.fileStore,
-            lineId: 0
-        };
-        return data;
+        fileStore.set(state.fileId, state);
+        if (state.fileId === 'help') {
+            //console.clear()
+            // -- load the previously loaded file.
+            return {
+                ...fileStore.get('-')
+            };
+        }
+        else {
+            //console.clear()
+            fileStore.set('-', state);
+            return {
+                ...files.loadFile(files.help()),
+                screen: state.screen,
+                ttyIn: state.ttyIn,
+                fileStore: state.fileStore,
+                lineId: 0
+            };
+        }
     });
 });
 export default mappings;

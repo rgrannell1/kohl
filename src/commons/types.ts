@@ -51,6 +51,7 @@ export interface KohlProps {
 export type FileStore = Map<string, KohlState>
 
 export interface KohlState {
+  fileId: string,
   ttyIn: tty.ReadStream,
   screen: Screen,
   cursor: Cursor,
