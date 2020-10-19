@@ -9,7 +9,7 @@ kohl as in kohlrabi. The successor project to https://github.com/rgrannell1/kale
 
 ## Stability Index
 
-1, Experimental - This project might die, it's undertested and underdocumented, and redesigns and breaking changes are likely
+2, Evolving - This project is healthy, but might lack testing or documentation or it is prone to breaking changes
 
 ### Usage
 
