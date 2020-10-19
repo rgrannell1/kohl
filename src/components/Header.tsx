@@ -53,7 +53,8 @@ export class SelectionSummary extends React.Component<SelectionSummaryProps, Sel
       ? 100
       : Math.round((selected / total) * 100)
   }
-  componentWillReceiveProps () {
+  // -- TODO this is deprecated and should be replaced.
+  UNSAFE_componentWillReceiveProps () {
     this.setState({
       lineLength: this.props.lines.size()
     })
