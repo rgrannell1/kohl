@@ -8,6 +8,8 @@ export default class Line {
     constructor(text) {
         this.text = text;
         this.id = idx++;
+        // -- rewire to be reliable
+        this.lineNumber = this.id;
     }
     /**
      * Does this line of text match either a literal or regular-expression pattern?

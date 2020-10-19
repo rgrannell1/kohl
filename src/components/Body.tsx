@@ -55,14 +55,12 @@ export class Body extends React.PureComponent<BodyProps> {
       patterns
     } = this.props
 
-    const filter = new LinesFilter({
-      lines,
-      patterns
+    const filter = new LinesFilter({ lines, patterns })
+    const displayLines = filter.displayLines(this.getBounds(cursor, screen), {
+      showLineNumber: false
     })
 
     const elems = []
-    const displayLines = filter.displayLines(this.getBounds(cursor, screen))
-
     if (displayLines.length === 0) {
       elems.push(<Text key={nanoid()} inverse>No Matches Found</Text>)
 

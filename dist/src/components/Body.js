@@ -31,7 +31,9 @@ export class Body extends React.PureComponent {
             patterns
         });
         const elems = [];
-        const displayLines = filter.displayLines(this.getBounds(cursor, screen));
+        const displayLines = filter.displayLines(this.getBounds(cursor, screen), {
+            showLineNumber: true
+        });
         if (displayLines.length === 0) {
             elems.push(React.createElement(Text, { key: nanoid(), inverse: true }, "No Matches Found"));
             const fillCount = this.freeLines(screen) - 1;

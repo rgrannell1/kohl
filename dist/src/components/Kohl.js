@@ -36,6 +36,7 @@ export class Kohl extends React.Component {
             state: {},
             status: 0
         };
+        const fileStore = new Map();
         /**
          * React "helpfully" doesn't like nested state objects, so this state is a mess. Rather than using a File
          * object to capture file information, we snapshot states into fileStore before switching to another file
@@ -53,7 +54,7 @@ export class Kohl extends React.Component {
             ttyIn,
             lines,
             lineId: 0,
-            fileStore: new Map()
+            fileStore
         };
     }
     readKeyStrokes() {
@@ -102,7 +103,7 @@ export class Kohl extends React.Component {
             this.setState({
                 screen: { rows, columns }
             });
-        }, 250);
+        }, 500);
     }
     componentDidMount() {
         this.readKeyStrokes();

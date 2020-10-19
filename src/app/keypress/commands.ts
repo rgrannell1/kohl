@@ -17,11 +17,15 @@ import { runCommand } from '../run-command.js'
 const mappings:KeyMapping = new Map()
 
 mappings.set(hasName('return'), (elem:React.Component) => {
-  elem.setState((state:KohlProps) => {
+  elem.setState((state:KohlState) => {
     if (state.mode === Mode.EnterCommand) {
       const result = runCommand(state, state.command)
 
       if (result.output.status === 0) {
+        // -- register the command in history
+
+        const history = state.fileStore.get('history')
+
         return {
           ...result,
           command: ''
