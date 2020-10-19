@@ -1,7 +1,7 @@
 
 import tap from 'tap'
 import React from 'react'
-import {render} from 'ink-testing-library';
+import {render} from 'ink-testing-library'
 
 import {
   SelectionSummary
