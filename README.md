@@ -26,6 +26,11 @@ kohl < /var/log/syslog
 cat /var/log/syslog | kohl
 ```
 
+### Architecture
+
+![Top Level](./top-level.png)
+![Kohl Component](./kohl.png)
+
 ### Installation
 
 On Linux distributions that support Snap packages, run:
