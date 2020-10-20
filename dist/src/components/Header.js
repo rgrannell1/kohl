@@ -35,10 +35,7 @@ export class SelectionSummary extends React.Component {
     }
     render() {
         const { lines, patterns } = this.props;
-        const filter = new LinesFilter({
-            lines: lines,
-            patterns: patterns
-        });
+        const filter = new LinesFilter({ lines, patterns });
         const total = filter.total();
         const selected = filter.selected();
         const ratio = this.ratio(selected, total);

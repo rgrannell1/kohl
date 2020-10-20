@@ -1,5 +1,5 @@
 import { isString, isRegexp } from '../commons/utils.js';
-import { highlightPatterns, formatString } from './highlight-patterns.js';
+import { highlightLineSegmentPatterns } from './highlight-patterns.js';
 let GLOBAL_LINE_ID = 0;
 /**
  * Representation of an input line's data and associated actions.
@@ -35,7 +35,7 @@ export default class Line {
      * @returns an ANSI-highlighted string
      */
     highlight(patterns, start, end) {
-        return formatString(highlightPatterns(this.text, patterns).slice(start, end));
+        return highlightLineSegmentPatterns(this.text, patterns, start, end);
     }
 }
 //# sourceMappingURL=Line.js.map

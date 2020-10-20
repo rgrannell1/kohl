@@ -1,3 +1,4 @@
+import hash from 'hash-sum';
 export const sequenceBy = (pred, coll) => {
     let out;
     if (coll.length === 0) {
@@ -31,5 +32,8 @@ export function isString(pattern) {
 }
 export function isRegexp(pattern) {
     return pattern instanceof RegExp;
+}
+export function hashSignature(args) {
+    return hash(args);
 }
 //# sourceMappingURL=utils.js.map

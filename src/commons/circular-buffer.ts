@@ -29,6 +29,26 @@ export default class CircularBuffer <I> {
     this._size = Math.min(this._size + 1, this._capacity)
   }
 
+  has (elem:I) {
+    for (const candidate of this.values()) {
+      if (candidate === elem) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  get (elem:I) {
+    for (const candidate of this.values()) {
+      if (candidate === elem) {
+        return candidate
+      }
+    }
+
+    return null
+  }
+
   values () {
     // -- start with the oldest modded by size
     const next = this.idx % this._size

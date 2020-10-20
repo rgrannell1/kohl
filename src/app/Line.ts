@@ -9,8 +9,7 @@ import {
 } from '../commons/types'
 
 import {
-  highlightPatterns,
-  formatString
+  highlightLineSegmentPatterns
 } from './highlight-patterns.js'
 
 let GLOBAL_LINE_ID = 0
@@ -54,6 +53,6 @@ export default class Line {
    * @returns an ANSI-highlighted string
    */
   highlight (patterns:Pattern[], start:number, end:number) {
-    return formatString(highlightPatterns(this.text, patterns).slice(start, end))
+    return highlightLineSegmentPatterns(this.text, patterns, start, end)
   }
 }

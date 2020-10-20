@@ -1,5 +1,6 @@
 
 import ansi from 'ansi-styles'
+import CircularBuffer from '../commons/circular-buffer'
 
 import {
   PatternMatchData,
@@ -9,7 +10,8 @@ import {
 import {
   sequenceBy,
   isString,
-  isRegexp
+  isRegexp,
+  hashSignature
 } from '../commons/utils.js'
 
 const matchStringPattern = (line:string, pattern:string) => {
@@ -124,6 +126,11 @@ const hasSameId = (elem0:Elem, elem1:Elem) => {
   return elem0.id === elem1.id
 }
 
+/**
+ *
+ *
+ * @param parts
+ */
 export const formatString = (parts:SequenceData[]) => {
   let message = ''
 
@@ -136,4 +143,53 @@ export const formatString = (parts:SequenceData[]) => {
   }
 
   return message
+}
+
+interface CacheEntry <I> {
+  value: I,
+  time: number
+}
+
+let cache = new Map<string, CacheEntry<string>>()
+
+// -- note this can be time-optimised!
+const clearCache = (cache:any) => {
+  const maxSize = 1e4
+
+  if (cache.size < maxSize) {
+    return
+  } else {
+    cache = new Map()
+  }
+}
+
+/**
+ * highlight the visible string subsection. This is the computationally intensive part of the program
+ * so it's memoised.
+ *
+ * @param text the line text
+ * @param patterns the search and highlight patterns for the program
+ * @param start the start index of the string subsection
+ * @param end the end index of the string subsection
+ *
+ * @returns an ansi string
+ */
+export const highlightLineSegmentPatterns = (text:string, patterns:Pattern[], start:number, end:number) => {
+  const signature = hashSignature([text, patterns, start, end])
+  const cacheEntry = cache.get(signature)
+
+  clearCache(cache)
+
+  if (typeof cacheEntry !== 'undefined') {
+    return cacheEntry.value
+  }
+
+  const result = formatString(highlightPatterns(text, patterns).slice(start, end))
+
+  cache.set(signature, {
+    value: result,
+    time: Date.now()
+  })
+
+  return result
 }

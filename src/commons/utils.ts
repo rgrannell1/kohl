@@ -1,4 +1,6 @@
 
+import hash from 'hash-sum'
+
 // type Predicate = <I>(elem0:I, elem1:I) => Boolean
 type Predicate = any
 
@@ -39,4 +41,8 @@ export function isString (pattern: any): pattern is string {
 
 export function isRegexp (pattern: any): pattern is RegExp {
   return pattern instanceof RegExp
+}
+
+export function hashSignature (args:any[]) {
+  return hash(args)
 }

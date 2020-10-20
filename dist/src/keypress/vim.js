@@ -3,10 +3,7 @@ import { hasSequence, keyHandler } from './utils.js';
 import LinesFilter from '../app/LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasSequence('G'), keyHandler(state => {
-    const filter = new LinesFilter({
-        lines: state.lines,
-        patterns: state.patterns
-    });
+    const filter = new LinesFilter(state);
     if (state.mode === Mode.Default) {
         return {
             cursor: {
@@ -25,7 +22,7 @@ mappings.set(hasSequence('g'), keyHandler(state => {
     if (state.mode === Mode.Default) {
         return {
             cursor: {
-                ...state.cursor,
+                column: state.cursor.column,
                 position: 0
             }
         };

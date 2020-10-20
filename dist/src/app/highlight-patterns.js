@@ -1,5 +1,5 @@
 import ansi from 'ansi-styles';
-import { sequenceBy, isString, isRegexp } from '../commons/utils.js';
+import { sequenceBy, isString, isRegexp, hashSignature } from '../commons/utils.js';
 const matchStringPattern = (line, pattern) => {
     // -- return matches for string literals. Not implemented by default
     let id = 0;
@@ -92,6 +92,11 @@ const formatText = (chars, id) => {
 const hasSameId = (elem0, elem1) => {
     return elem0.id === elem1.id;
 };
+/**
+ *
+ *
+ * @param parts
+ */
 export const formatString = (parts) => {
     let message = '';
     const grouped = sequenceBy(hasSameId, parts);
@@ -101,5 +106,41 @@ export const formatString = (parts) => {
         message += formatText(chars.join(''), id);
     }
     return message;
+};
+let cache = new Map();
+// -- note this can be time-optimised!
+const clearCache = (cache) => {
+    const maxSize = 1e4;
+    if (cache.size < maxSize) {
+        return;
+    }
+    else {
+        cache = new Map();
+    }
+};
+/**
+ * highlight the visible string subsection. This is the computationally intensive part of the program
+ * so it's memoised.
+ *
+ * @param text the line text
+ * @param patterns the search and highlight patterns for the program
+ * @param start the start index of the string subsection
+ * @param end the end index of the string subsection
+ *
+ * @returns an ansi string
+ */
+export const highlightLineSegmentPatterns = (text, patterns, start, end) => {
+    const signature = hashSignature([text, patterns, start, end]);
+    const cacheEntry = cache.get(signature);
+    clearCache(cache);
+    if (typeof cacheEntry !== 'undefined') {
+        return cacheEntry.value;
+    }
+    const result = formatString(highlightPatterns(text, patterns).slice(start, end));
+    cache.set(signature, {
+        value: result,
+        time: Date.now()
+    });
+    return result;
 };
 //# sourceMappingURL=highlight-patterns.js.map
