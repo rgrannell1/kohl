@@ -28,8 +28,9 @@ cat /var/log/syslog | kohl
 
 ### Architecture
 
-![Top Level](./top-level.png)
-![Kohl Component](./kohl.png)
+<img src="./images/top-level.png" width="200">
+
+<img src="./images/kohl.png" width="200">
 
 ### Installation
 
