@@ -1,4 +1,4 @@
-import { Mode } from '../../commons/types.js';
+import { Mode } from '../commons/types.js';
 const q = () => {
     return {
         mode: Mode.Default

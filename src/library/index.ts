@@ -1,7 +1,7 @@
 
 import {
   Library
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import jump from './jump.js'
 import q from './q.js'

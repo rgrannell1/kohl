@@ -2,9 +2,9 @@
 import {
   KohlProps,
   KohlState
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
-const search = (state:KohlProps):Partial<KohlState> => {
+const show = (state:KohlProps):Partial<KohlState> => {
   return {
     output: {
       message: state?.patterns?.highlight?.toString() || '',
@@ -14,7 +14,7 @@ const search = (state:KohlProps):Partial<KohlState> => {
   }
 }
 
-export default Object.assign(search, {
+export default Object.assign(show, {
   parameters: 0,
-  description: 'show current search patterns'
+  description: 'show current highlight patterns'
 })

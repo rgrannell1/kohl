@@ -1,7 +1,7 @@
 
 import {
   KohlProps
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 const searchRegexp = (state:KohlProps, query:string) => {
   return {

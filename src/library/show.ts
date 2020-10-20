@@ -2,7 +2,7 @@
 
 import {
   KohlProps
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 const show = (state:KohlProps, query:string) => {
   return {

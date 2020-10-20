@@ -1,7 +1,7 @@
 
 import {
   Mode
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 const q = () => {
   return {
