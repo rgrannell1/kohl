@@ -32,4 +32,11 @@ export const keypress = (binding) => {
         return asKeyBinding(key) === binding;
     };
 };
+export const keyHandler = (handler) => {
+    return (elem) => {
+        elem.setState((state) => {
+            return handler(state);
+        });
+    };
+};
 //# sourceMappingURL=utils.js.map

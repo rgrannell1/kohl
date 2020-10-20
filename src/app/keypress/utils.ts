@@ -1,7 +1,8 @@
 
 
 import {
-  Key
+  Key,
+  KohlState
 } from '../../commons/types'
 
 export const hasName = (val:string) => {
@@ -43,5 +44,15 @@ const asKeyBinding = (key:Key) => {
 export const keypress = (binding:string) => {
   return (key:Key) => {
     return asKeyBinding(key) === binding
+  }
+}
+
+type KeyHandler = (state:KohlState) => Partial<KohlState> | undefined
+
+export const keyHandler = (handler:KeyHandler) => {
+  return (elem:React.Component) => {
+    elem.setState((state:KohlState) => {
+      return handler(state)
+    })
   }
 }

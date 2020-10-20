@@ -12,4 +12,8 @@ export const createLines = (lines) => {
     }
     return buff;
 };
+export const expectedBody = (cursor, lines) => {
+    //  const expected = []
+    //  return expected
+};
 //# sourceMappingURL=utils.js.map

@@ -134,7 +134,7 @@ export const formatString = (parts:SequenceData[]) => {
   const grouped = sequenceBy(hasSameId, parts)
   for (const stretch of grouped) {
     const chars = stretch.map(group => group.char)
-    const [{ id } ]= stretch
+    const [{ id } ] = stretch
 
     message += formatText(chars.join(''), id)
   }

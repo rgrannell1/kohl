@@ -10,6 +10,7 @@ import {
 import {
   Body
 } from '../../src/components/Body.js'
+import { Cursor } from '../../src/commons/types.js'
 
 const defaultCase = {
   cursor: {
@@ -49,3 +50,5 @@ const runBodyComponent = () => {
 }
 
 runBodyComponent()
+
+// -- construct a model body based on the provided lines

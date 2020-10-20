@@ -1,6 +1,7 @@
 
 import CircularBuffer from '../src/commons/circular-buffer.js'
 import Line from '../src/app/Line.js'
+import { Cursor } from '../src/commons/types.js'
 
 /**
  * Construct a lines buffer from text lines.
@@ -15,4 +16,10 @@ export const createLines = (lines:string[]) => {
   }
 
   return buff
+}
+
+export const expectedBody = (cursor:Cursor, lines:Line[]) => {
+//  const expected = []
+
+//  return expected
 }
