@@ -108,19 +108,34 @@ export const formatString = (parts) => {
     return message;
 };
 let cache = new Map();
-// -- note this can be time-optimised!
+/**
+ * Cache highlighted lines. Maps preserve insertion order so
+ * removing head entries will remove the least-recently-used items. Given user's are normally
+ * scrolling it makes sense to remove from the head.
+ *
+ * @param cache a cache of lines
+ */
 const clearCache = (cache) => {
-    const maxSize = 1e4;
-    if (cache.size < maxSize) {
+    const maxSize = 1e3;
+    if (cache.size <= maxSize) {
         return;
     }
     else {
         cache = new Map();
+        let count = 0;
+        for (let key of Object.entries(cache)) {
+            cache.remove(key);
+            count++;
+            // -- arbitrary.
+            if (count > maxSize / 2) {
+                break;
+            }
+        }
     }
 };
 /**
  * highlight the visible string subsection. This is the computationally intensive part of the program
- * so it's memoised.
+ * so it's memoised. This is measured as producting approximately an x10 performance gain for this function.
  *
  * @param text the line text
  * @param patterns the search and highlight patterns for the program
