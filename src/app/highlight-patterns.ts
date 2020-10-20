@@ -15,10 +15,10 @@ import {
 const matchStringPattern = (line:string, pattern:string) => {
   // -- return matches for string literals. Not implemented by default
   let id = 0
-  const results = [ ]
+  const results = []
 
   for (let ith = 0; ith < line.length - pattern.length; ++ith) {
-    let sliced = line.slice(ith, line.length)
+    const sliced = line.slice(ith, line.length)
 
     if (sliced.startsWith(pattern)) {
       results.push({
@@ -64,7 +64,7 @@ type Pattern = string | RegExp
 export const highlightPatterns = (line:string, patterns:Pattern[]) => {
   const allMatches:MatchData[] = []
 
-  let id = 0
+  const id = 0
   // -- match each pattern as many times as possible using `matchAll`
   for (const pattern of patterns) {
     // -- note: does not work with strings;
@@ -79,7 +79,7 @@ export const highlightPatterns = (line:string, patterns:Pattern[]) => {
   // -- tag each character by match, preferring later matches.
   for (const match of allMatches) {
     for (const data of sequence) {
-      let isInMatch = data.index >= match.start && data.index < match.end
+      const isInMatch = data.index >= match.start && data.index < match.end
       if (isInMatch) {
         data.id = match.id
       }
@@ -131,7 +131,7 @@ export const formatString = (parts:SequenceData[]) => {
   const grouped = sequenceBy(hasSameId, parts)
   for (const stretch of grouped) {
     const chars = stretch.map(group => group.char)
-    const [{ id } ] = stretch
+    const [{ id }] = stretch
 
     message += formatText(chars.join(''), id)
   }

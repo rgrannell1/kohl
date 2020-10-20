@@ -29,8 +29,8 @@ language.Call = ref => {
     }
   )
 
-  const withoutArgs =  ref.ProcName.map(proc => {
-    return { type: LanguageParts.Call, proc, args: [ ]}
+  const withoutArgs = ref.ProcName.map(proc => {
+    return { type: LanguageParts.Call, proc, args: [] }
   })
 
   return P.alt(withArgs, withoutArgs)
@@ -46,7 +46,7 @@ language.Number = () => {
 
 language.String = () => {
   return P.regexp(/\"[^\"]*\"/).map((part:string) => {
-    return part.slice(1,-1)
+    return part.slice(1, -1)
   })
 }
 
@@ -55,7 +55,7 @@ language.Jump = ref => {
     return {
       proc: 'jump',
       type: LanguageParts.Call, // -- todo enum
-      args: [ Number(match.slice(1)) ]
+      args: [Number(match.slice(1))]
     }
   })
 }

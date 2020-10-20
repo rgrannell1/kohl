@@ -1,5 +1,5 @@
 
-//type Predicate = <I>(elem0:I, elem1:I) => Boolean
+// type Predicate = <I>(elem0:I, elem1:I) => Boolean
 type Predicate = any
 
 export const sequenceBy = <I>(pred:Predicate, coll:I[]):I[][] => {

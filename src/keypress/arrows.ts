@@ -5,9 +5,8 @@ import {
 
 import {
   keyHandler
-} from './utils.js'
+  , hasName } from './utils.js'
 
-import { hasName } from './utils.js'
 import LinesFilter from '../app/LinesFilter.js'
 
 const mappings:KeyMapping = new Map()
@@ -22,15 +21,15 @@ mappings.set(hasName('up'), keyHandler(state => {
 }))
 
 mappings.set(hasName('down'), keyHandler(state => {
-    const filter = new LinesFilter(state)
-    const bottom = Math.max(filter.selected() - state.screen.rows, 0)
+  const filter = new LinesFilter(state)
+  const bottom = Math.max(filter.selected() - state.screen.rows, 0)
 
-    return {
-      cursor: {
-        position: Math.min(state.cursor.position + 1, bottom),
-        column: state.cursor.column
-      }
+  return {
+    cursor: {
+      position: Math.min(state.cursor.position + 1, bottom),
+      column: state.cursor.column
     }
+  }
 }))
 
 mappings.set(hasName('right'), keyHandler(state => {

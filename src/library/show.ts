@@ -1,5 +1,4 @@
 
-
 import {
   KohlProps
 } from '../commons/types.js'

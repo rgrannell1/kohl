@@ -2,7 +2,7 @@
 import {
   Mode
 } from '../commons/types.js'
-import {library} from '../library/index.js'
+import { library } from '../library/index.js'
 
 import mustache from 'mustache'
 

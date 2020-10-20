@@ -1,7 +1,7 @@
 
 import tty from 'tty'
 import P from 'parsimmon'
-import CircularBuffer from "./circular-buffer";
+import CircularBuffer from './circular-buffer'
 import Line from '../app/Line'
 
 export enum Mode {

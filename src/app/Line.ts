@@ -18,14 +18,18 @@ type Pattern = string | RegExp
  */
 export default class Line {
   id: number
+
   text: string
+
   lineNumber: number
+
   constructor (text:string) {
     this.text = text
     this.id = idx++
     // -- rewire to be reliable
     this.lineNumber = this.id
   }
+
   /**
    * Does this line of text match either a literal or regular-expression pattern?
    *
@@ -38,6 +42,7 @@ export default class Line {
       return pattern.test(this.text)
     }
   }
+
   /**
    * Highlight a subsection this line of text, where it matches one of the provided patterns.
    *
