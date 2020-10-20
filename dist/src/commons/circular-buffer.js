@@ -18,13 +18,13 @@ export default class CircularBuffer {
     }
     values() {
         // -- start with the oldest modded by size
-        let next = this.idx % this._size;
-        let elems = [];
+        const next = this.idx % this._size;
+        const elems = [];
         // -- retrieve #size elements
         for (let ith = 0; ith < this._size; ++ith) {
             // -- construct a circular index starting from the oldest element
-            let idx = (next + ith) % this._size;
-            let elem = this.buffer[idx];
+            const idx = (next + ith) % this._size;
+            const elem = this.buffer[idx];
             elems.push(elem);
         }
         return elems;

@@ -4,13 +4,26 @@ import P from 'parsimmon'
 import CircularBuffer from './circular-buffer'
 import Line from '../app/Line'
 
+export type Pattern = string | RegExp
+
+/**
+ * The application mode:
+ *
+ * - Default: scroll through logs
+ * - ShowCommand: display executed command output
+ * - EnterCommand: Type in a command
+ */
 export enum Mode {
   Default,
   ShowCommand,
   EnterCommand
 }
 
-export interface MatchData {
+/**
+ * Data representing a highlighted section of a string. The starting and end index,
+ * and an ID for the match.
+ */
+export interface PatternMatchData {
   start: number,
   end: number,
   id: number

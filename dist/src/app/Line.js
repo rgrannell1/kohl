@@ -1,14 +1,14 @@
 import { isString, isRegexp } from '../commons/utils.js';
 import { highlightPatterns, formatString } from './highlight-patterns.js';
-let idx = 0;
+let GLOBAL_LINE_ID = 0;
 /**
  * Representation of an input line's data and associated actions.
  */
 export default class Line {
     constructor(text) {
         this.text = text;
-        this.id = idx++;
-        // -- rewire to be reliable
+        this.id = GLOBAL_LINE_ID++;
+        // -- TODO rewire this, this is not reliable
         this.lineNumber = this.id;
     }
     /**
@@ -23,6 +23,7 @@ export default class Line {
         else if (isRegexp(pattern)) {
             return pattern.test(this.text);
         }
+        // -- should never reach here.
     }
     /**
      * Highlight a subsection this line of text, where it matches one of the provided patterns.
@@ -34,9 +35,7 @@ export default class Line {
      * @returns an ANSI-highlighted string
      */
     highlight(patterns, start, end) {
-        const parts = highlightPatterns(this.text, patterns)
-            .slice(start, end);
-        return formatString(parts);
+        return formatString(highlightPatterns(this.text, patterns).slice(start, end));
     }
 }
 //# sourceMappingURL=Line.js.map

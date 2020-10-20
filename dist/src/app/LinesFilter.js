@@ -5,36 +5,56 @@ export default class LinesFilter {
         this.patterns = patterns;
     }
     /**
-     * Does a line match the search pattern?
+     * Select lines that match a query
      *
-     * @param line a candidate line
+     * @param query the search query to filter-down lines
      */
-    isMatch(line) {
-        return line.isMatch(this.patterns.search);
+    filterLines(query) {
+        return this.lines.values().filter(line => line.isMatch(query));
     }
-    matchingLines() {
-        return this.lines.values().filter(this.isMatch.bind(this));
-    }
-    highlightLine(bounds, data, opts) {
-        const { id } = data;
+    /**
+     * Highlight a _horizontal subsection_ of a line of data
+     *
+     * @param bounds the line-column subsection to display
+     * @param line the target line
+     * @param opts additional view options
+     *
+     * @returns an ansi-highlighted line of text
+     */
+    highlightLine(bounds, line, opts) {
+        const { id } = line;
         const { highlight } = this.patterns;
         let text = '';
         if (opts?.showLineNumber) {
             text += `${ansi.inverse.open}${id}${ansi.inverse.close}    `;
         }
-        text += data.highlight([highlight], bounds.left, bounds.right);
+        text += line.highlight([highlight], bounds.left, bounds.right);
         return { text, id };
     }
-    displayLines(bounds, opts) {
-        return this.matchingLines()
+    /**
+     * Format the lines to be displayed
+     *
+     * @param bounds the line-column subsection to display
+     * @param opts additional options that affect how lines are displayed
+     *
+     * @returns a list of formatted lines
+     */
+    formatLines(bounds, opts) {
+        return this.filterLines(this.patterns.search)
             .slice(bounds.top, bounds.bottom)
-            .map((data, ith) => this.highlightLine(bounds, data, opts));
+            .map(data => this.highlightLine(bounds, data, opts));
     }
+    /**
+     * How many unfiltered lines are there in the LinesFilter?
+     */
     total() {
         return this.lines.size();
     }
+    /**
+     * How many lines match the provided search pattern?
+     */
     selected() {
-        return this.matchingLines().length;
+        return this.filterLines(this.patterns.search).length;
     }
 }
 //# sourceMappingURL=LinesFilter.js.map

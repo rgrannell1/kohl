@@ -5,7 +5,7 @@ const matchStringPattern = (line, pattern) => {
     let id = 0;
     const results = [];
     for (let ith = 0; ith < line.length - pattern.length; ++ith) {
-        let sliced = line.slice(ith, line.length);
+        const sliced = line.slice(ith, line.length);
         if (sliced.startsWith(pattern)) {
             results.push({
                 start: ith,
@@ -42,7 +42,7 @@ const matchPattern = (line, pattern) => {
 };
 export const highlightPatterns = (line, patterns) => {
     const allMatches = [];
-    let id = 0;
+    const id = 0;
     // -- match each pattern as many times as possible using `matchAll`
     for (const pattern of patterns) {
         // -- note: does not work with strings;
@@ -55,7 +55,7 @@ export const highlightPatterns = (line, patterns) => {
     // -- tag each character by match, preferring later matches.
     for (const match of allMatches) {
         for (const data of sequence) {
-            let isInMatch = data.index >= match.start && data.index < match.end;
+            const isInMatch = data.index >= match.start && data.index < match.end;
             if (isInMatch) {
                 data.id = match.id;
             }

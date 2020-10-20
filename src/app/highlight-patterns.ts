@@ -2,7 +2,7 @@
 import ansi from 'ansi-styles'
 
 import {
-  MatchData,
+  PatternMatchData,
   SequenceData
 } from '../commons/types'
 
@@ -41,7 +41,7 @@ const matchPattern = (line:string, pattern:string | RegExp) => {
   if (isString(pattern)) {
     return matchStringPattern(line, pattern)
   } else if (isRegexp(pattern)) {
-    const results = [...line.matchAll(pattern)].map((match, ith):MatchData => {
+    const results = [...line.matchAll(pattern)].map((match, ith):PatternMatchData => {
       if (typeof match.index === 'undefined') {
         throw new TypeError('index was not defined.')
       }
@@ -62,8 +62,7 @@ const matchPattern = (line:string, pattern:string | RegExp) => {
 type Pattern = string | RegExp
 
 export const highlightPatterns = (line:string, patterns:Pattern[]) => {
-  const allMatches:MatchData[] = []
-
+  const allMatches:PatternMatchData[] = []
   const id = 0
   // -- match each pattern as many times as possible using `matchAll`
   for (const pattern of patterns) {

@@ -56,7 +56,7 @@ export class Body extends React.PureComponent<BodyProps> {
     } = this.props
 
     const filter = new LinesFilter({ lines, patterns })
-    const displayLines = filter.displayLines(this.getBounds(cursor, screen), {
+    const displayLines = filter.formatLines(this.getBounds(cursor, screen), {
       showLineNumber: false
     })
 

@@ -1,3 +1,10 @@
+/**
+ * The application mode:
+ *
+ * - Default: scroll through logs
+ * - ShowCommand: display executed command output
+ * - EnterCommand: Type in a command
+ */
 export var Mode;
 (function (Mode) {
     Mode[Mode["Default"] = 0] = "Default";
