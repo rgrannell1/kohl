@@ -13,7 +13,7 @@ import { Body } from './Body.js'
 
 import CircularBuffer from '../commons/circular-buffer.js'
 
-import mappings from '../app/keypress/index.js'
+import mappings from '../keypress/index.js'
 import {
   Key,
   KohlProps,

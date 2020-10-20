@@ -1,4 +1,4 @@
-import { Mode } from '../../commons/types.js';
+import { Mode } from '../commons/types.js';
 import arrowMappings from './arrows.js';
 import signalMappings from './signals.js';
 import commandMappings from './commands.js';

@@ -1,6 +1,6 @@
-import { Mode } from '../../commons/types.js';
+import { Mode } from '../commons/types.js';
 import { hasSequence, keyHandler } from './utils.js';
-import LinesFilter from '../LinesFilter.js';
+import LinesFilter from '../app/LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasSequence('G'), keyHandler(state => {
     const filter = new LinesFilter({

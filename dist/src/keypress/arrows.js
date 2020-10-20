@@ -1,6 +1,6 @@
 import { keyHandler } from './utils.js';
 import { hasName } from './utils.js';
-import LinesFilter from '../LinesFilter.js';
+import LinesFilter from '../app/LinesFilter.js';
 const mappings = new Map();
 mappings.set(hasName('up'), keyHandler(state => {
     return {

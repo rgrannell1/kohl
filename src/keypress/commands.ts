@@ -1,11 +1,11 @@
 
-import * as files from '../files.js'
+import * as files from '../app/files.js'
 import {
   Mode,
   KohlProps,
   KeyMapping,
   KohlState
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import {
   hasName,
@@ -13,7 +13,7 @@ import {
   hasSequence
 } from './utils.js'
 
-import { runCommand } from '../run-command.js'
+import { runCommand } from '../app/run-command.js'
 
 const mappings:KeyMapping = new Map()
 

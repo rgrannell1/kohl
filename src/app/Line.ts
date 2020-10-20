@@ -2,7 +2,7 @@
 import {
   isString,
   isRegexp
-} from '../commons/checks.js'
+} from '../commons/utils.js'
 
 import {
   highlightPatterns,

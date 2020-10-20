@@ -3,7 +3,7 @@
 import {
   Key,
   KohlState
-} from '../../commons/types'
+} from '../commons/types'
 
 export const hasName = (val:string) => {
   return (key:Key) => {

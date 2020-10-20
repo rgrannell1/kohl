@@ -3,13 +3,13 @@ import {
   Mode,
   KohlProps,
   KeyMapping
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import {
   hasSequence,
   keyHandler
 } from './utils.js'
-import LinesFilter from '../LinesFilter.js'
+import LinesFilter from '../app/LinesFilter.js'
 
 const mappings:KeyMapping = new Map()
 

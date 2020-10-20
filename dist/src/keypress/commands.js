@@ -1,7 +1,7 @@
-import * as files from '../files.js';
-import { Mode } from '../../commons/types.js';
+import * as files from '../app/files.js';
+import { Mode } from '../commons/types.js';
 import { hasName, keyHandler, hasSequence } from './utils.js';
-import { runCommand } from '../run-command.js';
+import { runCommand } from '../app/run-command.js';
 const mappings = new Map();
 mappings.set(hasName('return'), keyHandler(state => {
     if (state.mode === Mode.EnterCommand) {

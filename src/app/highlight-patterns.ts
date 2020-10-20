@@ -2,17 +2,14 @@
 import ansi from 'ansi-styles'
 
 import {
-  isString,
-  isRegexp
-} from '../commons/checks.js'
-
-import {
   MatchData,
   SequenceData
 } from '../commons/types'
 
 import {
-  sequenceBy
+  sequenceBy,
+  isString,
+  isRegexp
 } from '../commons/utils.js'
 
 const matchStringPattern = (line:string, pattern:string) => {

@@ -1,4 +1,4 @@
-import { isString, isRegexp } from '../commons/checks.js';
+import { isString, isRegexp } from '../commons/utils.js';
 import { highlightPatterns, formatString } from './highlight-patterns.js';
 let idx = 0;
 /**

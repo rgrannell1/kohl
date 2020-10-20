@@ -1,14 +1,14 @@
 
 import {
   KeyMapping
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import {
   keyHandler
 } from './utils.js'
 
 import { hasName } from './utils.js'
-import LinesFilter from '../LinesFilter.js'
+import LinesFilter from '../app/LinesFilter.js'
 
 const mappings:KeyMapping = new Map()
 

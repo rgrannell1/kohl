@@ -1,7 +1,7 @@
 
 import {
   KeyMapping
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import {
   keypress

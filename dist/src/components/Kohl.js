@@ -8,7 +8,7 @@ import { Header } from './Header.js';
 import { Footer } from './Footer.js';
 import { Body } from './Body.js';
 import CircularBuffer from '../commons/circular-buffer.js';
-import mappings from '../app/keypress/index.js';
+import mappings from '../keypress/index.js';
 import { Mode } from '../commons/types.js';
 import ink from 'ink';
 import Line from '../app/Line.js';

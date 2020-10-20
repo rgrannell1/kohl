@@ -26,4 +26,10 @@ export const sequenceBy = (pred, coll) => {
     }
     return out;
 };
+export function isString(pattern) {
+    return typeof pattern === 'string';
+}
+export function isRegexp(pattern) {
+    return pattern instanceof RegExp;
+}
 //# sourceMappingURL=utils.js.map

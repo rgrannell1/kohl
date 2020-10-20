@@ -1,6 +1,5 @@
 import ansi from 'ansi-styles';
-import { isString, isRegexp } from '../commons/checks.js';
-import { sequenceBy } from '../commons/utils.js';
+import { sequenceBy, isString, isRegexp } from '../commons/utils.js';
 const matchStringPattern = (line, pattern) => {
     // -- return matches for string literals. Not implemented by default
     let id = 0;

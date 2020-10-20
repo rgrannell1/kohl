@@ -3,7 +3,7 @@ import {
   Mode,
   KohlProps,
   KeyMapping
-} from '../../commons/types.js'
+} from '../commons/types.js'
 
 import arrowMappings from './arrows.js'
 import signalMappings from './signals.js'
@@ -12,7 +12,7 @@ import vimMappings from './vim.js'
 
 import {
   Key
-} from '../../commons/types'
+} from '../commons/types'
 
 const mappings:KeyMapping = new Map()
 
