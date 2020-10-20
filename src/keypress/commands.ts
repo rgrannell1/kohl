@@ -17,23 +17,18 @@ import { runCommand } from '../app/run-command.js'
 
 const mappings:KeyMapping = new Map()
 
+const clearCommand = (result:any) => {
+  return { ...result, command: '' }
+}
+
 mappings.set(hasName('return'), keyHandler(state => {
   if (state.mode === Mode.EnterCommand) {
     const result = runCommand(state, state.command)
 
-    if (result.output.status === 0) {
-      // -- register the command in history
-
-      const history = state.fileStore.get('history')
-
-      return {
-        ...result,
-        command: ''
-      }
-    } else {
-      return result
-    }
-
+    return result.output.status === 0
+      ? clearCommand(result)
+      : result
+  } else {
     return {}
   }
 }))
@@ -89,6 +84,7 @@ mappings.set(hasSequence('?'), keyHandler(state => {
     }
   } else {
     // -- store a reference to the current state
+    // -- TODO this can be tidied
     fileStore.set('-', state)
     return {
       ...files.loadFile(files.help()),

@@ -71,10 +71,7 @@ export class SelectionSummary extends React.Component<SelectionSummaryProps, Sel
       patterns
     } = this.props
 
-    const filter = new LinesFilter({
-      lines: lines,
-      patterns: patterns
-    })
+    const filter = new LinesFilter({ lines, patterns })
 
     const total = filter.total()
     const selected = filter.selected()
