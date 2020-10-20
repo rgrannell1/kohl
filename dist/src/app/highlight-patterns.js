@@ -149,13 +149,10 @@ export const highlightLineSegmentPatterns = (text, patterns, start, end) => {
     const cacheEntry = cache.get(signature);
     clearCache(cache);
     if (typeof cacheEntry !== 'undefined') {
-        return cacheEntry.value;
+        return cacheEntry;
     }
     const result = formatString(highlightPatterns(text, patterns).slice(start, end));
-    cache.set(signature, {
-        value: result,
-        time: Date.now()
-    });
+    cache.set(signature, result);
     return result;
 };
 //# sourceMappingURL=highlight-patterns.js.map

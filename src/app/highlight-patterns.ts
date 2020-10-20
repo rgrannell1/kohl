@@ -145,12 +145,7 @@ export const formatString = (parts:SequenceData[]) => {
   return message
 }
 
-interface CacheEntry <I> {
-  value: I,
-  time: number
-}
-
-let cache = new Map<string, CacheEntry<string>>()
+let cache = new Map<string, string>()
 
 /**
  * Cache highlighted lines. Maps preserve insertion order so
@@ -198,15 +193,12 @@ export const highlightLineSegmentPatterns = (text:string, patterns:Pattern[], st
   clearCache(cache)
 
   if (typeof cacheEntry !== 'undefined') {
-    return cacheEntry.value
+    return cacheEntry
   }
 
   const result = formatString(highlightPatterns(text, patterns).slice(start, end))
 
-  cache.set(signature, {
-    value: result,
-    time: Date.now()
-  })
+  cache.set(signature, result)
 
   return result
 }
