@@ -40,8 +40,7 @@ export default class CircularBuffer {
         for (let ith = 0; ith < this._size; ++ith) {
             // -- construct a circular index starting from the oldest element
             const idx = (next + ith) % this._size;
-            const elem = this.buffer[idx];
-            elems.push(elem);
+            elems.push(this.buffer[idx]);
         }
         return elems;
     }

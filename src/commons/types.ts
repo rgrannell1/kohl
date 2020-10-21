@@ -93,14 +93,14 @@ export interface ExecuteResult {
   readonly state: Partial<KohlState>
 }
 
-export type LibraryFunction = (state:KohlProps, ...args:any[]) => CommandStatus
-export interface LibraryFunctionMetadata {
+export interface LibraryFunction {
+  (state:KohlProps, ...args:any[]): CommandStatus
   readonly description: string,
   readonly parameters: number
 }
 
 export interface Library {
-  [key:string]: LibraryFunction & LibraryFunctionMetadata
+  [key:string]: LibraryFunction
 }
 
 export enum LanguageParts {
@@ -122,4 +122,10 @@ export interface Bounds {
   readonly right: number,
   readonly top: number,
   readonly bottom: number
+}
+
+export interface Call {
+  type: LanguageParts.Call,
+  proc: string,
+  args: string[]
 }

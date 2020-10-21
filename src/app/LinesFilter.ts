@@ -1,6 +1,5 @@
 
 import ansi from 'ansi-styles'
-import { inverse } from 'chalk'
 import Line from '../app/Line.js'
 
 import {

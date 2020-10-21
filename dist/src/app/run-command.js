@@ -10,43 +10,52 @@ const lang = P.createLanguage(language);
 const parseCommand = (command) => {
     return lang.Value.tryParse(command);
 };
+/**
+ * Command return results.
+ */
+class Result {
+    /**
+     * A successful command-run
+     *
+     * @param state partial kohl state; the updates we want to apply to the pager's state
+     */
+    static Ok(state) {
+        return {
+            status: 0,
+            state
+        };
+    }
+    /**
+     * An unsuccessful command execution
+     *
+     * @param message an error-message
+     */
+    static Error(message) {
+        return {
+            message,
+            status: 1,
+            state: {}
+        };
+    }
+}
 const executeCommand = (parsed, libs, state) => {
     if (parsed.type === LanguageParts.Call) {
         const { proc, args } = parsed;
         if (!libs[proc]) {
-            return {
-                message: `unknown procedure "${proc}".`,
-                status: 1,
-                state: {}
-            };
+            return Result.Error(`unknown procedure "${proc}".`);
         }
         try {
             const procDef = libs[proc];
             if (args.length !== procDef.parameters) {
-                return {
-                    message: `expected #${procDef.parameters} args, got #${args.length}`,
-                    status: 1,
-                    state: {}
-                };
+                return Result.Error(`expected #${procDef.parameters} args, got #${args.length}`);
             }
-            // -- invoke the command & set new desired state.
-            return {
-                status: 0,
-                state: libs[proc](state, ...args)
-            };
+            return Result.Ok(libs[proc](state, ...args));
         }
         catch (err) {
-            return {
-                message: err.message,
-                status: 1,
-                state: {}
-            };
+            return Result.Error(err.message);
         }
     }
-    return {
-        status: 1,
-        state: {}
-    };
+    return Result.Error('invalid parsed value');
 };
 export const runCommand = (state, command) => {
     try {

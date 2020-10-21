@@ -13,48 +13,54 @@ import { Mode } from '../commons/types.js';
 import ink from 'ink';
 import Line from '../app/Line.js';
 const { Newline } = ink;
+const ttyReadStream = () => {
+    const fd = fs.openSync('/dev/tty', 'r+');
+    return new tty.ReadStream(fd, {});
+};
 export class Kohl extends React.Component {
     constructor(props) {
         super(props);
-        const fd = fs.openSync('/dev/tty', 'r+');
-        const ttyIn = new tty.ReadStream(fd, {});
-        const lines = new CircularBuffer(Kohl.MAX_LINES);
-        const screen = {
-            rows: process.stdout.rows,
-            columns: process.stdout.columns
-        };
-        // -- the current row and line position of the available text.
-        const cursor = {
-            position: 0,
-            column: 0
-        };
-        const patterns = {
-            search: '',
-            highlight: ''
-        };
-        const output = {
-            state: {},
-            status: 0
-        };
-        const fileStore = new Map();
-        /**
-         * React "helpfully" doesn't like nested state objects, so this state is a mess. Rather than using a File
-         * object to capture file information, we snapshot states into fileStore before switching to another file
-         * stored in fileStore.
-         *
-         */
         this.state = {
-            fileId: 'stdin',
-            screen,
-            cursor,
-            patterns,
+            ...Kohl.defaultState('stdin', new CircularBuffer(Kohl.MAX_LINES)),
+            ttyIn: ttyReadStream(),
+            fileStore: new Map()
+        };
+    }
+    /**
+     * Initialise default state for Kohl
+     *
+     * React "helpfully" doesn't like nested state objects, so this state is a mess. Rather than using a File
+     * object to capture file information, we snapshot states into fileStore before switching to another file
+     * stored in fileStore.
+     *
+     * @param fileId a human-readable ID for the file
+     * @param lines a circular buffer containing line data
+     *
+     * @returns
+     */
+    static defaultState(fileId, lines) {
+        return {
+            screen: {
+                rows: process.stdout.rows,
+                columns: process.stdout.columns
+            },
+            fileId,
+            cursor: {
+                position: 0,
+                column: 0
+            },
+            patterns: {
+                search: '',
+                highlight: ''
+            },
             mode: Mode.Default,
             command: '',
-            output,
-            ttyIn,
+            output: {
+                state: {},
+                status: 0
+            },
             lines,
-            lineId: 0,
-            fileStore
+            lineId: 0
         };
     }
     readKeyStrokes() {

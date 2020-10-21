@@ -1,7 +1,4 @@
 
-import {
-  Mode
-} from '../commons/types.js'
 import { library } from '../library/index.js'
 
 import mustache from 'mustache'
@@ -13,15 +10,29 @@ import CircularBuffer from '../commons/circular-buffer.js'
 import Line from '../app/Line.js'
 
 import { fileURLToPath } from 'url'
+import { Kohl } from '../components/Kohl.js'
+import {
+  KohlState,
+  LibraryFunction
+} from '../commons/types.js'
 const __dirname = fileURLToPath(import.meta.url)
 
+type LibraryPair = [string, LibraryFunction]
+
+/**
+ * Render the help-page
+ *
+ * @returns the rendered help-page
+ */
 export const help = () => {
+  // -- read library functions
   const libraryEntries = Object.entries(library).sort((datum0, datum1) => {
     return datum0[0] > datum1[0] ? -1 : +1
   })
 
+  // -- assemble information about the command library in the view.
   const view = {
-    procedures: libraryEntries.map((pair:any) => {
+    procedures: libraryEntries.map((pair:LibraryPair) => {
       const [name, data] = pair
       return {
         name: chalk.underline(name),
@@ -31,12 +42,13 @@ export const help = () => {
     })
   }
 
+  // -- read help template syncronously
   const content = fs.readFileSync(path.join(__dirname, '../../files/help.mustache'))
 
   return mustache.render(content.toString(), view)
 }
 
-export const loadFile = (content:string) => {
+export const loadFile = (content:string):Partial<KohlState> => {
   const lines = content.split('\n')
   const buff = new CircularBuffer<Line>(lines.length)
 
@@ -44,23 +56,5 @@ export const loadFile = (content:string) => {
     buff.add(new Line(line))
   }
 
-  return {
-    fileId: 'help',
-    cursor: {
-      position: 0,
-      column: 0
-    },
-    patterns: {
-      search: '',
-      highlight: ''
-    },
-    mode: Mode.Default,
-    command: '',
-    output: {
-      state: {},
-      status: 0
-    },
-    lines: buff,
-    lineId: 0
-  }
+  return Kohl.defaultState('help', buff)
 }

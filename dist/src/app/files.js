@@ -1,4 +1,3 @@
-import { Mode } from '../commons/types.js';
 import { library } from '../library/index.js';
 import mustache from 'mustache';
 import chalk from 'chalk';
@@ -7,11 +6,19 @@ import * as path from 'path';
 import CircularBuffer from '../commons/circular-buffer.js';
 import Line from '../app/Line.js';
 import { fileURLToPath } from 'url';
+import { Kohl } from '../components/Kohl.js';
 const __dirname = fileURLToPath(import.meta.url);
+/**
+ * Render the help-page
+ *
+ * @returns the rendered help-page
+ */
 export const help = () => {
+    // -- read library functions
     const libraryEntries = Object.entries(library).sort((datum0, datum1) => {
         return datum0[0] > datum1[0] ? -1 : +1;
     });
+    // -- assemble information about the command library in the view.
     const view = {
         procedures: libraryEntries.map((pair) => {
             const [name, data] = pair;
@@ -22,6 +29,7 @@ export const help = () => {
             };
         })
     };
+    // -- read help template syncronously
     const content = fs.readFileSync(path.join(__dirname, '../../files/help.mustache'));
     return mustache.render(content.toString(), view);
 };
@@ -31,24 +39,6 @@ export const loadFile = (content) => {
     for (const line of lines) {
         buff.add(new Line(line));
     }
-    return {
-        fileId: 'help',
-        cursor: {
-            position: 0,
-            column: 0
-        },
-        patterns: {
-            search: '',
-            highlight: ''
-        },
-        mode: Mode.Default,
-        command: '',
-        output: {
-            state: {},
-            status: 0
-        },
-        lines: buff,
-        lineId: 0
-    };
+    return Kohl.defaultState('help', buff);
 };
 //# sourceMappingURL=files.js.map

@@ -25,7 +25,7 @@ export default class Line {
   constructor (text:string) {
     this.text = text
     this.id = GLOBAL_LINE_ID++
-    // -- TODO rewire this, this is not reliable
+    // -- TODO rewire this, this is not reliable and needs an ID counter
     this.lineNumber = this.id
   }
 

@@ -1,12 +1,9 @@
 
 export default class CircularBuffer <I> {
   idx: number
-
-  _size: number
-
-  _capacity: number
-
-  buffer: I[]
+  private _size: number
+  private _capacity: number
+  readonly buffer: I[]
 
   constructor (capacity:number) {
     this.idx = 0
@@ -58,8 +55,7 @@ export default class CircularBuffer <I> {
     for (let ith = 0; ith < this._size; ++ith) {
       // -- construct a circular index starting from the oldest element
       const idx = (next + ith) % this._size
-      const elem = this.buffer[idx]
-      elems.push(elem)
+      elems.push(this.buffer[idx])
     }
 
     return elems

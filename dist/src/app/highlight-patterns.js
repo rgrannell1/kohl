@@ -97,15 +97,12 @@ const hasSameId = (elem0, elem1) => {
  *
  * @param parts
  */
-export const formatString = (parts) => {
-    let message = '';
-    const grouped = sequenceBy(hasSameId, parts);
-    for (const stretch of grouped) {
+export const joinHighlightedParts = (parts) => {
+    return sequenceBy(hasSameId, parts).map(stretch => {
         const chars = stretch.map(group => group.char);
         const [{ id }] = stretch;
-        message += formatText(chars.join(''), id);
-    }
-    return message;
+        return formatText(chars.join(''), id);
+    }).join('');
 };
 let cache = new Map();
 /**
@@ -151,7 +148,7 @@ export const highlightLineSegmentPatterns = (text, patterns, start, end) => {
     if (typeof cacheEntry !== 'undefined') {
         return cacheEntry;
     }
-    const result = formatString(highlightPatterns(text, patterns).slice(start, end));
+    const result = joinHighlightedParts(highlightPatterns(text, patterns).slice(start, end));
     cache.set(signature, result);
     return result;
 };

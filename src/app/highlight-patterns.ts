@@ -1,6 +1,5 @@
 
 import ansi from 'ansi-styles'
-import CircularBuffer from '../commons/circular-buffer'
 
 import {
   PatternMatchData,
@@ -131,18 +130,13 @@ const hasSameId = (elem0:Elem, elem1:Elem) => {
  *
  * @param parts
  */
-export const formatString = (parts:SequenceData[]) => {
-  let message = ''
-
-  const grouped = sequenceBy(hasSameId, parts)
-  for (const stretch of grouped) {
+export const joinHighlightedParts = (parts:SequenceData[]) => {
+  return sequenceBy(hasSameId, parts).map(stretch => {
     const chars = stretch.map(group => group.char)
     const [{ id }] = stretch
 
-    message += formatText(chars.join(''), id)
-  }
-
-  return message
+    return formatText(chars.join(''), id)
+  }).join('')
 }
 
 let cache = new Map<string, string>()
@@ -196,7 +190,7 @@ export const highlightLineSegmentPatterns = (text:string, patterns:Pattern[], st
     return cacheEntry
   }
 
-  const result = formatString(highlightPatterns(text, patterns).slice(start, end))
+  const result = joinHighlightedParts(highlightPatterns(text, patterns).slice(start, end))
 
   cache.set(signature, result)
 
