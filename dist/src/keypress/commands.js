@@ -56,24 +56,31 @@ mappings.set(hasSequence('/'), keyHandler(state => {
     }
 }));
 mappings.set(hasSequence('?'), keyHandler(state => {
-    const fileStore = state.fileStore;
-    fileStore.set(state.fileId, state);
-    if (state.fileId === 'help') {
-        // -- load the previously loaded file.
-        return {
-            ...fileStore.get('-')
-        };
+    if (state.mode === Mode.Default || state.mode === Mode.ShowCommand) {
+        const fileStore = state.fileStore;
+        fileStore.set(state.fileId, state);
+        if (state.fileId === 'help') {
+            // -- load the previously loaded file.
+            return {
+                ...fileStore.get('-')
+            };
+        }
+        else {
+            // -- store a reference to the current state
+            // -- TODO this can be tidied
+            fileStore.set('-', state);
+            return {
+                ...files.loadFile(files.help()),
+                screen: state.screen,
+                ttyIn: state.ttyIn,
+                fileStore: state.fileStore,
+                lineId: 0
+            };
+        }
     }
     else {
-        // -- store a reference to the current state
-        // -- TODO this can be tidied
-        fileStore.set('-', state);
         return {
-            ...files.loadFile(files.help()),
-            screen: state.screen,
-            ttyIn: state.ttyIn,
-            fileStore: state.fileStore,
-            lineId: 0
+            command: state.command + '?'
         };
     }
 }));
