@@ -1,4 +1,5 @@
 
+import * as stream from 'stream'
 import tty from 'tty'
 import P from 'parsimmon'
 import CircularBuffer from './circular-buffer'
@@ -66,6 +67,7 @@ export type FileStore = Map<string, KohlState>
 export interface KohlState {
   fileId: string,
   ttyIn: tty.ReadStream,
+  lineStream: stream.Readable,
   screen: Screen,
   cursor: Cursor,
   patterns: Patterns,

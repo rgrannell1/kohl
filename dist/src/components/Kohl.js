@@ -23,6 +23,7 @@ export class Kohl extends React.Component {
         this.state = {
             ...Kohl.defaultState('stdin', new CircularBuffer(Kohl.MAX_LINES)),
             ttyIn: ttyReadStream(),
+            lineStream: process.stdin,
             fileStore: new Map()
         };
     }
@@ -80,7 +81,7 @@ export class Kohl extends React.Component {
         };
     }
     readStdin() {
-        process.stdin
+        this.state.lineStream
             .pipe(split())
             .pipe(through(line => {
             this.state.lines.add(new Line(line));
