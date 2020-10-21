@@ -1,10 +1,9 @@
 
 import {
-  KohlProps,
   KohlState
 } from '../commons/types.js'
 
-const show = (state:KohlProps):Partial<KohlState> => {
+const show = (state:KohlState):Partial<KohlState> => {
   return {
     output: {
       message: state?.patterns?.highlight?.toString() || '',

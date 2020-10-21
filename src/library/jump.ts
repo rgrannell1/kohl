@@ -1,12 +1,12 @@
 
 import {
-  KohlProps
+  KohlState
 } from '../commons/types.js'
 
-const jump = (state:KohlProps, line:number) => {
+const jump = (state:KohlState, line:number) => {
   return {
     cursor: {
-      ...state.cursor,
+      column: state.cursor.column,
       position: Math.max(line, 0)
     }
   }

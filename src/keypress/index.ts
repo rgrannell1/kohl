@@ -1,7 +1,7 @@
 
 import {
   Mode,
-  KohlProps,
+  KohlState,
   KeyMapping
 } from '../commons/types.js'
 
@@ -17,7 +17,7 @@ import {
 const mappings:KeyMapping = new Map()
 
 mappings.set(() => true, (elem:React.Component, key:Key) => {
-  elem.setState((state:KohlProps) => {
+  elem.setState((state:Partial<KohlState>) => {
     if (state.mode === Mode.EnterCommand && !key.ctrl && !key.meta) {
       return {
         command: state.command + key.sequence

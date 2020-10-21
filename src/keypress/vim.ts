@@ -1,7 +1,6 @@
 
 import {
   Mode,
-  KohlProps,
   KeyMapping
 } from '../commons/types.js'
 

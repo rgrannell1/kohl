@@ -3,7 +3,6 @@ import {
   Mode,
   Call,
   Library,
-  KohlProps,
   ExecuteResult,
   LanguageParts,
   KohlState
@@ -52,7 +51,7 @@ class Result {
   }
 }
 
-const executeCommand = (parsed:Call, libs:Library, state:KohlProps):ExecuteResult => {
+const executeCommand = (parsed:Call, libs:Library, state:Partial<KohlState>):ExecuteResult => {
   if (parsed.type === LanguageParts.Call) {
     const { proc, args } = parsed
 
@@ -75,7 +74,7 @@ const executeCommand = (parsed:Call, libs:Library, state:KohlProps):ExecuteResul
   return Result.Error('invalid parsed value')
 }
 
-export const runCommand = (state:KohlProps, command:string) => {
+export const runCommand = (state:Partial<KohlState>, command:string) => {
   try {
     var parsed = parseCommand(command)
   } catch (err) {

@@ -27,18 +27,21 @@ const { Newline } = ink
 
 const ttyReadStream = () => {
   const fd = fs.openSync('/dev/tty', 'r+')
-  return new tty.ReadStream(fd, { })
+  const stream = new tty.ReadStream(fd, { })
+
+  stream.setRawMode(true)
+  return stream
 }
 
-export class Kohl extends React.Component<{}, KohlState> {
+export class Kohl extends React.Component<KohlProps, KohlState> {
   static MAX_LINES = 20_000
   constructor (props:KohlProps) {
     super(props)
 
     this.state = {
       ...Kohl.defaultState('stdin', new CircularBuffer(Kohl.MAX_LINES)),
-      ttyIn: ttyReadStream(),
-      lineStream: process.stdin,
+      ttyIn: props.ttyIn ?? ttyReadStream(),
+      lineStream: props.lineStream ?? process.stdin,
       fileStore: new Map<string, KohlState>()
     }
   }
@@ -83,7 +86,6 @@ export class Kohl extends React.Component<{}, KohlState> {
   readKeyStrokes () {
     readline.emitKeypressEvents(this.state.ttyIn)
     this.state.ttyIn.on('keypress', this.handleKeyPress.bind(this))
-    this.state.ttyIn.setRawMode(true)
   }
   ingestLine (line:string, state:KohlState) {
     state.lines.add(new Line(line))

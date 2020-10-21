@@ -15,15 +15,17 @@ import Line from '../app/Line.js';
 const { Newline } = ink;
 const ttyReadStream = () => {
     const fd = fs.openSync('/dev/tty', 'r+');
-    return new tty.ReadStream(fd, {});
+    const stream = new tty.ReadStream(fd, {});
+    stream.setRawMode(true);
+    return stream;
 };
 export class Kohl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             ...Kohl.defaultState('stdin', new CircularBuffer(Kohl.MAX_LINES)),
-            ttyIn: ttyReadStream(),
-            lineStream: process.stdin,
+            ttyIn: props.ttyIn ?? ttyReadStream(),
+            lineStream: props.lineStream ?? process.stdin,
             fileStore: new Map()
         };
     }
@@ -67,7 +69,6 @@ export class Kohl extends React.Component {
     readKeyStrokes() {
         readline.emitKeypressEvents(this.state.ttyIn);
         this.state.ttyIn.on('keypress', this.handleKeyPress.bind(this));
-        this.state.ttyIn.setRawMode(true);
     }
     ingestLine(line, state) {
         state.lines.add(new Line(line));

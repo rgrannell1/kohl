@@ -1,9 +1,9 @@
 
 import {
-  KohlProps
+  KohlState
 } from '../commons/types.js'
 
-const showRegexp = (state:KohlProps, query:string) => {
+const showRegexp = (state:KohlState, query:string) => {
   try {
     var regexp = new RegExp(query, 'g')
   } catch (err) {

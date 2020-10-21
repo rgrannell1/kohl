@@ -1,7 +1,7 @@
 const jump = (state, line) => {
     return {
         cursor: {
-            ...state.cursor,
+            column: state.cursor.column,
             position: Math.max(line, 0)
         }
     };

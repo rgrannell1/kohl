@@ -2,9 +2,7 @@
 import * as files from '../app/files.js'
 import {
   Mode,
-  KohlProps,
-  KeyMapping,
-  KohlState
+  KeyMapping
 } from '../commons/types.js'
 
 import {

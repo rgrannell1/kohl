@@ -1,9 +1,9 @@
 
 import {
-  KohlProps
+  KohlState
 } from '../commons/types.js'
 
-const show = (state:KohlProps, query:string) => {
+const show = (state:KohlState, query:string) => {
   return {
     patterns: {
       ...state.patterns,

@@ -54,19 +54,15 @@ export interface Patterns {
 export type Lines = CircularBuffer<Line>
 
 export interface KohlProps {
-  readonly screen: Screen,
-  readonly cursor: Cursor,
-  readonly patterns: Patterns,
-  readonly mode: Mode,
-  readonly command: string,
-  readonly lines: Lines
+  readonly lineStream?: stream.Readable
+  readonly ttyIn?: stream.Readable | tty.ReadStream
 }
 
 export type FileStore = Map<string, KohlState>
 
 export interface KohlState {
   fileId: string,
-  ttyIn: tty.ReadStream,
+  ttyIn: stream.Readable | tty.ReadStream,
   lineStream: stream.Readable,
   screen: Screen,
   cursor: Cursor,
@@ -96,7 +92,7 @@ export interface ExecuteResult {
 }
 
 export interface LibraryFunction {
-  (state:KohlProps, ...args:any[]): CommandStatus
+  (state:Partial<KohlState>, ...args:any[]): CommandStatus
   readonly description: string,
   readonly parameters: number
 }
