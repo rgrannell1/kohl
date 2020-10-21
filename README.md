@@ -26,6 +26,35 @@ kohl < /var/log/syslog
 cat /var/log/syslog | kohl
 ```
 
+### Files
+
+
+```
+.github/workflows
+  ci.yaml                    defines the CI workflow for testing this repo
+.vscode
+  launch.json                includes launch instructions for debugging
+ dist                        compiled code, so people don't need to manually compile to test
+ images/                     images used by the readme
+ inkling/                    an experimental testing framework based on `ink-testing-framework`
+ src/
+   app/                      code app logic
+     Line.ts                 class representing an input line of text
+     LinesFilter.ts          filters and highlights collections of lines
+     files.ts                defines file-loading and help files
+     highlight-pattern.ts    defines a memoised line-highlighting function
+     language.ts             defines a LL parser that parses commands provided to Kohl
+     run-command.ts          executes Kohl commands and updates the application state accordingly
+     
+   cli/                      the neodoc cli definition for Kohl
+   commons/                  shared utility code
+   components/               React components defining the application state (`Kohl.tsx`) and application view (the rest)
+   files/                    template files (Mustache) used by Kohl for help and other documentation
+   keypress/                 a map of keypress predicate's to application state-changes. Handle's Kohl's keyboard input
+   library/                  procedures available from Kohl's command-mode
+   externals.d.ts            declarations for external modules that have no typing library
+```
+
 ### Architecture
 
 <img src="./images/top-level.png" width="200">
