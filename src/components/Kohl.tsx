@@ -151,6 +151,9 @@ export class Kohl extends React.Component<KohlProps, KohlState> {
 
     throw new Error(`unhandled key ${key.sequence}`)
   }
+  getState () {
+    return this.state
+  }
   render () {
     const state = this.state
 

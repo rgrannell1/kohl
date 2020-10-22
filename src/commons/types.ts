@@ -54,8 +54,8 @@ export interface Patterns {
 export type Lines = CircularBuffer<Line>
 
 export interface KohlProps {
-  readonly lineStream?: stream.Readable
-  readonly ttyIn?: stream.Readable | tty.ReadStream
+  readonly lineStream?: any //stream.Readable
+  readonly ttyIn?: any //stream.Readable | tty.ReadStream
 }
 
 export type FileStore = Map<string, KohlState>

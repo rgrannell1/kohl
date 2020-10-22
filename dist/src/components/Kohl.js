@@ -129,6 +129,9 @@ export class Kohl extends React.Component {
         }
         throw new Error(`unhandled key ${key.sequence}`);
     }
+    getState() {
+        return this.state;
+    }
     render() {
         const state = this.state;
         return React.createElement(React.Fragment, null,
