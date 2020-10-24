@@ -1,13 +1,18 @@
 import React from 'react';
 import Inkling from 'inkling';
 import { Kohl } from '../../src/components/Kohl.js';
-const $kohl = new Inkling(({ stdin, stdout, ttyIn }) => {
+let $kohl = new Inkling(({ stdin, stdout, ttyIn }) => {
     return React.createElement(Kohl, { ttyIn: ttyIn, lineStream: stdin, outputStream: stdout });
 });
 $kohl.stdin.write('a');
 $kohl.stdin.write('b');
 $kohl.stdin.write('c');
 $kohl.stdin.write('d');
-$kohl.instance.unmount();
-$kohl.instance.cleanup();
+$kohl.press({
+    name: 'q',
+    sequence: 'q',
+    meta: false,
+    ctrl: false,
+    shift: false
+});
 //# sourceMappingURL=index.js.map

@@ -42,6 +42,7 @@ const asKeyBinding = (key:Key) => {
 
 export const keypress = (binding:string) => {
   return (key:Key) => {
+
     return asKeyBinding(key) === binding
   }
 }
