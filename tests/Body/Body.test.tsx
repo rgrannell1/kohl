@@ -10,7 +10,6 @@ import {
 import {
   Body
 } from '../../src/components/Body.js'
-import { Cursor } from '../../src/commons/types.js'
 
 const defaultCase = {
   cursor: {

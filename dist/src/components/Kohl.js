@@ -22,10 +22,16 @@ const ttyReadStream = () => {
 export class Kohl extends React.Component {
     constructor(props) {
         super(props);
+        const outputStream = props.outputStream ?? process.stdout;
         this.state = {
             ...Kohl.defaultState('stdin', new CircularBuffer(Kohl.MAX_LINES)),
+            screen: {
+                rows: outputStream.rows,
+                columns: outputStream.columns
+            },
             ttyIn: props.ttyIn ?? ttyReadStream(),
             lineStream: props.lineStream ?? process.stdin,
+            outputStream,
             fileStore: new Map()
         };
     }
@@ -43,10 +49,6 @@ export class Kohl extends React.Component {
      */
     static defaultState(fileId, lines) {
         return {
-            screen: {
-                rows: process.stdout.rows,
-                columns: process.stdout.columns
-            },
             fileId,
             cursor: {
                 position: 0,
@@ -74,8 +76,8 @@ export class Kohl extends React.Component {
         state.lines.add(new Line(line));
         return {
             console: {
-                rows: process.stdout.rows,
-                columns: process.stdout.columns
+                rows: state.outputStream.rows,
+                columns: state.outputStream.columns
             },
             lines: state.lines,
             lineId: state.lineId + 1
@@ -96,8 +98,8 @@ export class Kohl extends React.Component {
     clearOnResizing() {
         // -- TODO find an unmount, find a more efficient method.
         const pid = setInterval(() => {
-            const rows = process.stdout.rows;
-            const columns = process.stdout.columns;
+            const rows = this.state.outputStream.rows;
+            const columns = this.state.outputStream.columns;
             if (rows !== this.state.screen.rows || columns !== this.state.screen.columns) {
                 console.clear();
                 this.forceUpdate();

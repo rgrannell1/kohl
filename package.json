@@ -56,6 +56,7 @@
     "hash-sum": "^2.0.0",
     "ink": "^3.0.7",
     "ink-testing-library": "^2.1.0",
+    "inkling": "github:rgrannell1/inkling",
     "keypress": "^0.2.1",
     "moment": "2.26.0",
     "mustache": "^4.0.1",
