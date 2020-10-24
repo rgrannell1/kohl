@@ -8,5 +8,6 @@ $kohl.stdin.write('a');
 $kohl.stdin.write('b');
 $kohl.stdin.write('c');
 $kohl.stdin.write('d');
-process.exit(0);
+$kohl.instance.unmount();
+$kohl.instance.cleanup();
 //# sourceMappingURL=index.js.map

@@ -97,7 +97,7 @@ export class Kohl extends React.Component {
     }
     clearOnResizing() {
         // -- TODO find an unmount, find a more efficient method.
-        const pid = setInterval(() => {
+        const resizePid = setInterval(() => {
             const rows = this.state.outputStream.rows;
             const columns = this.state.outputStream.columns;
             if (rows !== this.state.screen.rows || columns !== this.state.screen.columns) {
@@ -111,6 +111,7 @@ export class Kohl extends React.Component {
                 throw new TypeError('stdout-columns count not defined; are you piping stdout to a file or program?');
             }
             this.setState({
+                resizePid,
                 screen: { rows, columns }
             });
         }, 500);
@@ -122,6 +123,7 @@ export class Kohl extends React.Component {
     }
     componentWillUnmount() {
         this.state.ttyIn.removeListener('keypress', this.handleKeyPress);
+        clearInterval(this.state.resizePid);
     }
     handleKeyPress(_, key) {
         for (const [pred, handler] of mappings.entries()) {

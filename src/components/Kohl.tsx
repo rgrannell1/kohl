@@ -115,7 +115,7 @@ export class Kohl extends React.Component<KohlProps, KohlState> {
   }
   clearOnResizing () {
     // -- TODO find an unmount, find a more efficient method.
-    const pid = setInterval(() => {
+    const resizePid = setInterval(() => {
       const rows = this.state.outputStream.rows
       const columns = this.state.outputStream.columns
 
@@ -132,6 +132,7 @@ export class Kohl extends React.Component<KohlProps, KohlState> {
       }
 
       this.setState({
+        resizePid,
         screen: { rows, columns }
       })
     }, 500)
@@ -143,6 +144,7 @@ export class Kohl extends React.Component<KohlProps, KohlState> {
   }
   componentWillUnmount () {
     this.state.ttyIn.removeListener('keypress', this.handleKeyPress)
+    clearInterval(this.state.resizePid)
   }
   handleKeyPress (_:any, key:Key) {
     for (const [pred, handler] of mappings.entries()) {

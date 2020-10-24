@@ -74,7 +74,8 @@ export interface KohlState {
   output: ExecuteResult,
   lines: Lines,
   lineId: number,
-  fileStore: FileStore
+  fileStore: FileStore,
+  resizePid?: any
 }
 
 export interface Key {
