@@ -2,7 +2,6 @@
 import React from 'react'
 import { createApp } from '../utils.js'
 import {
-  Inkling,
   KeyPress
 } from 'inkling'
 import tap from 'tap'
