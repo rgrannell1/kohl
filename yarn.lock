@@ -1981,7 +1981,7 @@ ink@^2.6.0:
 
 "inkling@github:rgrannell1/inkling":
   version "1.0.0"
-  resolved "https://codeload.github.com/rgrannell1/inkling/tar.gz/d9538640ec0478e18c03f7610af2bda0b9629d86"
+  resolved "https://codeload.github.com/rgrannell1/inkling/tar.gz/5cfbb7cb59a0d84c93809bfbc244470de5ab928b"
   dependencies:
     "@types/node" "14.14.2"
     "@types/react" "16.9.53"

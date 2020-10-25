@@ -1,0 +1,14 @@
+[?25hnpm ERR! code 1
+npm ERR! path /home/rg/Code/kohl
+npm ERR! command failed
+npm ERR! command sh -c tap dist/tests --no-esm
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/rg/.npm/_logs/2020-10-25T00_02_44_315Z-debug.log
+npm ERR! code 1
+npm ERR! path /home/rg/Code/kohl
+npm ERR! command failed
+npm ERR! command sh -c npm run build && npx tap dist/tests --no-esm
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/rg/.npm/_logs/2020-10-25T00_02_44_325Z-debug.log
