@@ -1,4 +1,10 @@
 
+import React from 'react'
+import {
+  Inkling
+} from 'inkling'
+import { Kohl } from '../src/components/Kohl.js'
+
 import CircularBuffer from '../src/commons/circular-buffer.js'
 import Line from '../src/app/Line.js'
 import { Cursor } from '../src/commons/types.js'
@@ -23,3 +29,10 @@ export const expectedBody = (cursor:Cursor, lines:Line[]) => {
 
 //  return expected
 }
+
+export const createApp = () => {
+  return new Inkling(({stdin, stdout, ttyIn}) => {
+    return <Kohl ttyIn={ttyIn} lineStream={stdin} outputStream={stdout}/>
+  })
+}
+

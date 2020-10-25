@@ -1,3 +1,6 @@
+import React from 'react';
+import { Inkling } from 'inkling';
+import { Kohl } from '../src/components/Kohl.js';
 import CircularBuffer from '../src/commons/circular-buffer.js';
 import Line from '../src/app/Line.js';
 /**
@@ -15,5 +18,10 @@ export const createLines = (lines) => {
 export const expectedBody = (cursor, lines) => {
     //  const expected = []
     //  return expected
+};
+export const createApp = () => {
+    return new Inkling(({ stdin, stdout, ttyIn }) => {
+        return React.createElement(Kohl, { ttyIn: ttyIn, lineStream: stdin, outputStream: stdout });
+    });
 };
 //# sourceMappingURL=utils.js.map

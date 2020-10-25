@@ -1,22 +1,11 @@
 
 import React from 'react'
+import { createApp } from '../utils.js'
 import {
   Inkling,
   KeyPress
 } from 'inkling'
-import { Kohl } from '../../src/components/Kohl.js'
-
-const createApp = () => {
-  return new Inkling(({stdin, stdout, ttyIn}) => {
-    return <Kohl ttyIn={ttyIn} lineStream={stdin} outputStream={stdout}/>
-  })
-}
-
-const testExit = () => {
-  let $kohl = createApp()
-
-  $kohl.press(new KeyPress('q'))
-}
+import tap from 'tap'
 
 const testCommandDisplay = () => {
   let $kohl = createApp()
@@ -25,10 +14,11 @@ const testCommandDisplay = () => {
     $kohl.press(new KeyPress(char))
   }
 
+  tap.includes($kohl.lastFrame(), 'testquery', 'did not find "testquery" in body')
+
   $kohl.press(new KeyPress('q'))
   $kohl.press(KeyPress.ESCAPE)
   $kohl.press(new KeyPress('q'))
 }
 
-testExit()
 testCommandDisplay()
