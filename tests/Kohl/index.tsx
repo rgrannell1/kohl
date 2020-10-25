@@ -1,6 +1,9 @@
 
 import React from 'react'
-import Inkling from 'inkling'
+import {
+  Inkling,
+  KeyPress
+} from 'inkling'
 import { Kohl } from '../../src/components/Kohl.js'
 
 const createApp = () => {
@@ -12,18 +15,20 @@ const createApp = () => {
 const testExit = () => {
   let $kohl = createApp()
 
-//  $kohl.stdin.write('a\n')
-//  $kohl.stdin.write('b\n')
-//  $kohl.stdin.write('c\n')
-//  $kohl.stdin.write('d\n')
+  $kohl.press(new KeyPress('q'))
+}
 
-  $kohl.press({
-    name: 'q',
-    sequence: 'q',
-    meta: false,
-    ctrl: false,
-    shift: false
-  })
+const testCommandDisplay = () => {
+  let $kohl = createApp()
+
+  for (let char of '/testquery') {
+    $kohl.press(new KeyPress(char))
+  }
+
+  $kohl.press(new KeyPress('q'))
+  $kohl.press(KeyPress.ESCAPE)
+  $kohl.press(new KeyPress('q'))
 }
 
 testExit()
+testCommandDisplay()

@@ -1,5 +1,5 @@
 import React from 'react';
-import Inkling from 'inkling';
+import { Inkling, KeyPress } from 'inkling';
 import { Kohl } from '../../src/components/Kohl.js';
 const createApp = () => {
     return new Inkling(({ stdin, stdout, ttyIn }) => {
@@ -8,17 +8,17 @@ const createApp = () => {
 };
 const testExit = () => {
     let $kohl = createApp();
-    //  $kohl.stdin.write('a\n')
-    //  $kohl.stdin.write('b\n')
-    //  $kohl.stdin.write('c\n')
-    //  $kohl.stdin.write('d\n')
-    $kohl.press({
-        name: 'q',
-        sequence: 'q',
-        meta: false,
-        ctrl: false,
-        shift: false
-    });
+    $kohl.press(new KeyPress('q'));
+};
+const testCommandDisplay = () => {
+    let $kohl = createApp();
+    for (let char of '/testquery') {
+        $kohl.press(new KeyPress(char));
+    }
+    $kohl.press(new KeyPress('q'));
+    $kohl.press(KeyPress.ESCAPE);
+    $kohl.press(new KeyPress('q'));
 };
 testExit();
+testCommandDisplay();
 //# sourceMappingURL=index.js.map
