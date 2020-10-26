@@ -20,6 +20,6 @@ parts:
   kohl:
     source: .
     plugin: nodejs
-    nodejs-version: 14.3.0
+    nodejs-version: 15.0.1
     nodejs-package-manager: yarn
     build-packages: ['libcurl4-openssl-dev', 'git']
