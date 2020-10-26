@@ -16,7 +16,7 @@ const testExit = () => {
 
   $kohl.press(new KeyPress('q'))
 
-  // -- TODO check exited upon q
+  throw new Error('kohl did not exit process upon hitting "q" at the top level; exit flow is broken')
 }
 
 testExit()
