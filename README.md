@@ -70,7 +70,7 @@ itself is tested via [inkling](https://github.com/rgrannell1/inkling), a puppete
 - ~~exits via `Ctrl + C`~~
 - help document display
 - help document exit
-- ~~stdin reads~~
+- stdin reads
 
 ### Architecture
 
