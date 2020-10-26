@@ -3,7 +3,7 @@ import React from 'react'
 import { createApp } from '../utils.js'
 import {
   KeyPress
-} from 'inkling'
+} from '@rgrannell/inkling'
 import tap from 'tap'
 
 /**

@@ -1,5 +1,5 @@
 import { createApp } from '../utils.js';
-import { KeyPress } from 'inkling';
+import { KeyPress } from '@rgrannell/inkling';
 import tap from 'tap';
 /**
  * Check that the app displays "No Matches" by default, when no stdin frames are provided.

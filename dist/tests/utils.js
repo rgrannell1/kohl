@@ -1,5 +1,5 @@
 import React from 'react';
-import { Inkling } from 'inkling';
+import { Inkling } from '@rgrannell/inkling';
 import { Kohl } from '../src/components/Kohl.js';
 import CircularBuffer from '../src/commons/circular-buffer.js';
 import Line from '../src/app/Line.js';

@@ -1,5 +1,5 @@
 import { createApp } from '../utils.js';
-import { KeyPress } from 'inkling';
+import { KeyPress } from '@rgrannell/inkling';
 import tap from 'tap';
 /**
  * check that typing a command displays as expected.
