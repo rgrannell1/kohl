@@ -45,7 +45,7 @@ cat /var/log/syslog | kohl
      highlight-pattern.ts    defines a memoised line-highlighting function
      language.ts             defines a LL parser that parses commands provided to Kohl
      run-command.ts          executes Kohl commands and updates the application state accordingly
-     
+
    cli/                      the neodoc cli definition for Kohl
    commons/                  shared utility code
    components/               React components defining the application state (`Kohl.tsx`) and application view (the rest)
@@ -53,7 +53,17 @@ cat /var/log/syslog | kohl
    keypress/                 a map of keypress predicate's to application state-changes. Handle's Kohl's keyboard input
    library/                  procedures available from Kohl's command-mode
    externals.d.ts            declarations for external modules that have no typing library
+tests/
+  Body/                      test body components
+  Footer/                    test footer components
+  Header/                    test header components
+  Kohl/                      individual application tests
 ```
+
+### Tests
+
+Kohl tests each pure-component (most of them) by directly providing test-input and checking the rendered output is as expected. The application
+itself is tested via [inkling](https://github.com/rgrannell1/inkling), a puppeteer-style testing library I wrote.
 
 ### Architecture
 

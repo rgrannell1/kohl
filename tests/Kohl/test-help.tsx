@@ -24,11 +24,10 @@ const testHelp = () => {
     'https://github.com/rgrannell1/kohl/issues'
   ]
 
+  // -- check the expected row content displays.
   lines.forEach(line => {
     tap.includes($kohl.lastFrame(), line)
   })
-
-  // -- check the expected row content displays.
 
   // -- check the footer displays
   tap.includes($kohl.lastFrame(), 'Press / to run command, q to exit, \'?\' for help')
