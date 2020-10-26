@@ -71,6 +71,7 @@ itself is tested via [inkling](https://github.com/rgrannell1/inkling), a puppete
 - help document display
 - help document exit
 - stdin reads
+- search works as expected
 
 ### Architecture
 
