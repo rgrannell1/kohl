@@ -40,6 +40,18 @@ const testSearch = async () => {
     throw new Error('search did not remove irrelevant lines')
   }
 
+  // -- check that search? command shows the current search pattern
+  for (let char of '/search?') {
+    $kohl.press(new KeyPress(char))
+  }
+
+  $kohl.press(new KeyPress('return'))
+
+  const lines = $kohl.lastFrame().split('\n')
+  const last = lines[lines.length - 1]
+
+  tap.include($kohl.lastFrame(), last)
+
   $kohl.press(new KeyPress('escape'))
   $kohl.press(new KeyPress('q'))
 }

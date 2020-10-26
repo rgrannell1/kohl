@@ -6,7 +6,7 @@ import {
 const search = (state:KohlState):Partial<KohlState> => {
   return {
     output: {
-      message: state?.patterns?.highlight?.toString() || '',
+      message: state?.patterns?.search?.toString() || '',
       status: 0,
       state: {}
     }
