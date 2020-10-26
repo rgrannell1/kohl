@@ -63,7 +63,14 @@ tests/
 ### Tests
 
 Kohl tests each pure-component (most of them) by directly providing test-input and checking the rendered output is as expected. The application
-itself is tested via [inkling](https://github.com/rgrannell1/inkling), a puppeteer-style testing library I wrote.
+itself is tested via [inkling](https://github.com/rgrannell1/inkling), a puppeteer-style testing library I wrote. Specifically, I tested:
+
+- displaying entered command
+- exits via `q` and `escape`
+- ~~exits via `Ctrl + C`~~
+- help document display
+- help document exit
+- ~~stdin reads~~
 
 ### Architecture
 
