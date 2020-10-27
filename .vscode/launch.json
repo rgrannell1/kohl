@@ -11,7 +11,7 @@
       ],
       "args": [
         "<",
-        "data/apache_logs.txt"
+        "data/simple.txt"
      ],
       "program": "${workspaceFolder}/dist/src/cli/kohl.js",
       "console": "integratedTerminal"

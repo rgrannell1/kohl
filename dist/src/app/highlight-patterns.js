@@ -1,6 +1,6 @@
 import ansi from 'ansi-styles';
 import { sequenceBy, isString, isRegexp, hashSignature } from '../commons/utils.js';
-const matchStringPattern = (line, pattern) => {
+export const matchStringPattern = (line, pattern) => {
     // -- return matches for string literals. Not implemented by default
     let id = 0;
     const results = [];
@@ -18,7 +18,7 @@ const matchStringPattern = (line, pattern) => {
     }
     return results;
 };
-const matchPattern = (line, pattern) => {
+export const matchPattern = (line, pattern) => {
     const lineType = Object.prototype.toString.call(pattern).slice(8, -1).toLowerCase();
     if (isString(pattern)) {
         return matchStringPattern(line, pattern);

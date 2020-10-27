@@ -13,7 +13,7 @@ import {
   hashSignature
 } from '../commons/utils.js'
 
-const matchStringPattern = (line:string, pattern:string) => {
+export const matchStringPattern = (line:string, pattern:string) => {
   // -- return matches for string literals. Not implemented by default
   let id = 0
   const results = []
@@ -36,7 +36,7 @@ const matchStringPattern = (line:string, pattern:string) => {
   return results
 }
 
-const matchPattern = (line:string, pattern:string | RegExp) => {
+export const matchPattern = (line:string, pattern:string | RegExp) => {
   const lineType = Object.prototype.toString.call(pattern).slice(8, -1).toLowerCase()
 
   if (isString(pattern)) {
@@ -68,7 +68,7 @@ export const highlightPatterns = (line:string, patterns:Pattern[]) => {
   // -- match each pattern as many times as possible using `matchAll`
   for (const pattern of patterns) {
     // -- note: does not work with strings;
-    allMatches.push(...matchPattern(line, pattern))
+    allMatches.push (...matchPattern(line, pattern))
   }
 
   // -- convert to characters and indices.
