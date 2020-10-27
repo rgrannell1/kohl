@@ -19,6 +19,7 @@ const testScroll = async () => {
   await $kohl.waitUntil(frame => frame.includes('test1'))
   await $kohl.waitUntil(frame => frame.includes('line 0'))
 
+  // -- scroll down
   $kohl.press(new KeyPress('down'))
   await $kohl.waitUntil(frame => frame.includes('line 1') && !(/^test0$/).test(frame))
 
@@ -27,6 +28,13 @@ const testScroll = async () => {
 
   $kohl.press(new KeyPress('down'))
   await $kohl.waitUntil(frame => frame.includes('line 3') && !(/^test2$/).test(frame))
+
+  // -- scroll up
+  $kohl.press(new KeyPress('up'))
+  await $kohl.waitUntil(frame => frame.includes('line 2') && !(/^test1$/).test(frame))
+
+  $kohl.press(new KeyPress('up'))
+  await $kohl.waitUntil(frame => frame.includes('line 1') && !(/^test0$/).test(frame))
 
   $kohl.press(new KeyPress('q'))
   $kohl.press(new KeyPress('q'))
