@@ -40,6 +40,7 @@
     "typedoc": "^0.19.2"
   },
   "dependencies": {
+    "@rgrannell/inkling": "github:rgrannell1/inkling",
     "@types/ansi-styles": "^3.2.1",
     "@types/docopt": "^0.6.31",
     "@types/hash-sum": "^1.0.0",
@@ -55,7 +56,6 @@
     "hash-sum": "^2.0.0",
     "ink": "^3.0.7",
     "ink-testing-library": "^2.1.0",
-    "@rgrannell/inkling": "^0.1.0",
     "keypress": "^0.2.1",
     "mustache": "^4.0.1",
     "nanoid": "^3.1.9",

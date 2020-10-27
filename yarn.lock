@@ -291,6 +291,22 @@
     through "2.3.8"
     typescript "4.0.3"
 
+"@rgrannell/inkling@github:rgrannell1/inkling":
+  version "0.1.0"
+  resolved "https://codeload.github.com/rgrannell1/inkling/tar.gz/d46b323be836535c3d968f65fd0fc6ddf1d71534"
+  dependencies:
+    "@types/node" "14.14.2"
+    "@types/react" "16.9.53"
+    "@types/split" "1.0.0"
+    "@types/tap" "^14.10.1"
+    "@types/through" "0.0.30"
+    "@types/typescript" "2.0.0"
+    ink "3.0.8"
+    split "1.0.1"
+    tap "^14.10.8"
+    through "2.3.8"
+    typescript "4.0.3"
+
 "@types/ansi-styles@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@types/ansi-styles/-/ansi-styles-3.2.1.tgz"

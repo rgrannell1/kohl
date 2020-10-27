@@ -2,9 +2,7 @@
 import tap from 'tap'
 import {
   matchStringPattern,
-  highlightPatterns,
-  joinHighlightedParts,
-  highlightLineSegmentPatterns
+  highlightPatterns
 } from '../../src/app/highlight-patterns.js'
 
 tap.test('returns expected matches for string patterns', test => {
