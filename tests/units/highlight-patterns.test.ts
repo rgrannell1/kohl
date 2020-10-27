@@ -10,22 +10,23 @@ import {
 tap.test('returns expected matches for string patterns', test => {
   const match = matchStringPattern('test', 'test')
 
-  tap.equals(match.length, 1)
+  tap.equals(match.length, 1, 'unexpected number of string matches')
 
   test.end()
 })
 
 tap.test('returns original line when provided no patterns', test => {
   const message = 'line'
-  const lineData =  highlightPatterns(message, [])
+  const lineData = highlightPatterns(message, [])
 
   for (let ith = 0; ith < message.length; ++ith) {
-    tap.equals(lineData[ith].char, message[ith])
-    tap.equals(lineData[ith].index, ith)
+    tap.equals(lineData[ith].char, message[ith], 'character mismatch')
+    tap.equals(lineData[ith].index, ith, 'index mismatch')
   }
 
   test.end()
 })
+
 
 tap.test('returns highlighted subsection when provided a string pattern', test => {
   const message = 'part one'
@@ -38,7 +39,7 @@ tap.test('returns highlighted subsection when provided a string pattern', test =
     if (ith < 4) {
       tap.equals(lineData[ith].id, 0)
     } else if (ith > 5) {
-      tap.equals(lineData[ith].id, 1)
+      tap.equals(lineData[ith].id, 0)
     }
   }
 
