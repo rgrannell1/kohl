@@ -40,7 +40,7 @@
     "typedoc": "^0.19.2"
   },
   "dependencies": {
-    "@rgrannell/inkling": "github:rgrannell1/inkling",
+    "@rgrannell/inkling": "^0.3.0",
     "@types/ansi-styles": "^3.2.1",
     "@types/docopt": "^0.6.31",
     "@types/hash-sum": "^1.0.0",

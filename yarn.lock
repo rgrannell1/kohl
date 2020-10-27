@@ -274,26 +274,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@rgrannell/inkling@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@rgrannell/inkling/-/inkling-0.1.0.tgz#2b7bf2d7e9f89bc59bf8542699c864b76990c4b8"
-  integrity sha512-EOcJC50yLgKzgEWdwTNcyJJ3Vr+QJkUoJH/07xxgeo8ZOlSRk/toPW0fUgKTPhVDfM7IlYugCrt146+hFgXyUg==
-  dependencies:
-    "@types/node" "14.14.2"
-    "@types/react" "16.9.53"
-    "@types/split" "1.0.0"
-    "@types/tap" "^14.10.1"
-    "@types/through" "0.0.30"
-    "@types/typescript" "2.0.0"
-    ink "3.0.8"
-    split "1.0.1"
-    tap "^14.10.8"
-    through "2.3.8"
-    typescript "4.0.3"
-
-"@rgrannell/inkling@github:rgrannell1/inkling":
-  version "0.1.0"
-  resolved "https://codeload.github.com/rgrannell1/inkling/tar.gz/d46b323be836535c3d968f65fd0fc6ddf1d71534"
+"@rgrannell/inkling@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@rgrannell/inkling/-/inkling-0.3.0.tgz#3623e6229216fc52dd6ef1863b665b1270628af5"
+  integrity sha512-pApgb3AUlT1PU4bqMTZ++/baGj4zE9yLnslFaWUxid7uTaC0c+n5/t6RKxn1oRZrY6XNhL0kmbl4ibLkp36oTA==
   dependencies:
     "@types/node" "14.14.2"
     "@types/react" "16.9.53"
