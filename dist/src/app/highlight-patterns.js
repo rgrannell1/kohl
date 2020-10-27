@@ -4,7 +4,7 @@ export const matchStringPattern = (line, pattern) => {
     // -- return matches for string literals. Not implemented by default
     let id = 0;
     const results = [];
-    for (let ith = 0; ith < line.length - pattern.length; ++ith) {
+    for (let ith = 0; ith <= line.length - pattern.length; ++ith) {
         const sliced = line.slice(ith, line.length);
         if (sliced.startsWith(pattern)) {
             results.push({

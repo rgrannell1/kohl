@@ -18,7 +18,7 @@ export const matchStringPattern = (line:string, pattern:string) => {
   let id = 0
   const results = []
 
-  for (let ith = 0; ith < line.length - pattern.length; ++ith) {
+  for (let ith = 0; ith <= line.length - pattern.length; ++ith) {
     const sliced = line.slice(ith, line.length)
 
     if (sliced.startsWith(pattern)) {
