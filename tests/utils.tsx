@@ -35,4 +35,3 @@ export const createApp = () => {
     return <Kohl ttyIn={ttyIn} lineStream={stdin} outputStream={stdout}/>
   })
 }
-

@@ -1,7 +1,7 @@
 name: kohl
 grade: stable
 version: v0.1.0
-base: core18
+base: core20
 
 license: MIT
 
@@ -19,7 +19,5 @@ apps:
 parts:
   kohl:
     source: .
-    plugin: nodejs
-    nodejs-version: 15.0.1
-    nodejs-package-manager: yarn
-    build-packages: ['libcurl4-openssl-dev', 'git']
+    plugin: npm
+    npm-node-version: 15.0.1
