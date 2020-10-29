@@ -19,9 +19,11 @@ export const expectedBody = (cursor, lines) => {
     //  const expected = []
     //  return expected
 };
-export const createApp = () => {
-    return new Inkling(({ stdin, stdout, ttyIn }) => {
-        return React.createElement(Kohl, { ttyIn: ttyIn, lineStream: stdin, outputStream: stdout });
-    });
-};
+export class KohlInking extends Inkling {
+    constructor() {
+        super(({ stdin, stdout, ttyIn }) => {
+            return React.createElement(Kohl, { ttyIn: ttyIn, lineStream: stdin, outputStream: stdout });
+        });
+    }
+}
 //# sourceMappingURL=utils.js.map

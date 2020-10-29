@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { createApp } from '../utils.js'
+import { KohlInking } from '../utils.js'
 import {
   KeyPress
 } from '@rgrannell/inkling'
@@ -10,7 +10,7 @@ import tap from 'tap'
  * check that typing a command displays as expected.
  */
 const testCommandDisplay = () => {
-  let $kohl = createApp()
+  let $kohl = new KohlInking()
 
   for (let char of '/testquery') {
     $kohl.press(new KeyPress(char))

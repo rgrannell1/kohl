@@ -1,11 +1,11 @@
-import { createApp } from '../utils.js';
+import { KohlInking } from '../utils.js';
 import { KeyPress } from '@rgrannell/inkling';
 import tap from 'tap';
 /**
  * Check that the app displays "No Matches" by default, when no stdin frames are provided.
  */
 const testStdin = async () => {
-    let $kohl = createApp();
+    let $kohl = new KohlInking();
     $kohl.stdin.write('testline0\n');
     $kohl.stdin.write('testline1\n');
     $kohl.stdin.write('testline2\n');

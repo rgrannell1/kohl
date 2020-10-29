@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { createApp } from '../utils.js'
+import { KohlInking } from '../utils.js'
 import {
   KeyPress
 } from '@rgrannell/inkling'
@@ -11,7 +11,7 @@ import ansi from 'ansi-styles'
  * Check that the app displays "No Matches" by default, when no stdin frames are provided.
  */
 const testHighlight = async () => {
-  let $kohl = createApp()
+  let $kohl = new KohlInking()
 
   $kohl.stdin.write('testline0\n')
   $kohl.stdin.write('testline1\n')
@@ -39,7 +39,6 @@ const testHighlight = async () => {
   tap.includes($kohl.lastFrame(), 'testline1')
   tap.includes($kohl.lastFrame(), 'testline2')
 
-  // -- TODO CHECK ANSI HIGHLIGHT IS APPLIED
   await new Promise(resolve => setTimeout(resolve, 2000))
 
   tap.includes($kohl.lastFrame(), `${ansi.green.open}testline1${ansi.green.close}`)

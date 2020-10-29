@@ -8,6 +8,7 @@ import { Kohl } from '../src/components/Kohl.js'
 import CircularBuffer from '../src/commons/circular-buffer.js'
 import Line from '../src/app/Line.js'
 import { Cursor } from '../src/commons/types.js'
+import Ink from 'ink/build/ink'
 
 /**
  * Construct a lines buffer from text lines.
@@ -30,8 +31,10 @@ export const expectedBody = (cursor:Cursor, lines:Line[]) => {
 //  return expected
 }
 
-export const createApp = () => {
-  return new Inkling(({stdin, stdout, ttyIn}) => {
-    return <Kohl ttyIn={ttyIn} lineStream={stdin} outputStream={stdout}/>
-  })
+export class KohlInking extends Inkling {
+  constructor () {
+    super(({stdin, stdout, ttyIn}) => {
+      return <Kohl ttyIn={ttyIn} lineStream={stdin} outputStream={stdout}/>
+    })
+  }
 }

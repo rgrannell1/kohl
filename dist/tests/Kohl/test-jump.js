@@ -1,11 +1,11 @@
-import { createApp } from '../utils.js';
+import { KohlInking } from '../utils.js';
 import { KeyPress } from '@rgrannell/inkling';
 import tap from 'tap';
 /**
  * Check that the app displays "No Matches" by default, when no stdin frames are provided.
  */
 const testJump = async () => {
-    let $kohl = createApp();
+    let $kohl = new KohlInking();
     $kohl.press(new KeyPress('?'));
     tap.includes($kohl.lastFrame(), 'kohl    line 0      0 / 0 (100%)\n');
     for (let char of '/jump 3') {
