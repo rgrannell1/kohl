@@ -10,7 +10,6 @@
     "build": "rm -rf dist && npm run tsc && chmod +x dist/src/cli/kohl.js && cp -r src/files dist/src/files",
     "start": "npm run build && cat data/apache_logs.txt | node dist/src/cli/kohl.js",
     "standard": "npx standard 'src/**'",
-    "standard:fix": "npx standard 'src/**' --fix",
     "perf:measure": "cat data/apache_logs.txt | node --prof dist/src/cli/kohl.js",
     "perf:clean": "rm isolate* || echo ''",
     "perf:show": "node --prof-process --preprocess -j isolate*.log | node_modules/.bin/flamebearer",
