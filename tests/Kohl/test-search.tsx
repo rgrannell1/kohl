@@ -12,9 +12,11 @@ import tap from 'tap'
 const testSearch = async () => {
   let $kohl = new KohlInking()
 
-  $kohl.stdin.write('testline0\n')
-  $kohl.stdin.write('testline1\n')
-  $kohl.stdin.write('testline2\n')
+  $kohl.toStdin([
+    'testline0',
+    'testline1',
+    'testline2'
+  ])
 
   // -- load stdin.
   await $kohl.waitUntil((frame:string) => {
@@ -52,8 +54,8 @@ const testSearch = async () => {
 
   tap.include($kohl.lastFrame(), last)
 
-  $kohl.press(new KeyPress('escape'))
-  $kohl.press(new KeyPress('q'))
+  $kohl.escape()
+  $kohl.q()
 }
 
 testSearch()

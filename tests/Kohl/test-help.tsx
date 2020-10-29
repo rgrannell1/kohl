@@ -33,8 +33,8 @@ const testHelp = () => {
   tap.includes($kohl.lastFrame(), 'Press / to run command, q to exit, \'?\' for help')
 
   // -- test exit works from built-in documents
-  $kohl.press(new KeyPress('q'))
-  $kohl.press(new KeyPress('q'))
+  $kohl.q()
+  $kohl.q()
 
   throw new Error('kohl did not exit process upon hitting "q" at the top level; exit flow is broken')
 }

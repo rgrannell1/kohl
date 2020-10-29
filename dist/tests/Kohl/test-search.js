@@ -6,9 +6,11 @@ import tap from 'tap';
  */
 const testSearch = async () => {
     let $kohl = new KohlInking();
-    $kohl.stdin.write('testline0\n');
-    $kohl.stdin.write('testline1\n');
-    $kohl.stdin.write('testline2\n');
+    $kohl.toStdin([
+        'testline0',
+        'testline1',
+        'testline2'
+    ]);
     // -- load stdin.
     await $kohl.waitUntil((frame) => {
         return frame.includes('testline0') && frame.includes('testline1') && frame.includes('testline2');
@@ -34,8 +36,8 @@ const testSearch = async () => {
     const lines = $kohl.lastFrame().split('\n');
     const last = lines[lines.length - 1];
     tap.include($kohl.lastFrame(), last);
-    $kohl.press(new KeyPress('escape'));
-    $kohl.press(new KeyPress('q'));
+    $kohl.escape();
+    $kohl.q();
 };
 testSearch();
 //# sourceMappingURL=test-search.js.map

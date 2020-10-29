@@ -13,8 +13,8 @@ const testJump = async () => {
     }
     $kohl.press(new KeyPress('return'));
     await $kohl.waitUntil((frame) => frame.includes('line 3'));
-    $kohl.press(new KeyPress('q'));
-    $kohl.press(new KeyPress('q'));
+    $kohl.q();
+    $kohl.q();
     throw new Error('kohl did not exit process upon hitting "q" at the top level; exit flow is broken');
 };
 testJump();

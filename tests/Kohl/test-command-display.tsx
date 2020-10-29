@@ -18,9 +18,9 @@ const testCommandDisplay = () => {
 
   tap.includes($kohl.lastFrame(), '> testquery', 'did not find "testquery" in body')
 
-  $kohl.press(new KeyPress('q'))
-  $kohl.press(KeyPress.ESCAPE)
-  $kohl.press(new KeyPress('q'))
+  $kohl.q()
+  $kohl.escape()
+  $kohl.q()
 }
 
 testCommandDisplay()

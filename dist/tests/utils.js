@@ -1,5 +1,5 @@
 import React from 'react';
-import { Inkling } from '@rgrannell/inkling';
+import { Inkling, KeyPress } from '@rgrannell/inkling';
 import { Kohl } from '../src/components/Kohl.js';
 import CircularBuffer from '../src/commons/circular-buffer.js';
 import Line from '../src/app/Line.js';
@@ -15,14 +15,21 @@ export const createLines = (lines) => {
     }
     return buff;
 };
-export const expectedBody = (cursor, lines) => {
-    //  const expected = []
-    //  return expected
-};
 export class KohlInking extends Inkling {
     constructor() {
         super(({ stdin, stdout, ttyIn }) => {
             return React.createElement(Kohl, { ttyIn: ttyIn, lineStream: stdin, outputStream: stdout });
+        });
+    }
+    q() {
+        this.press(new KeyPress('q'));
+    }
+    escape() {
+        this.press(KeyPress.ESCAPE);
+    }
+    toStdin(lines) {
+        lines.forEach(line => {
+            this.stdin.write(`${line}\n`);
         });
     }
 }

@@ -13,7 +13,7 @@ const testScroll = async () => {
   let $kohl = new KohlInking()
 
   for (let ith = 0; ith < 100; ++ith) {
-    $kohl.stdin.write(`test${ith}\n`)
+    $kohl.toStdin([`test${ith}`])
   }
 
   await $kohl.waitUntil(frame => frame.includes('test1'))
@@ -36,8 +36,8 @@ const testScroll = async () => {
   $kohl.press(new KeyPress('up'))
   await $kohl.waitUntil(frame => frame.includes('line 1') && !(/^test0$/).test(frame))
 
-  $kohl.press(new KeyPress('q'))
-  $kohl.press(new KeyPress('q'))
+  $kohl.q()
+  $kohl.q()
 
   throw new Error('kohl did not exit process upon hitting "q" at the top level; exit flow is broken')
 }
